@@ -1,0 +1,2 @@
+# koshOS
+honzakostejn's dotfiles
