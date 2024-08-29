@@ -24,5 +24,5 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp0s1.useDHCP = lib.mkDefault true;
 
-  nixpkgs.hostPlatform = lib.mkDefault ${pkgs.system};
+  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 }
