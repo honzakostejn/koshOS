@@ -13,5 +13,5 @@
 
     # look
     ./fonts.nix
-  ]
+  ];
 }
