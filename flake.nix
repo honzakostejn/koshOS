@@ -36,6 +36,10 @@
       };
     };
 
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+    };
+
     swww = {
       url = "github:LGFae/swww";
     };
@@ -59,28 +63,13 @@
         ];
       };
 
-      # framework = inputs.nixpkgs.lib.nixosSystem {
-      #   system = "x86_64-linux";
-      #   specialArgs = { inherit inputs; };
-      #   modules = [
-      #     # disk configuration
-      #     ./hosts/vm/disk-config.nix
-      #     inputs.disko.nixosModules.disko
-
-      #     # configuration
-      #     ./hosts/vm/configuration.nix
-
-      #     # make home-manager as a module of nixos
-      #     # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-      #     inputs.home-manager.nixosModules.home-manager
-      #     {
-      #       inputs.home-manager.useGlobalPkgs = true;
-      #       inputs.home-manager.useUserPackages = true;
-      #       inputs.home-manager.users.honzakostejn = import ./home/honzakostejn/home.nix;
-      #       inputs.home-manager.extraSpecialArgs = { inherit inputs; };
-      #     }
-      #   ];
-      # };
+      framework = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          nixos-hardware.nixosModules.framework-11th-gen-intel
+        ];
+      };
     };
   };
 }

@@ -26,6 +26,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
+  # authentication daemon
   services.greetd = let
     session = {
       # this logs the user in automatically,
@@ -39,4 +40,11 @@
       default_session = session;
     };
   };
+
+  # steam
+  programs.steam = {
+    enable = true;
+    gamescopeSession = true;
+  };
+  programs.gamemode.enable = true;
 }

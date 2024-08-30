@@ -27,6 +27,7 @@
     git
     glxinfo
     kitty
+    mangohud
     neofetch
     neovim
     rofi-wayland
