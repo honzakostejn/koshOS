@@ -1,6 +1,16 @@
 {
   ...
 }: let
+  wallpaper = let
+    url = "https://github.com/honzakostejn/koshOS/blob/main/assets/wallpapers/forest-fire.gif?raw=true";
+    sha256 = "005jq0pafwz6pscrsb78h3j8n09qga6bqlxv3yiv4xjp5gmhip2r";
+    ext = "gif";
+  in
+    builtins.fetchurl {
+      name = "wallpaper-${sha256}.${ext}";
+      inherit url sha256;
+    };
+
   workspaceConfiguration = builtins.genList (
     x: let
       # genList is zero-indexed, so we need to add 1 to the index
@@ -41,7 +51,7 @@ in {
       # lock the screen, because the greetd is auto-logging the user
       "hyprlock"
       "swww-daemon"
-      "swww img $HOME/koshos/assets/wallpapers/forest-fire.gif"
+      "swww img \"${wallpaper}\""  # this is not working atm and must be called from the terminal
     ];
 
     workspace = workspaceConfiguration;
