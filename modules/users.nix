@@ -12,7 +12,7 @@
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.honzakostejn = import ./home/honzakostejn;
+      home-manager.users.honzakostejn = import ../home/honzakostejn;
       home-manager.extraSpecialArgs = { inherit inputs; };
     }
   ];
