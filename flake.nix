@@ -67,7 +67,7 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          nixos-hardware.nixosModules.framework-11th-gen-intel
+          inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
         ];
       };
     };

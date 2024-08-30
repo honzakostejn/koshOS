@@ -43,8 +43,8 @@
 
   # steam
   programs.steam = {
-    enable = true;
-    gamescopeSession = true;
+    enable = false;  # there is no aarch64 steam client
+    gamescopeSession.enable = true;
   };
   programs.gamemode.enable = true;
 }
