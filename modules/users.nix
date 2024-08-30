@@ -1,9 +1,22 @@
 {
+  inputs,
   config,
   lib,
   pkgs,
   ...
 }: {
+  imports = [
+    # make home-manager as a module of nixos
+    # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+    inputs.home-manager.nixosModules.home-manager
+    {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.users.honzakostejn = import ./home/honzakostejn;
+      home-manager.extraSpecialArgs = { inherit inputs; };
+    }
+  ];
+
   # define a user account
   # don't forget to set a password with ‘passwd’
   users.users.honzakostejn = {

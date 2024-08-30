@@ -41,25 +41,21 @@
     };
   };
 
-  outputs = inputs @ { ... }: {
+  outputs = { ... }@inputs: {
     nixosConfigurations = {
       m1-qemu = inputs.nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = { inherit inputs; };
-        modules = with inputs; [
+        modules = [
           ./systems/aarch64-linux/m1-qemu
+        ];
+      };
 
-          disko.nixosModules.disko
-
-          # make home-manager as a module of nixos
-          # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.honzakostejn = import ./home/honzakostejn;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-          }
+      x86_64-iso-image = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./systems/x86_64-linux/iso-image
         ];
       };
 
