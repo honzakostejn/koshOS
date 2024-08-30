@@ -14,6 +14,7 @@
 
     systemPackages = with pkgs; [
       fastfetch
+      gh
       git
       htop
       neovim
