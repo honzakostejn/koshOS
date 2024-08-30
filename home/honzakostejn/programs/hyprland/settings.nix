@@ -38,9 +38,10 @@ in {
     ];
 
     exec-once = [
+      # lock the screen, because the greetd is auto-logging the user
+      "hyprlock"
       "swww-daemon"
-      "swww img $HOME/dotfiles/wallpapers/forest-fire.gif"
-      # "hyprlock"
+      "swww img $HOME/koshos/assets/wallpapers/forest-fire.gif"
     ];
 
     workspace = workspaceConfiguration;

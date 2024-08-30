@@ -38,6 +38,8 @@
     enable = true;
   };
 
+  services.libinput.touchpad.naturalScrolling = true;
+
   # video and audio routing
   services.pipewire = {
     enable = true;
