@@ -31,6 +31,12 @@
   ) 10);
 
 in {
+  home.file = {
+    # wallpaper
+    ".local/share/swww/wallpaper.gif".source =
+      "${wallpaper}";
+  };
+
   wayland.windowManager.hyprland.settings = {
     "$terminal" = "kitty";
     "$menu" = "rofi -show drun";
@@ -51,7 +57,7 @@ in {
       # lock the screen, because the greetd is auto-logging the user
       "hyprlock"
       "swww-daemon"
-      "swww img \"${wallpaper}\""  # this is not working atm and must be called from the terminal
+      "swww img .local/share/swww/wallpaper.gif"
     ];
 
     workspace = workspaceConfiguration;
