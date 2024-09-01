@@ -4,11 +4,11 @@
   ...
 }: {
   imports = [
-    ./programs/ags
+    # ./programs/ags
     
-    inputs.hyprland.homeManagerModules.default
-    ./programs/hyprland
-    ./programs/hyprlock
+    # inputs.hyprland.homeManagerModules.default
+    # ./programs/hyprland
+    # ./programs/hyprlock
   ];
 
   home.stateVersion = "24.05";
