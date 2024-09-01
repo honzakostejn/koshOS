@@ -47,14 +47,6 @@
 
   outputs = { ... }@inputs: {
     nixosConfigurations = {
-      m1-qemu = inputs.nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./systems/aarch64-linux/m1-qemu
-        ];
-      };
-
       x86_64-iso-image = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
@@ -63,11 +55,19 @@
         ];
       };
 
+      m1-qemu = inputs.nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./systems/aarch64-linux/m1-qemu
+        ];
+      };
+
       framework = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
+          ./systems/x86_64-linux/framework
         ];
       };
     };

@@ -23,7 +23,7 @@
     isNormalUser = true;
     description = "honzakostejn";
     initialPassword = "changemewithpasswd";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "tss" ]; # tss group has access to TPM devices
   };
 
   # authentication daemon
@@ -43,7 +43,7 @@
 
   # steam
   programs.steam = {
-    enable = false;  # there is no aarch64 steam client
+    enable = true;  # there is no aarch64 steam client
     gamescopeSession.enable = true;
   };
   programs.gamemode.enable = true;
