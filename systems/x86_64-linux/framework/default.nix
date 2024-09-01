@@ -51,7 +51,6 @@
     enable = true;
   };
 
-  services.libinput.touchpad.naturalScrolling = true;
 
   # video and audio routing
   services.pipewire = {
@@ -65,6 +64,8 @@
 
   # other services
   services.openssh.enable = true;
+  services.fwupd.enable = true; # enable firmware updates daemon
+  services.libinput.touchpad.naturalScrolling = true;
  
   # automatic garbage collection
   nix.gc = {
