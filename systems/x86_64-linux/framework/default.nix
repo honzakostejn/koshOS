@@ -18,16 +18,18 @@
     # ../../look/fonts.nix
   ];
 
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
+  boot = {
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
+      grub = {
+        efiSupport = true;
+        device = "nodev";
+      };
     };
-    grub = {
-      efiSupport = true;
-      device = "nodev";
-    };
-
+    
     # enable hibernation
     resumeDevice = "/dev/disk/by-label/nixos";
     kernelParams = [
