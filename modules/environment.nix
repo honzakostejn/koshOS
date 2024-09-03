@@ -13,8 +13,6 @@
     };
 
     systemPackages = with pkgs; [
-      alsa-utils
-      brightnessctl
       fastfetch
       gh
       git
