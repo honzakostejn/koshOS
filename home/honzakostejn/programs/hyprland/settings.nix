@@ -1,4 +1,5 @@
 {
+  pkgs,
   ...
 }: let
   wallpaper = let
@@ -48,11 +49,11 @@ in {
       # "HYPRCURSOR_SIZE,${toString pointer.size}"
     ];
 
-    monitor = {
+    monitor = [
       "Virtual-1, 1920x1200@59.88Hz, 0x0, 1"
       "eDP-1, preferred, auto, 1.175000"
       ", preferred, auto, 1"
-    };
+    ];
 
     input = {
       accel_profile = "adaptive";
@@ -60,6 +61,12 @@ in {
       touchpad = {
         natural_scroll = true;
         scroll_factor = 0.5;
+
+        # button presses with 1, 2, or 3 fingers will be
+        # mapped to LMB, RMB, and MMB respectively
+        clickfinger_behavior = true;
+        # require physical click
+        tap-to-click = false;
       };
     };
 
@@ -82,24 +89,29 @@ in {
 
     # bind[flag]
     # [flags]
-    # l -> locked, aka. works also when an input inhibitor (e.g. a lockscreen) is active.
+    # l -> locked, will also work when an input inhibitor (e.g. a lockscreen) is active.
     # r -> release, will trigger on release of a key.
     # e -> repeat, will repeat when held.
     # n -> non-consuming, key/mouse events will be passed to the active window in addition to triggering the dispatcher.
-    # m -> mouse, see below
+    # m -> mouse, see below.
     # t -> transparent, cannot be shadowed by other binds.
     # i -> ignore mods, will ignore modifiers.
-    bindi = {
-      ",XF86MonBrightnessUp" = "exec, ${pkgs.brightnessctl}/bin/brightnessctl +5%";
-      ",XF86MonBrightnessDown" = "exec, ${pkgs.brightnessctl}/bin/brightnessctl -5% ";
-      ",XF86AudioRaiseVolume" = "exec, ${pkgs.pamixer}/bin/pamixer -i 5";
-      ",XF86AudioLowerVolume" = "exec, ${pkgs.pamixer}/bin/pamixer -d 5";
-      ",XF86AudioMute" = "exec, ${pkgs.pamixer}/bin/pamixer --toggle-mute";
-      ",XF86AudioMicMute" = "exec, ${pkgs.pamixer}/bin/pamixer --default-source --toggle-mute";
-      ",XF86AudioNext" = "exec, ${pkgs.playerctl}/bin/playerctl next";
-      ",XF86AudioPrev" = "exec, ${pkgs.playerctl}/bin/playerctl previous";
-      ",XF86AudioPlay" = "exec, ${pkgs.playerctl}/bin/playerctl play-pause";
-      ",XF86AudioStop" = "exec, ${pkgs.playerctl}/bin/playerctl stop";
-    };
+    # s -> separate, will arbitrarily combine keys between each mod/key, see [Keysym combos](#keysym-combos) above.
+    # d -> has description, will allow you to write a description for your bind.
+    # p -> bypasses the app's requests to inhibit keybinds.
+    bindei = [
+      ",XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set +5%"
+      ",XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5%-"
+      ",XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer -i 5"
+      ",XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d 5"
+    ];
+    bindi = [
+      ",XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer --toggle-mute"
+      ",XF86AudioMicMute, exec, ${pkgs.pamixer}/bin/pamixer --default-source --toggle-mute"
+      ",XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
+      ",XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
+      ",XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+      ",XF86AudioStop, exec, ${pkgs.playerctl}/bin/playerctl stop"
+    ];
   };
 }

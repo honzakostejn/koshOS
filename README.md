@@ -7,9 +7,8 @@ sudo nix run github:nix-community/disko#disko-install -- --flake github:honzakos
 nix run nixpkgs#nixos-generators -- --format iso --flake github:honzakostejn/koshos#x86_64-iso-image -o result
 
 # todos
-- [ ] Control brightness with fn keys.
-- [ ] Control sound with fn keys.
-- [ ] Block mouse down event and support only touch if possible.
+- [x] Control brightness with fn keys.
+- [x] Control sound with fn keys.
 - [ ] Enable hibernation with offset
 - [ ] Display battery status.
 - [ ] Setup firefox (ZEN) with extensions.
