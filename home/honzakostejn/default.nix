@@ -9,6 +9,8 @@
     inputs.hyprland.homeManagerModules.default
     ./programs/hyprland
     ./programs/hyprlock
+
+    ./theming
   ];
 
   home.stateVersion = "24.05";
