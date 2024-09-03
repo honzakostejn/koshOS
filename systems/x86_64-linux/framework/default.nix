@@ -49,7 +49,11 @@
   hardware.graphics = {
     enable = true;
   };
-
+  # required for AX210 wireless card
+  hardware.enableRedistributableFirmware = true;
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  hardware.xone.enable = true;
 
   # video and audio routing
   services.pipewire = {
@@ -64,7 +68,7 @@
   # other services
   services.openssh.enable = true;
   services.fwupd.enable = true; # enable firmware updates daemon
-  services.libinput.touchpad.naturalScrolling = true;
+  services.blueman.enable = true;
  
   # automatic garbage collection
   nix.gc = {
