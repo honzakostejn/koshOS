@@ -23,7 +23,12 @@
     isNormalUser = true;
     description = "honzakostejn";
     initialPassword = "changemewithpasswd";
-    extraGroups = [ "networkmanager" "wheel" "tss" ]; # tss group has access to TPM devices
+    extraGroups = [
+      "audio"
+      "networkmanager"
+      "wheel"
+      "tss" # tss group has access to TPM devices
+    ];
   };
 
   # authentication daemon
