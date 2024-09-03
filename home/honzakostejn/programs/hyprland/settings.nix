@@ -2,9 +2,9 @@
   ...
 }: let
   wallpaper = let
-    url = "https://github.com/honzakostejn/koshOS/blob/main/assets/wallpapers/forest-fire.gif?raw=true";
-    sha256 = "005jq0pafwz6pscrsb78h3j8n09qga6bqlxv3yiv4xjp5gmhip2r";
-    ext = "gif";
+    url = "https://github.com/honzakostejn/koshOS/blob/main/assets/wallpapers/mf-doom.jpg?raw=true";
+    sha256 = "0bvz5kjvqvqsmypbjmgmhqr40p4m5fpfl1kgln9r6vgsl42v7wdq";
+    ext = "jpg";
   in
     builtins.fetchurl {
       name = "wallpaper-${sha256}.${ext}";
@@ -33,7 +33,7 @@
 in {
   home.file = {
     # wallpaper
-    ".local/share/swww/wallpaper.gif".source =
+    ".local/share/swww/wallpaper.jpg".source =
       "${wallpaper}";
   };
 
@@ -50,20 +50,32 @@ in {
 
     monitor = [
       "Virtual-1, 1920x1200@59.88Hz, 0x0, 1"
+      "eDP-1, preferred, auto, 1.175000"
       ", preferred, auto, 1"
     ];
+
+    input = {
+      accel_profile = "adaptive";
+      sensitivity = 0.5;
+      touchpad = {
+        natural_scroll = true;
+        scroll_factor = 0.5;
+      };
+    };
 
     exec-once = [
       # lock the screen, because the greetd is auto-logging the user
       "hyprlock"
       "swww-daemon"
-      "swww img .local/share/swww/wallpaper.gif"
+      "sleep 3"
+      "swww img \".local/share/swww/wallpaper.jpg\" --resize no --fill-collor FFFFFF"
     ];
 
     workspace = workspaceConfiguration;
 
     bind = [
-      "$mod, Q, exec, $terminal"
+      "$mod, Q, killactive"
+      "$mod, T, exec, $terminal"
       "$mod, R, exec, $menu"
       "$mod, M, exit,"
     ] ++ workspaceBinds;
