@@ -73,9 +73,6 @@ in {
     exec-once = [
       # lock the screen, because the greetd is auto-logging the user
       "hyprlock"
-      "swww-daemon"
-      "sleep 3"
-      "swww img \".local/share/swww/wallpaper.jpg\" --resize no --fill-collor FFFFFF"
     ];
 
     workspace = workspaceConfiguration;

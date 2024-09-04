@@ -9,6 +9,7 @@
     inputs.hyprland.homeManagerModules.default
     ./programs/hyprland
     ./programs/hyprlock
+    ./programs/firefox
 
     ./theming
   ];
@@ -24,7 +25,6 @@
 
   # user packages
   home.packages = with pkgs; [
-    firefox
     freerdp3
     git
     glxinfo
@@ -33,10 +33,9 @@
     neofetch
     neovim
     rofi-wayland
+    teams-for-linux
     ungoogled-chromium
     vscode
-
-    inputs.swww.packages.${pkgs.system}.swww
   ];
 
   home.pointerCursor = {
