@@ -11,6 +11,8 @@
     # networking configuration
     ./networking.nix
 
+    ./power.nix
+
     ../../../modules
 
     # ./environment.nix

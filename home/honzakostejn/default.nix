@@ -32,6 +32,7 @@
     mangohud
     neofetch
     neovim
+    # pamixer
     rofi-wayland
     teams-for-linux
     ungoogled-chromium
