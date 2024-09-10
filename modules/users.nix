@@ -47,10 +47,10 @@
   };
 
   # steam
-  # programs.steam = {
-  #   enable = true;  # there is no aarch64 steam client
-  #   gamescopeSession.enable = true;
-  # };
-  # programs.gamemode.enable = true;
+  programs.steam = {
+    enable = true;  # there is no aarch64 steam client
+    gamescopeSession.enable = true;
+  };
+  programs.gamemode.enable = true;
   programs.dconf.enable = true;
 }

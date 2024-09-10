@@ -12,6 +12,6 @@
     ./users.nix
 
     # look
-    # ./fonts.nix
+    ./fonts.nix
   ];
 }
