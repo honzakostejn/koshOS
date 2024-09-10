@@ -43,7 +43,7 @@
                 settings = {
                   crypttabExtraOpts = ["tpm2-device=auto" "fido2-device=auto" "token-timeout=10"];
                 };
-                passwordFile = "/tmp/luks-password.txt";
+                passwordFile = "/tmp/secret.key";
                 content = {
                   type = "btrfs";
                   extraArgs = ["-L" "nixos" "-f"];

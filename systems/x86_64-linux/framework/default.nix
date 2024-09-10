@@ -21,14 +21,6 @@
   ];
 
   boot = {
-    loader = {
-      efi.canTouchEfiVariables = true;
-      grub = {
-        efiSupport = true;
-        device = "nodev";
-      };
-    };
-    
     # enable hibernation
     resumeDevice = "/dev/disk/by-label/nixos";
     kernelParams = [
