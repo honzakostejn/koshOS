@@ -12,7 +12,7 @@
     ./networking.nix
 
     ./power.nix
-    ./lanzaboote.nix
+    #./lanzaboote.nix
 
     ../../../modules
 
