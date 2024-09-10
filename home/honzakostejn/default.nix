@@ -25,16 +25,12 @@
 
   # user packages
   home.packages = with pkgs; [
-    freerdp3
     git
-    glxinfo
     kitty
     mangohud
-    neofetch
     neovim
     rofi-wayland
-    teams-for-linux
-    ungoogled-chromium
+    # teams-for-linux
     vscode
   ];
 
