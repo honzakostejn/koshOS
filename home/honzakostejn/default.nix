@@ -4,14 +4,14 @@
   ...
 }: {
   imports = [
-    ./programs/ags
+    #./programs/ags
     
-    inputs.hyprland.homeManagerModules.default
-    ./programs/hyprland
-    ./programs/hyprlock
-    ./programs/firefox
+    #inputs.hyprland.homeManagerModules.default
+    #./programs/hyprland
+    #./programs/hyprlock
+    #./programs/firefox
 
-    ./theming
+    #./theming
   ];
 
   home.stateVersion = "24.05";

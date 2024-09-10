@@ -18,8 +18,6 @@
       git
       htop
       neovim
-      spice-autorandr
-      spice-vdagent
     ];
   };
 }
