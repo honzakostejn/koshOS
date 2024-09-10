@@ -12,7 +12,7 @@ in {
   # xdg.dataFile."icons/${cursor}".source = "${cursorPackage}/share/icons/${cursor}";
 
   wayland.windowManager.hyprland = {
-    enable = true;
+    enable = false;
     systemd = {
       enable = true;
       variables = [ "--all" ];

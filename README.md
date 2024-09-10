@@ -3,7 +3,7 @@ honzakostejn's dotfiles
 
 # instructions
 echo "password" > /tmp/secret.key # luks password
-sudo nix run github:nix-community/disko#disko-install -- --flake github:honzakostejn/koshos#framework --write-efi-boot-entries --disk main /dev/nvme0n1 
+sudo nix run --extra-experimental-features "nix-command flake" github:nix-community/disko#disko-install -- --flake github:honzakostejn/koshos#framework --write-efi-boot-entries --disk main /dev/nvme0n1
 
 # useful commands
 nix run nixpkgs#nixos-generators -- --format iso --flake github:honzakostejn/koshos#x86_64-iso-image -o result
