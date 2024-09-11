@@ -12,7 +12,7 @@
     ./networking.nix
 
     ./power.nix
-    #./lanzaboote.nix
+    ./lanzaboote.nix
 
     ../../../modules
 
@@ -22,6 +22,8 @@
   ];
 
   boot = {
+    bootspec.enable = true;
+
     initrd = {
       systemd = {
         enable = true;
@@ -35,10 +37,10 @@
     };
     
     # enable hibernation
-    resumeDevice = "/dev/disk/by-label/nixos";
+    resumeDevice = "/dev/disk/by-uid/d8954ecc-913b-4ed0-94de-78c7812fc8a0";
     kernelParams = [
       # https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Acquire_swap_file_offset
-      "resume_offset=111111"
+      "resume_offset=533760"
     ];
   };
 
