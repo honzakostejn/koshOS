@@ -37,7 +37,7 @@
     };
     
     # enable hibernation
-    resumeDevice = "/dev/disk/by-uid/d8954ecc-913b-4ed0-94de-78c7812fc8a0";
+    resumeDevice = "/dev/disk/by-label/nixos";
     kernelParams = [
       # https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Acquire_swap_file_offset
       "resume_offset=533760"
