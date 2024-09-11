@@ -4,6 +4,7 @@ honzakostejn's dotfiles
 # instructions
 echo "password" > /tmp/secret.key # luks password
 sudo nix run --extra-experimental-features "nix-command flakes" github:nix-community/disko#disko-install -- --flake github:honzakostejn/koshos#framework --write-efi-boot-entries --disk main /dev/nvme0n1
+sudo systemd-cryptenroll /dev/nvme0n1p2 --tpm2-device=auto --tpm2-pcrs=0+2+7+12 --wipe-slot=tpm2
 
 # useful commands
 nix run nixpkgs#nixos-generators -- --format iso --flake github:honzakostejn/koshos#x86_64-iso-image -o result
