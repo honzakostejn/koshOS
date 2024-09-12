@@ -46,6 +46,10 @@
     };
   };
 
+  programs.hyprland = {
+    enable = true;
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  };
   # steam
   programs.steam = {
     enable = true;  # there is no aarch64 steam client
