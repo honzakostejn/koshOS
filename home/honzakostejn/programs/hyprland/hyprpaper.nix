@@ -5,7 +5,7 @@
 }: let
   wallpaper = let
     url = "https://github.com/honzakostejn/koshOS/blob/main/assets/wallpapers/mf-doom.jpg?raw=true";
-    sha256 = "0bvz5kjvqvqsmypbjmgmhqr40p4m5fpfl1kgln9r6vgsl42v7wdq";
+    sha256 = "0gfdd966hf278arcay2g0s9ppl8q9dyn2jwfx1a7wfzprg04xph0";
     ext = "jpg";
   in
     builtins.fetchurl {
