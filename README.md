@@ -5,9 +5,13 @@ honzakostejn's dotfiles
 echo "password" > /tmp/secret.key # luks password
 sudo nix run --extra-experimental-features "nix-command flakes" github:nix-community/disko#disko-install -- --flake github:honzakostejn/koshos#framework --write-efi-boot-entries --disk main /dev/nvme0n1
 sudo nix run nixpkgs#sbctl create-keys
+// enable lanzaboote
 // enable secure boot
 sudo nix run nixpkgs#sbctl enroll-keys -- --microsoft
 sudo systemd-cryptenroll /dev/nvme0n1p2 --tpm2-device=auto --tpm2-pcrs=0+2+7+12 --wipe-slot=tpm2
+
+# hibernation
+it might be required to reference disk by uuid for hibernation to work; then you can revert.
 
 # useful commands
 nix run nixpkgs#nixos-generators -- --format iso --flake github:honzakostejn/koshos#x86_64-iso-image -o result
@@ -15,7 +19,7 @@ nix run nixpkgs#nixos-generators -- --format iso --flake github:honzakostejn/kos
 # todos
 - [x] Control brightness with fn keys.
 - [x] Control sound with fn keys.
-- [ ] Enable hibernation with offset
+- [x] Enable hibernation with offset
 - [ ] Display battery status.
 - [ ] Setup firefox (ZEN) with extensions.
 - [ ] Setup wallpaper with home-manager options.
@@ -25,11 +29,11 @@ nix run nixpkgs#nixos-generators -- --format iso --flake github:honzakostejn/kos
 - [ ] Customize AGS bar.
 - [ ] Configure xremap to support macOS like bindings.
 - [ ] Add binds to move the mouse to the hyprland.
-- [ ] Enable TPM2 luks decrypt.
+- [x] Enable TPM2 luks decrypt.
 
 # sources
-https://gitlab.com/hmajid2301/nixicle
 https://github.com/fufexan/dotfiles/
 https://github.com/Aylur/dotfiles
 
+https://haseebmajid.dev/posts/2024-07-30-how-i-setup-btrfs-and-luks-on-nixos-using-disko/
 https://jnsgr.uk/2024/04/nixos-secure-boot-tpm-fde/

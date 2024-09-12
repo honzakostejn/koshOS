@@ -1,8 +1,9 @@
 {
   services = {
-    logind.extraConfig = ''
-      HandlePowerKey=suspend
-    '';
+    logind = {
+      powerKey = "poweroff";
+      lidSwitch = "suspend-then-hibernate";
+    };
 
     power-profiles-daemon.enable = true;
 

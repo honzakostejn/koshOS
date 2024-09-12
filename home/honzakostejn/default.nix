@@ -41,4 +41,6 @@
     gtk.enable = true;
     x11.enable = true;
   };
+
+  services.remmina.enable = true;
 }
