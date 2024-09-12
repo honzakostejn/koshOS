@@ -2,16 +2,6 @@
   pkgs,
   ...
 }: let
-  wallpaper = let
-    url = "https://github.com/honzakostejn/koshOS/blob/main/assets/wallpapers/mf-doom.jpg?raw=true";
-    sha256 = "0bvz5kjvqvqsmypbjmgmhqr40p4m5fpfl1kgln9r6vgsl42v7wdq";
-    ext = "jpg";
-  in
-    builtins.fetchurl {
-      name = "wallpaper-${sha256}.${ext}";
-      inherit url sha256;
-    };
-
   workspaceConfiguration = builtins.genList (
     x: let
       # genList is zero-indexed, so we need to add 1 to the index
@@ -32,11 +22,11 @@
   ) 10);
 
 in {
-  home.file = {
-    # wallpaper
-    ".local/share/swww/wallpaper.jpg".source =
-      "${wallpaper}";
-  };
+  # home.file = {
+  #   # wallpaper
+  #   ".local/share/swww/wallpaper.jpg".source =
+  #     "${wallpaper}";
+  # };
 
   wayland.windowManager.hyprland.settings = {
     "$terminal" = "kitty";

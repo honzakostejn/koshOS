@@ -7,6 +7,7 @@
 in {
   imports = [
     ./settings.nix
+    ./hyprpaper.nix
   ];
 
   # xdg.dataFile."icons/${cursor}".source = "${cursorPackage}/share/icons/${cursor}";
