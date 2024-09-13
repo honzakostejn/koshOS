@@ -70,9 +70,11 @@ in {
 
     bind = [
       "$mod, Q, killactive"
-      "$mod, T, exec, $terminal"
+      "$mod, T, togglefloating"
+      "$mod, M, fullscreen, 1"
+      "$mod, F, fullscreen, 0"
       "$mod, R, exec, $menu"
-      "$mod, M, exit,"
+      "$mod, F4, exit,"
     ] ++ workspaceBinds;
 
     # bind[flag]

@@ -19,10 +19,11 @@ nix run nixpkgs#nixos-generators -- --format iso --flake github:honzakostejn/kos
 # todos
 - [x] Control brightness with fn keys.
 - [x] Control sound with fn keys.
-- [x] Enable hibernation with offset
+- [x] Enable hibernation with offset.
+- [ ] Configure Hyprland.
 - [ ] Display battery status.
 - [ ] Setup firefox (ZEN) with extensions.
-- [ ] Setup wallpaper with home-manager options.
+- [x] Setup wallpaper with home-manager options.
 - [ ] Configure nix-colors.
 - [ ] Properly set hyprlock.
 - [ ] Add hypridle.
