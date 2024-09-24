@@ -18,8 +18,8 @@ in {
     package = inputs.hyprpaper.packages.${pkgs.stdenv.hostPlatform.system}.default;
     settings = {
       ipc = "off";
-      splash = true;
-      splash_offset = 2.0;
+      # splash = true;
+      # splash_offset = 2.0;
 
       preload = [
         "${wallpaper}"

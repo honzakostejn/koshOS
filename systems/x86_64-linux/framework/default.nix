@@ -1,4 +1,5 @@
 {
+  pkgs,
   ...
 }: {
   imports = [
@@ -78,12 +79,14 @@
   services.openssh.enable = true;
   services.fwupd.enable = true; # enable firmware updates daemon
   services.blueman.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  environment.systemPackages = [ pkgs.gnome.seahorse ];
  
   # automatic garbage collection
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 7d";
+    options = "--delete-older-than 30d";
   };
 
   # miscellaneous

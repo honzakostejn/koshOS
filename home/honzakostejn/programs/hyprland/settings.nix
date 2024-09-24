@@ -62,7 +62,7 @@ in {
 
     exec-once = [
       # lock the screen, because the greetd is auto-logging the user
-      "hyprlock"
+      # "hyprlock"
       "hyprctl dispatch workspace 1"
     ];
 

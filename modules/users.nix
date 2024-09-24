@@ -36,7 +36,7 @@
     session = {
       # this logs the user in automatically,
       # because there's no greeter specified in the command
-      command = "${lib.getExe config.programs.hyprland.package}";
+      command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd ${lib.getExe config.programs.hyprland.package}";
       user = "honzakostejn";
     };
   in {
@@ -45,6 +45,8 @@
       default_session = session;
     };
   };
+  security.pam.services.greetd.enableGnomeKeyring = true;
+
 
   programs.hyprland = {
     enable = true;
