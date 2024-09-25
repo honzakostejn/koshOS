@@ -25,6 +25,12 @@
 
   # user packages
   home.packages = with pkgs; [
+    # screenshots
+    wl-clipboard
+    grim
+    slurp
+    swappy
+
     git
     kitty
     mangohud
