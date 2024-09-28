@@ -80,7 +80,7 @@
   services.fwupd.enable = true; # enable firmware updates daemon
   services.blueman.enable = true;
   services.gnome.gnome-keyring.enable = true;
-  environment.systemPackages = [ pkgs.gnome.seahorse ];
+  environment.systemPackages = [ pkgs.seahorse ];
  
   # automatic garbage collection
   nix.gc = {

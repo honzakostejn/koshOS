@@ -4,12 +4,14 @@
   ...
 }: {
   imports = [
-    ./programs/ags
-    
     inputs.hyprland.homeManagerModules.default
+
+    ./programs/ags
+    ./programs/firefox
     ./programs/hyprland
     ./programs/hyprlock
-    ./programs/firefox
+    # ./programs/kanshi
+    ./programs/shikane
 
     ./theming
   ];
