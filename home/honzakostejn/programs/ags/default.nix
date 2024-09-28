@@ -20,7 +20,8 @@ in {
     Unit = {
       Description = "Aylur's Gtk Shell";
       PartOf = [
-        "graphical-session.target"  # "hyprland-session.target"
+        "hyprland-session.target"
+        # "graphical-session.target"
       ];
     };
     Service = {
@@ -28,7 +29,8 @@ in {
       Restart = "on-failure";
     };
     Install.WantedBy = [
-      "graphical-session.target"  # "hyprland-session.target"
+      "hyprland-session.target"
+      # "graphical-session.target"
     ];
   };
 }

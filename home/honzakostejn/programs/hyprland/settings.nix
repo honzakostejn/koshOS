@@ -7,7 +7,8 @@
       # genList is zero-indexed, so we need to add 1 to the index
       workspaceNumber = x + 1;
     in
-      "${toString workspaceNumber},monitor:Virtual-1,persistent:true"
+      "${toString workspaceNumber},persistent:true"
+      # "${toString workspaceNumber},monitor:desc:Hewlett Packard HP LP3065 CZ49310227"
   ) 10;
 
   workspaceBinds = builtins.concatLists (builtins.genList (
@@ -40,8 +41,10 @@ in {
     ];
 
     monitor = [
-      "Virtual-1, 1920x1200@59.88Hz, 0x0, 1"
       "eDP-1, preferred, auto, 1.175000"
+      # "desc:Dell Inc. DELL U2415 7MT0167B2AEL, 1920x1200@45.00Hz, auto-left, 1, transform, 1"
+      # "desc:Hewlett Packard HP LP3065 CZ49310227, preferred, 0x0, 1"
+      # "desc:Dell Inc. DELL U2415 7MT0162411FL, preferred, auto-right, 1, transform, 3"
       ", preferred, auto, 1"
     ];
 
@@ -63,6 +66,7 @@ in {
     exec-once = [
       # lock the screen, because the greetd is auto-logging the user
       # "hyprlock"
+      "${pkgs.shikane}/bin/shikane"
       "hyprctl dispatch workspace 1"
     ];
 
@@ -73,8 +77,11 @@ in {
       "$mod, T, togglefloating"
       "$mod, M, fullscreen, 1"
       "$mod, F, fullscreen, 0"
-      "$mod, R, exec, $menu"
+      "$mod, SPACE, exec, $menu"
       "$mod, F4, exit,"
+
+      "$mod, R, exec, grim -g \"$(slurp)\" - | wl-copy"
+      "$mod SHIFT, R, exec, grim -g \"$(slurp)\" - | swappy -f - -o - | wl-copy"
     ] ++ workspaceBinds;
 
     # bind[flag]
@@ -89,19 +96,19 @@ in {
     # s -> separate, will arbitrarily combine keys between each mod/key, see [Keysym combos](#keysym-combos) above.
     # d -> has description, will allow you to write a description for your bind.
     # p -> bypasses the app's requests to inhibit keybinds.
-    bindei = [
-      ",XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set +5%"
-      ",XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5%-"
-      ",XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer -i 5"
-      ",XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d 5"
+    bindlei = [
+      ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set +5%"
+      ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5%-"
+      ", XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer -i 5"
+      ", XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d 5"
     ];
-    bindi = [
-      ",XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer --toggle-mute"
-      ",XF86AudioMicMute, exec, ${pkgs.pamixer}/bin/pamixer --default-source --toggle-mute"
-      ",XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
-      ",XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
-      ",XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
-      ",XF86AudioStop, exec, ${pkgs.playerctl}/bin/playerctl stop"
+    bindli = [
+      ", XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer --toggle-mute"
+      ", XF86AudioMicMute, exec, ${pkgs.pamixer}/bin/pamixer --default-source --toggle-mute"
+      ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
+      ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
+      ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+      ", XF86AudioStop, exec, ${pkgs.playerctl}/bin/playerctl stop"
     ];
   };
 }
