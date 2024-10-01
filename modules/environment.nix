@@ -1,6 +1,5 @@
-{
-  pkgs,
-  ...
+{ pkgs
+, ...
 }: {
   environment = {
     variables = {
@@ -18,6 +17,7 @@
       git
       htop
       neovim
+      nixpkgs-fmt
     ];
   };
 }
