@@ -18,6 +18,8 @@
     ];
 
     input = {
+      follow_mouse = 2;
+
       accel_profile = "adaptive";
       sensitivity = 0.5;
       touchpad = {
