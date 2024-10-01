@@ -37,7 +37,7 @@
           "dom.security.https_only_mode" = true;
           "browser.download.panel.shown" = true;
           "identity.fxaccounts.enabled" = false;
-          "signon.rememberSignons" = false;
+          "signon.rememberSignons" = true;
         };
 
         userChrome = ''                         
@@ -60,7 +60,7 @@
           "dom.security.https_only_mode" = true;
           "browser.download.panel.shown" = true;
           "identity.fxaccounts.enabled" = false;
-          "signon.rememberSignons" = false;
+          "signon.rememberSignons" = true;
         };
 
         userChrome = ''                         
