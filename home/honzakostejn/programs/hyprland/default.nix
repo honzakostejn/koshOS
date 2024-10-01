@@ -1,12 +1,15 @@
-{
-  ...
-}: let
+{ ...
+}:
+let
   # cursor = "Bibata-Modern-Classic-Hyprcursor";
   # cursorPackage = inputs.self.packages.${pkgs.system}.bibata-hyprcursor;
-  
-in {
+
+in
+{
   imports = [
-    ./settings.nix
+    ./settings
+    ./plugins
+
     ./hyprpaper.nix
   ];
 
