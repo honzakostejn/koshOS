@@ -3,36 +3,27 @@
   wayland.windowManager.hyprland.settings = {
     decoration = {
       rounding = 16;
-      drop_shadow = true;
-      shadow_range = 8;
+      drop_shadow = 1;
+      shadow_range = 15;
       shadow_render_power = 2;
-      "col.shadow" = "rgba(1a1a1aa6)";
-      dim_special = 0.0;
-
+      shadow_ignore_window = 1;
+      shadow_offset = "0 4";
+      "col.shadow" = "0x55000000";
+      "col.shadow_inactive" = "0x55000000";
 
       blur = {
         enabled = true;
-        size = 2;
-        passes = 3;
+        size = 8;
+        passes = 2;
         new_optimizations = true;
-        xray = false;
-        contrast = 0.7;
-        brightness = 0.5;
-        noise = 0.4;
-        vibrancy = 80;
-        vibrancy_darkness = 0.0;
-        special = true;
+        xray = true;
+        # contrast = 0.7;
+        # brightness = 0.5;
+        # noise = 0.4;
+        # vibrancy = 80;
+        # vibrancy_darkness = 0.0;
+        # special = true;
       };
-    };
-
-    general = {
-      # See https://wiki.hyprland.org/Configuring/Variables/ for more
-      layout = "dwindle";
-      gaps_in = 8;
-      gaps_out = 16;
-      border_size = 2;
-      "col.active_border" = "rgba(A89984de)";
-      "col.inactive_border" = "rgba(A8998480)";
     };
 
     animations = {

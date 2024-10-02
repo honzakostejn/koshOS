@@ -42,7 +42,7 @@ in
     # d -> has description, will allow you to write a description for your bind.
     # p -> bypasses the app's requests to inhibit keybinds.
 
-    bind = [
+    bind = workspaceBinds ++ [
       # basics
       "$mod, SPACE, exec, $menu"
       "$mod, Q, killactive"
@@ -51,6 +51,7 @@ in
 
       # window actions
       "$mod, T, togglefloating"
+      "$mod SHIFT, T, resizewindowpixel, exact 50% 50%,activewindow"
       "$mod, M, fullscreen, 1"
       "$mod, F, fullscreen, 0"
 
@@ -66,7 +67,11 @@ in
       # screenshots
       "$mod, R, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy"
       "$mod SHIFT, R, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.swappy}/bin/swappy -f - -o - | ${pkgs.wl-clipboard}/bin/wl-copy"
-    ] ++ workspaceBinds;
+    ];
+    bindm = [
+      "$mod, CONTROL_L, movewindow"
+      "$mod, ALT_L, resizewindow"
+    ];
     bindl = [
       ", switch:Lid Switch, exec, $lock"
     ];

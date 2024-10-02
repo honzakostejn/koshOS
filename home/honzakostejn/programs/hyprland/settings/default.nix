@@ -47,6 +47,15 @@
       "hyprctl dispatch split-workspace 1"
     ];
 
+    general = {
+      layout = "dwindle";
+      border_size = 4;
+      "col.active_border" = "rgba(A8C5E6ff) rgba(f1a7e2ff) 45deg";
+      "col.inactive_border" = "0x000B0A10";
+      gaps_in = 8;
+      gaps_out = 15;
+    };
+
     misc = {
       disable_splash_rendering = true;
       force_default_wallpaper = 0;
