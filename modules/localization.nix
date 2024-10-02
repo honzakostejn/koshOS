@@ -18,14 +18,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # configure keymap in X11
-  services.xserver = {
-    xkb = {
-      layout = "us,cz";
-      variant = ",qwerty";
-    };
-  };
-
   # configure console keymap
   console.keyMap = "us";
 }

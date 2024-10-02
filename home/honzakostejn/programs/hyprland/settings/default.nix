@@ -3,6 +3,7 @@
 }: {
   imports = [
     ./binds.nix
+    ./theme.nix
   ];
 
   wayland.windowManager.hyprland.settings = {
@@ -18,10 +19,14 @@
     ];
 
     input = {
-      follow_mouse = 2;
+      kb_layout = "us,cz";
+      kb_variant = ",qwerty";
+      kb_options = "grp:alt_shift_toggle";
 
+      follow_mouse = 2;
       accel_profile = "adaptive";
       sensitivity = 0.5;
+
       touchpad = {
         # scrolling settings
         natural_scroll = true;
@@ -41,5 +46,12 @@
       "${pkgs.shikane}/bin/shikane"
       "hyprctl dispatch split-workspace 1"
     ];
+
+    misc = {
+      disable_splash_rendering = true;
+      force_default_wallpaper = 0;
+      disable_hyprland_logo = true;
+      animate_manual_resizes = true;
+    };
   };
 }
