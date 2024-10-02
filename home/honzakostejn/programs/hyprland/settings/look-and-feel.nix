@@ -1,6 +1,15 @@
 { ...
 }: {
   wayland.windowManager.hyprland.settings = {
+    general = {
+      layout = "dwindle";
+      border_size = 4;
+      "col.active_border" = "rgba(A8C5E6ff) rgba(f1a7e2ff) 45deg";
+      "col.inactive_border" = "0x000B0A10";
+      gaps_in = 8;
+      gaps_out = 15;
+    };
+
     decoration = {
       rounding = 16;
       drop_shadow = 1;
