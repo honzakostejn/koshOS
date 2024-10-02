@@ -29,24 +29,6 @@ in
     "$menu" = "rofi -show drun";
     "$lock" = "pgrep hyprlock || hyprlock";
 
-    bind = [
-      "$mod, Q, killactive"
-      "$mod, T, togglefloating"
-      "$mod, M, fullscreen, 1"
-      "$mod, F, fullscreen, 0"
-
-      "$mod, SPACE, exec, $menu"
-      "$mod, W, exec, firefox -P honzakostejn"
-      "$mod SHIFT, W, exec, firefox -P NETWORG"
-      "$mod, C, exec, code"
-
-      "$mod, F4, exit,"
-      "$mod, L, exec, $lock"
-
-      "$mod, R, exec, grim -g \"$(slurp)\" - | wl-copy"
-      "$mod SHIFT, R, exec, grim -g \"$(slurp)\" - | swappy -f - -o - | wl-copy"
-    ] ++ workspaceBinds;
-
     # bind[flag]
     # [flags]
     # l -> locked, will also work when an input inhibitor (e.g. a lockscreen) is active.
@@ -59,6 +41,32 @@ in
     # s -> separate, will arbitrarily combine keys between each mod/key, see [Keysym combos](#keysym-combos) above.
     # d -> has description, will allow you to write a description for your bind.
     # p -> bypasses the app's requests to inhibit keybinds.
+
+    bind = [
+      # basics
+      "$mod, SPACE, exec, $menu"
+      "$mod, Q, killactive"
+      "$mod, L, exec, $lock"
+      "$mod, F4, exit,"
+
+      # window actions
+      "$mod, T, togglefloating"
+      "$mod, M, fullscreen, 1"
+      "$mod, F, fullscreen, 0"
+
+      # window movement
+      "$mod SHIFT, COMMA, split-changemonitor, prev"
+      "$mod SHIFT, PERIOD, split-changemonitor, next"
+
+      # application shortcuts
+      "$mod, W, exec, firefox -P honzakostejn"
+      "$mod SHIFT, W, exec, firefox -P NETWORG"
+      "$mod, C, exec, code"
+
+      # screenshots
+      "$mod, R, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy"
+      "$mod SHIFT, R, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.swappy}/bin/swappy -f - -o - | ${pkgs.wl-clipboard}/bin/wl-copy"
+    ] ++ workspaceBinds;
     bindl = [
       ", switch:Lid Switch, exec, $lock"
     ];

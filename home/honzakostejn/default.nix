@@ -10,7 +10,6 @@
     ./programs/firefox
     ./programs/hyprland
     ./programs/hyprlock
-    # ./programs/kanshi
     ./programs/shikane
 
     ./theming
@@ -27,12 +26,6 @@
 
   # user packages
   home.packages = with pkgs; [
-    # screenshots
-    wl-clipboard
-    grim
-    slurp
-    swappy
-
     git
     kitty
     mangohud

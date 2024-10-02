@@ -26,8 +26,6 @@ in {
 
       input-field = [
         {
-          monitor = "Virtual-1";
-
           size = "300, 50";
 
           outline_thickness = 1;
