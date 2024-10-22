@@ -4,13 +4,13 @@
   ...
 }: {
   imports = [
-    inputs.hyprland.homeManagerModules.default
-
     ./programs/ags
     ./programs/firefox
+    ./programs/hypridle
     ./programs/hyprland
     ./programs/hyprlock
     ./programs/shikane
+    ./programs/wezterm
 
     ./theming
   ];
@@ -26,8 +26,14 @@
 
   # user packages
   home.packages = with pkgs; [
+    # dolphin
+    rawtherapee
+
+    blender
+    cava
+    cbonsai
     git
-    kitty
+    # kitty
     mangohud
     neovim
     rofi-wayland
@@ -44,4 +50,5 @@
   };
 
   services.remmina.enable = true;
+  services.dunst.enable = true;
 }

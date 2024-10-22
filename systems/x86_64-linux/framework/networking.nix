@@ -1,5 +1,4 @@
-{
-  ...
+{ ...
 }: {
   # enable networking
   networking.networkmanager.enable = true;
@@ -13,5 +12,9 @@
       enable = true;
       addresses = true;
     };
+  };
+
+  networking.firewall = {
+    enable = true;
   };
 }

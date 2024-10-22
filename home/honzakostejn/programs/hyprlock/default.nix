@@ -1,11 +1,25 @@
-{
-  config,
-  inputs,
-  pkgs,
-  ...
-}: let
+{ config
+, inputs
+, pkgs
+, lib
+, ...
+}:
+let
   font_family = "JetBrains Mono";
-in {
+
+  # background is mapped to the last monitor state (screenshot)
+  # hyprlock can't evaluate this at the runtime,
+  # so there's pregenerated config for "extra" monitors at design time
+  generateBackground = monitor: {
+    monitor = monitor;
+    path = "/tmp/screenshots/${monitor}/hyprlock.png";
+    blur_passes = 2;
+    blur_size = 5;
+  };
+  backgrounds = map generateBackground (import ./monitors.nix);
+  
+in
+{
   programs.hyprlock = {
     enable = true;
 
@@ -18,11 +32,7 @@ in {
         no_fade_in = true;
       };
 
-      background = [
-        {
-          monitor = "";
-        }
-      ];
+      background = backgrounds;
 
       input-field = [
         {
@@ -35,7 +45,8 @@ in {
           font_color = "rgb(255, 255, 255)";
 
           fade_on_empty = false;
-          placeholder_text = ''<span font_family="${font_family}" foreground="##255,255,255">Password...</span>'';
+          placeholder_text = "Password...";
+          inherit font_family;
 
           dots_spacing = 0.2;
           dots_center = true;
@@ -54,18 +65,18 @@ in {
         valign = "center";
         halign = "center";
       }
-      {
-        monitor = "";
-        text = "cmd[update:3600000] date +'%a %b %d'";
-        inherit font_family;
-        font_size = 20;
-        color = "rgb(255, 100, 100)";
+        {
+          monitor = "";
+          text = "cmd[update:3600000] date +'%a %b %d'";
+          inherit font_family;
+          font_size = 20;
+          color = "rgb(255, 100, 100)";
 
-        position = "0, 50";
+          position = "0, 50";
 
-        valign = "center";
-        halign = "center";
-      }];
+          valign = "center";
+          halign = "center";
+        }];
     };
   };
 }

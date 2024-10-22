@@ -1,6 +1,5 @@
-{
-  pkgs,
-  ...
+{ pkgs
+, ...
 }: {
   imports = [
     # hardware
@@ -28,7 +27,7 @@
     initrd = {
       systemd = {
         enable = true;
-        enableTpm2 = true;
+        tpm2.enable = true;
       };
     };
 
@@ -36,7 +35,7 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
     };
-    
+
     # enable hibernation
     resumeDevice = "/dev/disk/by-label/nixos";
     kernelParams = [
@@ -49,7 +48,7 @@
   security.tpm2 = {
     enable = true;
     pkcs11.enable = true; # expose /run/current-system/sw/lib/libtpm2_pkcs11.so
-    tctiEnvironment.enable = true;  # TPM2TOOLS_TCTI and TPM2_PKCS11_TCTI env variables
+    tctiEnvironment.enable = true; # TPM2TOOLS_TCTI and TPM2_PKCS11_TCTI env variables
   };
 
   system.stateVersion = "24.05";
@@ -81,7 +80,7 @@
   services.blueman.enable = true;
   services.gnome.gnome-keyring.enable = true;
   environment.systemPackages = [ pkgs.seahorse ];
- 
+
   # automatic garbage collection
   nix.gc = {
     automatic = true;

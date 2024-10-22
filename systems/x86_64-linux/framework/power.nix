@@ -49,7 +49,7 @@ in {
       powerKey = "poweroff";
       lidSwitch = "suspend";
       # `suspend-then-hibernate` option hibernates only at 5% of remaining battery
-      # thus hibernation is automated with `HIBERNATE_SECONDS
+      # thus hibernation is automated with `HIBERNATE_SECONDS`
     };
 
     power-profiles-daemon.enable = true;

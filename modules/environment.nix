@@ -1,4 +1,5 @@
-{ pkgs
+{ inputs
+, pkgs
 , ...
 }: {
   environment = {
@@ -12,10 +13,13 @@
     };
 
     systemPackages = with pkgs; [
+      inputs.swww.packages.${pkgs.system}.swww
+
       fastfetch
       gh
       git
       htop
+      jq
       neovim
       nixpkgs-fmt
     ];

@@ -11,6 +11,9 @@
     };
 
     decoration = {
+      active_opacity = 0.95;
+      inactive_opacity = 0.95;
+      fullscreen_opacity = 1;
       rounding = 16;
       drop_shadow = 1;
       shadow_range = 15;

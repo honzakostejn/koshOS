@@ -13,6 +13,7 @@
     config = ''
       [[profile]]
       name = "undocked"
+      exec = ["swww-daemon & swww img /home/honzakostejn/koshos/assets/wallpapers/forest-fire.gif --filter Nearest"]
         [[profile.output]]
         match = "eDP-1"
         enable = true
@@ -20,6 +21,7 @@
 
       [[profile]]
       name = "docked-hub-prague"
+      exec = ["swww-daemon & swww img /home/honzakostejn/koshos/assets/wallpapers/forest-fire.gif --filter Nearest"]
         [[profile.output]]
         match = "eDP-1"
         enable = false

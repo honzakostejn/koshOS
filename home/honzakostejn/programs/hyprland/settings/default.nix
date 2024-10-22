@@ -42,8 +42,7 @@
     };
 
     exec-once = [
-      # lock the screen, because the greetd is auto-logging the user
-      "${pkgs.shikane}/bin/shikane"
+      # "${pkgs.shikane}/bin/shikane"
       "hyprctl dispatch split-workspace 1"
     ];
 

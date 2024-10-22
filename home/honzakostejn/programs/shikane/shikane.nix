@@ -25,18 +25,9 @@ in {
         default = ''
           [[profile]]
           name = "laptop builtin"
-          [[profile.output]]
-          match = "eDP-1"
-          enable = true
-
-          [[profile]]
-          name = "monitor"
-          [[profile.output]]
-          match = "/HDMI-.-[1-9]/"
-          enable = true
-          [[profile.output]]
-          match = "/DP-[1-9]/"
-          enable = true
+            [[profile.output]]
+            match = "eDP-1"
+            enable = true
         '';
         description = "toml configuration";
       };

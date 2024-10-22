@@ -25,6 +25,7 @@
     initialPassword = "changemewithpasswd";
     extraGroups = [
       "audio"
+      "video" # required for brillo and setting the brightness
       "networkmanager"
       "wheel"
       "tss" # tss group has access to TPM devices
@@ -49,6 +50,7 @@
 
   programs.hyprland = {
     enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.default;
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
   # steam

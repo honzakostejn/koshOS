@@ -22,7 +22,7 @@ nix run nixpkgs#nixos-generators -- --format iso --flake github:honzakostejn/kos
 - [x] Control brightness with fn keys.
 - [x] Control sound with fn keys.
 - [x] Enable hibernation with offset.
-- [ ] Configure Hyprland.
+- [x] Configure Hyprland.
 - [ ] Display battery status.
 - [ ] Setup firefox (ZEN) with extensions.
 - [x] Setup wallpaper with home-manager options.

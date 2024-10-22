@@ -1,7 +1,6 @@
-{
-  pkgs,
-  inputs,
-  ...
+{ pkgs
+, inputs
+, ...
 }: {
   programs.firefox = {
     enable = true;
@@ -38,11 +37,15 @@
           "browser.download.panel.shown" = true;
           "identity.fxaccounts.enabled" = false;
           "signon.rememberSignons" = true;
+
+          "browser.toolbars.bookmarks.visibility" = "never";
+          "browser.translations.neverTranslateLanguages" = "en,cs";
+          "browser.startup.page" = 3; # Restore previous session
         };
 
-        userChrome = ''                         
+        userChrome = ''
           /* some css */                        
-        '';                                      
+        '';
 
         extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
           bitwarden
@@ -60,12 +63,25 @@
           "dom.security.https_only_mode" = true;
           "browser.download.panel.shown" = true;
           "identity.fxaccounts.enabled" = false;
-          "signon.rememberSignons" = true;
+          "signon.rememberSignons" = false;
+
+          "browser.toolbars.bookmarks.visibility" = "never";
+          "browser.translations.neverTranslateLanguages" = "en,cs";
+          "browser.startup.page" = 3; # Restore previous session
+
+          "privacy.history.custom" = true;
+          "network.cookie.cookieBehavior" = 0; # block cross-site tracking cookies
+          "privacy.donottrackheader.enabled" = true;
+          "privacy.bounceTrackingProtection.hasMigratedUserActivationData" = true;
+          "privacy.sanitize.clearOnShutdown.hasMigratedToNewPrefs2" = true;
+          "privacy.clearOnShutdown_v2.cache" = false;
+          "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
+          "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = false;
         };
 
-        userChrome = ''                         
+        userChrome = ''
           /* some css */                        
-        '';                                      
+        '';
 
         extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
           bitwarden
@@ -77,14 +93,14 @@
   };
 
   xdg.mimeApps = {
-    enable                              =  true;
+    enable = true;
     defaultApplications = {
-      "default-web-browser"           = [ "firefox.desktop" ];
-      "text/html"                     = [ "firefox.desktop" ];
-      "x-scheme-handler/http"         = [ "firefox.desktop" ];
-      "x-scheme-handler/https"        = [ "firefox.desktop" ];
-      "x-scheme-handler/about"        = [ "firefox.desktop" ];
-      "x-scheme-handler/unknown"      = [ "firefox.desktop" ];
+      "default-web-browser" = [ "firefox.desktop" ];
+      "text/html" = [ "firefox.desktop" ];
+      "x-scheme-handler/http" = [ "firefox.desktop" ];
+      "x-scheme-handler/https" = [ "firefox.desktop" ];
+      "x-scheme-handler/about" = [ "firefox.desktop" ];
+      "x-scheme-handler/unknown" = [ "firefox.desktop" ];
     };
   };
 }

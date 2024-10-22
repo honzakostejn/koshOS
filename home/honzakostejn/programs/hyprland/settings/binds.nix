@@ -1,4 +1,5 @@
 { pkgs
+, lib
 , ...
 }:
 let
@@ -20,6 +21,8 @@ let
     )
     workspaceCount);
 
+  custom-hyprlock-script = import ../../hyprlock/custom-hyprlock-script.nix { inherit pkgs lib; };
+
 in
 {
   wayland.windowManager.hyprland.settings = {
@@ -27,7 +30,7 @@ in
 
     "$terminal" = "kitty";
     "$menu" = "rofi -show drun";
-    "$lock" = "pgrep hyprlock || hyprlock";
+    "$lock" = "${custom-hyprlock-script}/bin/custom-hyprlock-script";
 
     # bind[flag]
     # [flags]
@@ -46,7 +49,7 @@ in
       # basics
       "$mod, SPACE, exec, $menu"
       "$mod, Q, killactive"
-      "$mod, L, exec, $lock"
+      "$mod ALT_L, L, exec, $lock"
       "$mod, F4, exit,"
 
       # window actions
@@ -56,8 +59,14 @@ in
       "$mod, F, fullscreen, 0"
 
       # window movement
-      "$mod SHIFT, COMMA, split-changemonitor, prev"
-      "$mod SHIFT, PERIOD, split-changemonitor, next"
+      "$mod SHIFT, H, split-changemonitor, prev"
+      "$mod SHIFT, L, split-changemonitor, next"
+
+      # focus movement
+      "$mod, J, movefocus, d"
+      "$mod, K, movefocus, u"
+      "$mod, H, movefocus, l"
+      "$mod, L, movefocus, r"
 
       # application shortcuts
       "$mod, W, exec, firefox -P honzakostejn"
@@ -76,8 +85,8 @@ in
       ", switch:Lid Switch, exec, $lock"
     ];
     bindlei = [
-      ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set +5%"
-      ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 5%-"
+      ", XF86MonBrightnessUp, exec, ${lib.getExe pkgs.brillo} -A 5 -u 200000"
+      ", XF86MonBrightnessDown, exec, ${lib.getExe pkgs.brillo} -U 5 -u 200000"
       ", XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer -i 5"
       ", XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d 5"
     ];
