@@ -1,20 +1,20 @@
-{ pkgs
+{ config
+, pkgs
 , inputs
 , ...
-}:
-let
-  kosh-ags = pkgs.callPackage ../../../../pkgs/kosh-ags/default.nix { inherit inputs; };
-  
-in
-{
-  imports = [
-    inputs.ags.homeManagerModules.default
-  ];
+}: {
+  imports = [ inputs.agsV2.homeManagerModules.default ];
 
   programs.ags = {
     enable = true;
-    configDir = "${kosh-ags}";
-    extraPackages = import ../../../../pkgs/kosh-ags/dependencies.nix { inherit pkgs; };
+
+    configDir = ./.;
+
+    # additional packages to add to gjs's runtime
+    extraPackages = with pkgs; [
+      inputs.agsV2.packages.${pkgs.system}.battery
+      inputs.agsV2.packages.${pkgs.system}.hyprland
+    ];
   };
 
   systemd.user.services.ags = {
@@ -26,7 +26,8 @@ in
       ];
     };
     Service = {
-      ExecStart = "${inputs.ags.packages.${pkgs.system}.default}/bin/ags";
+      # ExecStart = "${inputs.agsV2.packages.${pkgs.system}.default}/bin/ags";
+      ExecStart = "${config.programs.ags.finalPackage}/bin/ags";
       Restart = "on-failure";
     };
     Install.WantedBy = [
