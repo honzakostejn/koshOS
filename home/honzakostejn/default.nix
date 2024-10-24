@@ -4,7 +4,8 @@
   ...
 }: {
   imports = [
-    ./programs/ags
+    # ./programs/ags
+    ./programs/ags/backup.nix
     ./programs/firefox
     ./programs/hypridle
     ./programs/hyprland

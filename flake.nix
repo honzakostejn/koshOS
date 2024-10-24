@@ -6,6 +6,24 @@
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
 
+    agsV2 = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.astal.follows = "astal";
+
+      type = "github";
+      owner = "Aylur";
+      repo = "ags";
+      ref = "v2";
+    };
+    
+    astal = {
+      inputs.nixpkgs.follows = "nixpkgs";
+
+      type = "github";
+      owner = "Aylur";
+      repo = "astal";
+    };
+
     ags = {
       url = "github:Aylur/ags";
     };
