@@ -11,6 +11,7 @@ ags --generate
 
 # copy the generated types to the config directory
 mv ~/.config/ags/@girs ~/koshos/home/honzakostejn/programs/ags
+mv ~/.config/ags/tsconfig.json ~/koshos/home/honzakostejn/programs/ags
 
 # remove everything again, so that the configuration can be managed by home-manager
 rm -rf ~/.config/ags
