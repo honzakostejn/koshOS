@@ -28,7 +28,7 @@ nix run nixpkgs#nixos-generators -- --format iso --flake github:honzakostejn/kos
 - [x] Setup wallpaper with home-manager options.
 - [ ] Configure nix-colors.
 - [ ] Properly set hyprlock.
-- [ ] Add hypridle.
+- [x] Add hypridle.
 - [ ] Customize AGS bar.
 - [ ] Configure xremap to support macOS like bindings.
 - [ ] Add binds to move the mouse to the hyprland.

@@ -50,6 +50,7 @@
       disable_splash_rendering = true;
       force_default_wallpaper = 0;
       disable_hyprland_logo = true;
+      background_color = "0x1E1E2E";
       animate_manual_resizes = true;
     };
   };
