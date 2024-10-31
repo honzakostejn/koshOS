@@ -33,10 +33,13 @@ nix run nixpkgs#nixos-generators -- --format iso --flake github:honzakostejn/kos
 - [ ] Configure xremap to support macOS like bindings.
 - [ ] Add binds to move the mouse to the hyprland.
 - [x] Enable TPM2 luks decrypt.
+- [ ] optimize battery charging thresholds
 
 # sources
 https://github.com/fufexan/dotfiles/
-https://github.com/Aylur/dotfiles
+https://github.com/Aylur/dotfiles/
+https://github.com/matt1432/nixos-configs/
+
 
 https://haseebmajid.dev/posts/2024-07-30-how-i-setup-btrfs-and-luks-on-nixos-using-disko/
 https://jnsgr.uk/2024/04/nixos-secure-boot-tpm-fde/

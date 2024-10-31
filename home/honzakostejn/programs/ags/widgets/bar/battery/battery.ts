@@ -9,11 +9,7 @@ export const fetchBatteryStatus = (): IBatteryProps => {
   const level = Math.floor(percentage / 10) * 10;
   const isCharging = Dependencies.battery.get_charging();
   const isFullyCharged = percentage === 100 && isCharging;
-  const iconName = isFullyCharged ?
-    'battery-level-100-charged-symbolic' :
-    `battery-level-${level}${isCharging ?
-      '-charging' :
-      ''}-symbolic`;
+  const iconName = Dependencies.battery.get_battery_icon_name();
 
   return {
     isPresent,
