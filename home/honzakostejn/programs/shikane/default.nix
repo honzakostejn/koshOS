@@ -8,7 +8,7 @@
   services.shikane = {
     enable = true;
     systemdTarget = [
-      "hyprland-session.target"
+      "graphical-session.target"
     ];
     config = ''
       [[profile]]

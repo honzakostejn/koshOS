@@ -1,4 +1,5 @@
 { pkgs
+, config
 , inputs
 , ...
 }: {
@@ -47,10 +48,13 @@
           /* some css */                        
         '';
 
+        # these extensions will be installed,
+        # but they must be enabled manually in the browser
         extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
           bitwarden
           ublock-origin
-          tridactyl
+          vimium
+
           youtube-shorts-block
         ];
       };
@@ -83,10 +87,12 @@
           /* some css */                        
         '';
 
+        # these extensions will be installed,
+        # but they must be enabled manually in the browser
         extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
           bitwarden
           ublock-origin
-          tridactyl
+          vimium
         ];
       };
     };
