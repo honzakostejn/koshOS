@@ -31,6 +31,7 @@ nix run nixpkgs#nixos-generators -- --format iso --flake github:honzakostejn/kos
 - [x] Add hypridle.
 - [ ] Customize AGS bar.
 - [ ] Configure xremap to support macOS like bindings.
+- [ ] kanata mods
 - [ ] Add binds to move the mouse to the hyprland.
 - [x] Enable TPM2 luks decrypt.
 - [ ] optimize battery charging thresholds

@@ -12,6 +12,7 @@
     ./programs/hyprlock
     ./programs/shikane
     ./programs/wezterm
+    ./programs/vscode
 
     ./theming
   ];
@@ -30,16 +31,21 @@
     # dolphin
     rawtherapee
 
-    blender
+    btop
+    # blender
     cava
     cbonsai
+    figma-linux
     git
     # kitty
     mangohud
     neovim
+    quickemu
     rofi-wayland
     teams-for-linux
-    vscode
+
+    # hyprpanel
+    kanata
   ];
 
   home.pointerCursor = {
