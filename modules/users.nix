@@ -1,9 +1,8 @@
-{
-  inputs,
-  config,
-  lib,
-  pkgs,
-  ...
+{ inputs
+, config
+, lib
+, pkgs
+, ...
 }: {
   imports = [
     # make home-manager as a module of nixos
@@ -24,28 +23,31 @@
     description = "honzakostejn";
     initialPassword = "changemewithpasswd";
     extraGroups = [
+      "wheel" # allow the user to run sudo
       "audio"
       "video" # required for brillo and setting the brightness
       "networkmanager"
-      "wheel"
       "tss" # tss group has access to TPM devices
+      "docker"
     ];
   };
 
   # authentication daemon
-  services.greetd = let
-    session = {
-      # this logs the user in automatically,
-      # because there's no greeter specified in the command
-      command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd ${lib.getExe config.programs.hyprland.package}";
-      user = "honzakostejn";
+  services.greetd =
+    let
+      session = {
+        # this logs the user in automatically,
+        # because there's no greeter specified in the command
+        command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd ${lib.getExe config.programs.hyprland.package}";
+        user = "honzakostejn";
+      };
+    in
+    {
+      enable = true;
+      settings = {
+        default_session = session;
+      };
     };
-  in {
-    enable = true;
-    settings = {
-      default_session = session;
-    };
-  };
   security.pam.services.greetd.enableGnomeKeyring = true;
 
   programs.hyprland = {
@@ -55,9 +57,10 @@
   };
   # steam
   programs.steam = {
-    enable = true;  # there is no aarch64 steam client
+    enable = true; # there is no aarch64 steam client
     gamescopeSession.enable = true;
   };
   programs.gamemode.enable = true;
   programs.dconf.enable = true;
+  programs.nix-ld.enable = true;
 }

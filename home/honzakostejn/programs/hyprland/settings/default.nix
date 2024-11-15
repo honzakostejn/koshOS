@@ -1,4 +1,6 @@
-{ pkgs
+{ inputs
+, pkgs
+, config
 , ...
 }: {
   imports = [
@@ -14,7 +16,7 @@
     ];
 
     monitor = [
-      "eDP-1, preferred, auto, 1.175000"
+      # shikane is used for dynamic display management
       ", preferred, auto, 1"
     ];
 
@@ -42,8 +44,9 @@
     };
 
     exec-once = [
-      # "${pkgs.shikane}/bin/shikane"
-      "hyprctl dispatch split-workspace 1"
+      "${config.programs.ags.finalPackage}/bin/ags run"
+      # "${pkgs.hyprpanel}/bin/hyprpanel"
+      # "hyprctl dispatch split-workspace 1"
     ];
 
     misc = {

@@ -1,7 +1,7 @@
 { ...
 }: {
   imports = [
-    ./hyprwinwrap.nix
+    # ./hyprwinwrap.nix
     ./split-monitor-workspaces.nix
   ];
 }

@@ -12,6 +12,10 @@
       NIXOS_OZONE_WL = "1";
     };
 
+    shellAliases = {
+      rebuild = "sudo nixos-rebuild switch --flake ~/koshos#framework";
+    };
+
     systemPackages = with pkgs; [
       inputs.swww.packages.${pkgs.system}.swww
 

@@ -17,20 +17,21 @@
     ];
   };
 
-  systemd.user.services.ags = {
-    Unit = {
-      Description = "Aylur's Gtk Shell";
-      PartOf = [
-        "graphical-session.target"
-      ];
-    };
-    Service = {
-      # ExecStart = "${inputs.agsV2.packages.${pkgs.system}.default}/bin/ags";
-      ExecStart = "${config.programs.ags.finalPackage}/bin/ags";
-      Restart = "on-failure";
-    };
-    Install.WantedBy = [
-      "graphical-session.target"
-    ];
-  };
+  # currently started from hyprland
+  # systemd.user.services.ags = {
+  #   Unit = {
+  #     Description = "Aylur's Gtk Shell";
+  #     PartOf = [
+  #       "graphical-session.target"
+  #     ];
+  #   };
+  #   Service = {
+  #     # ExecStart = "${inputs.agsV2.packages.${pkgs.system}.default}/bin/ags";
+  #     ExecStart = "${config.programs.ags.finalPackage}/bin/ags";
+  #     Restart = "on-failure";
+  #   };
+  #   Install.WantedBy = [
+  #     "graphical-session.target"
+  #   ];
+  # };
 }

@@ -15,13 +15,13 @@
       inactive_opacity = 0.95;
       fullscreen_opacity = 1;
       rounding = 16;
-      drop_shadow = 1;
-      shadow_range = 15;
-      shadow_render_power = 2;
-      shadow_ignore_window = 1;
-      shadow_offset = "0 4";
-      "col.shadow" = "0x55000000";
-      "col.shadow_inactive" = "0x55000000";
+      # drop_shadow = 1;
+      # shadow_range = 15;
+      # shadow_render_power = 2;
+      # shadow_ignore_window = 1;
+      # shadow_offset = "0 4";
+      # "col.shadow" = "0x55000000";
+      # "col.shadow_inactive" = "0x55000000";
 
       blur = {
         enabled = true;

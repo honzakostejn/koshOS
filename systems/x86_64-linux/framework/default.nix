@@ -53,7 +53,6 @@
 
   system.stateVersion = "24.05";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.allowUnfree = true;
 
   hardware.graphics = {
     enable = true;
@@ -79,7 +78,20 @@
   services.fwupd.enable = true; # enable firmware updates daemon
   services.blueman.enable = true;
   services.gnome.gnome-keyring.enable = true;
-  environment.systemPackages = [ pkgs.seahorse ];
+  environment.systemPackages = with pkgs; [
+    seahorse
+
+    libimobiledevice
+    ifuse # optional, to mount using 'ifuse'
+  ];
+
+  services.spice-vdagentd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    storageDriver = "btrfs";
+  };
+  services.usbmuxd.enable = true;
 
   # automatic garbage collection
   nix.gc = {
@@ -92,5 +104,9 @@
   security = {
     # allow wayland lockers to unlock the screen
     pam.services.hyprlock.text = "auth include login";
+
+
+    # don't ask for password for wheel group
+    sudo.wheelNeedsPassword = false;
   };
 }

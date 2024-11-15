@@ -72,6 +72,7 @@ in
       "$mod, W, exec, firefox -P honzakostejn"
       "$mod SHIFT, W, exec, firefox -P NETWORG"
       "$mod, C, exec, code"
+      # "$mod, A, exec, ${pkgs.hyprpanel}/bin/hyprpanel"
 
       # screenshots
       "$mod, R, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy"
