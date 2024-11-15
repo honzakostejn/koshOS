@@ -3,7 +3,11 @@
 
   inputs = {
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
+      type = "github";
+      owner = "nixos";
+      repo = "nixpkgs";
+      ref = "refs/heads/nixos-unstable";
+      # ref = "master";
     };
 
     agsV2 = {
@@ -15,7 +19,7 @@
       repo = "ags";
       ref = "v2";
     };
-    
+
     astal = {
       inputs.nixpkgs.follows = "nixpkgs";
 
@@ -57,13 +61,17 @@
       type = "git";
       url = "https://github.com/hyprwm/Hyprland";
       submodules = true;
-      # ref = "refs/tags/v0.44.1";
+      ref = "refs/tags/v0.45.0";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
     };
 
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
+    # hyprland-plugins = {
+    #   url = "github:hyprwm/hyprland-plugins";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
 
     hyprlock = {
       url = "github:hyprwm/hyprlock";
@@ -85,6 +93,12 @@
     #   };
     # };
 
+    # hyprpanel = {
+    #   type = "github";
+    #   owner = "Jas-SinghFSU";
+    #   repo = "HyprPanel";
+    # };
+
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.1";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -97,6 +111,12 @@
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware/master";
     };
+
+    # nur = {
+    #   type = "github";
+    #   owner = "nix-community";
+    #   repo = "NUR";
+    # };
 
     split-monitor-workspaces = {
       url = "github:Duckonaut/split-monitor-workspaces";
@@ -113,31 +133,44 @@
     };
   };
 
-  outputs = { ... }@inputs: {
-    nixosConfigurations = {
-      x86_64-iso-image = inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./systems/x86_64-linux/iso-image
+  outputs = { ... }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+        overlays = [
+          # inputs.nur.overlay
+          # inputs.hyprpanel.overlay
         ];
       };
 
-      m1-qemu = inputs.nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./systems/aarch64-linux/m1-qemu
-        ];
-      };
+    in
+    {
+      nixosConfigurations = {
+        x86_64-iso-image = inputs.nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./systems/x86_64-linux/iso-image
+          ];
+        };
 
-      framework = inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./systems/x86_64-linux/framework
-        ];
+        m1-qemu = inputs.nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./systems/aarch64-linux/m1-qemu
+          ];
+        };
+
+        framework = inputs.nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs pkgs; };
+          modules = [
+            ./systems/x86_64-linux/framework
+          ];
+        };
       };
     };
-  };
 }
