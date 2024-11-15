@@ -10,6 +10,14 @@ export default function Workspaces(props: IWorkspacesProps) {
     return mod10 === 0 ? 10 : mod10;
   }
 
+  const getFocusedWorkspaceNumber = (): number => {
+    return Dependencies.hyprland.get_focused_workspace().get_id();
+  }
+
+  const isFocusedWorkspaceOnCurrentMonitor = (): boolean => {
+    return Dependencies.hyprland.get_focused_workspace().get_monitor().get_serial() === props.currentMonitor.hyprlandMonitor.get_serial();
+  }
+
   return (
     <box
       className={"workspaces"}
@@ -19,17 +27,18 @@ export default function Workspaces(props: IWorkspacesProps) {
         <button
           className={
             props.currentMonitor.hyprlandMonitor.get_active_workspace().get_id() === workspace.get_id() ?
-              "workspace active" :
+              "workspace focused" :
               "workspace"
           }
           halign={Gtk.Align.CENTER}
           setup={(self) => {
             self.hook(Dependencies.hyprland, 'notify::focused-workspace', () => {
-              const focusedWorkspace = Dependencies.hyprland.get_focused_workspace();
-
-              // make sure the focused workspace is on the current monitor before toggling class
-              if (focusedWorkspace && focusedWorkspace.get_monitor().get_serial() === props.currentMonitor.hyprlandMonitor.get_serial()) {
-                self.toggleClassName("active", focusedWorkspace.get_id() === workspace.get_id());
+              if (getFocusedWorkspaceNumber() === workspace.get_id() && isFocusedWorkspaceOnCurrentMonitor()) {
+                self.toggleClassName("focused", true);
+              }
+              else {
+                self.toggleClassName("focused", false);
+                self.toggleClassName("has-clients", workspace.get_clients().length > 0);
               }
             })
           }}
