@@ -13,7 +13,7 @@
     };
 
     shellAliases = {
-      rebuild = "sudo nixos-rebuild switch --flake ~/koshos#framework";
+      rebuild = "sudo nixos-rebuild switch --flake ~/repos/koshos#framework";
     };
 
     systemPackages = with pkgs; [

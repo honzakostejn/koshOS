@@ -33,7 +33,6 @@
 
     btop
     # blender
-    cava
     cbonsai
     figma-linux
     git

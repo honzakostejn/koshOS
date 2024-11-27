@@ -29,6 +29,7 @@
       "networkmanager"
       "tss" # tss group has access to TPM devices
       "docker"
+      "wireshark"
     ];
   };
 
@@ -63,4 +64,8 @@
   programs.gamemode.enable = true;
   programs.dconf.enable = true;
   programs.nix-ld.enable = true;
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
+  };
 }

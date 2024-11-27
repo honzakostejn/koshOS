@@ -7,17 +7,17 @@
       owner = "nixos";
       repo = "nixpkgs";
       ref = "refs/heads/nixos-unstable";
-      # ref = "master";
     };
 
-    agsV2 = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.astal.follows = "astal";
+    ags = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        astal.follows = "astal";
+      };
 
       type = "github";
       owner = "Aylur";
       repo = "ags";
-      ref = "v2";
     };
 
     astal = {
@@ -26,10 +26,6 @@
       type = "github";
       owner = "Aylur";
       repo = "astal";
-    };
-
-    ags = {
-      url = "github:Aylur/ags";
     };
 
     disko = {
@@ -58,14 +54,15 @@
     };
 
     hyprland = {
-      type = "git";
-      url = "https://github.com/hyprwm/Hyprland";
-      submodules = true;
-      ref = "refs/tags/v0.45.0";
-
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };
+
+      type = "github";
+      owner = "hyprwm";
+      repo = "Hyprland";
+      # submodules = true;
+      # ref = "refs/tags/v0.45.0";
     };
 
     # hyprland-plugins = {

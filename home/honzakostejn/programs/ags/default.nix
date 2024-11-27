@@ -3,7 +3,7 @@
 , inputs
 , ...
 }: {
-  imports = [ inputs.agsV2.homeManagerModules.default ];
+  imports = [ inputs.ags.homeManagerModules.default ];
 
   programs.ags = {
     enable = true;
@@ -12,8 +12,8 @@
 
     # additional packages to add to gjs's runtime
     extraPackages = with pkgs; [
-      inputs.agsV2.packages.${pkgs.system}.battery
-      inputs.agsV2.packages.${pkgs.system}.hyprland
+      inputs.ags.packages.${pkgs.system}.battery
+      inputs.ags.packages.${pkgs.system}.hyprland
     ];
   };
 
