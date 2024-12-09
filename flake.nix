@@ -109,6 +109,16 @@
       url = "github:NixOS/nixos-hardware/master";
     };
 
+    nixvim = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+
+      type = "github";
+      owner = "nix-community";
+      repo = "nixvim";
+    };
+
     # nur = {
     #   type = "github";
     #   owner = "nix-community";

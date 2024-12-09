@@ -48,7 +48,7 @@ in
         }
         {
           inherit timeout;
-          on-timeout = "hyprctl dispatch dpms off";
+          on-timeout = "if [ $(cat /sys/class/power_supply/ACAD/online) == 1 ]; then hyperctl dispatch dpms off; fi";
           on-resume = "hyprctl dispatch dpms on";
         }
         {

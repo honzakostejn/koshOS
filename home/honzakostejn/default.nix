@@ -7,11 +7,13 @@
     ./programs/ags
     # ./programs/ags/backup.nix
     ./programs/firefox
+    ./programs/foot
     ./programs/hypridle
     ./programs/hyprland
     ./programs/hyprlock
+    ./programs/nixvim
     ./programs/shikane
-    ./programs/wezterm
+    # ./programs/wezterm
     ./programs/vscode
 
     ./theming
@@ -38,7 +40,6 @@
     git
     # kitty
     mangohud
-    neovim
     quickemu
     rofi-wayland
     teams-for-linux

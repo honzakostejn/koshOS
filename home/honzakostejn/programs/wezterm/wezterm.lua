@@ -17,6 +17,6 @@ return {
   -- Remove later.
   front_end = "WebGpu",
 
-  enable_wayland = false,
+  enable_wayland = true,
   -- use_ime = true
 }

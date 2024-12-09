@@ -3,9 +3,9 @@
 , ...
 }: {
   environment = {
-    variables = {
-      EDITOR = "nvim";
-    };
+    # variables = {
+    #   EDITOR = "nvim";
+    # };
 
     sessionVariables = {
       # hint Electron apps to use wayland
@@ -14,6 +14,7 @@
 
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake ~/repos/koshos#framework";
+      dev-lopata = "cd ~/repos/lopata && nix-shell";
     };
 
     systemPackages = with pkgs; [
@@ -24,7 +25,6 @@
       git
       htop
       jq
-      neovim
       nixpkgs-fmt
     ];
   };
