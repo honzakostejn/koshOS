@@ -38,6 +38,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    ghostty = {
+      type = "github";
+      owner = "ghostty-org";
+      repo = "ghostty";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

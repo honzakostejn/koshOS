@@ -7,7 +7,7 @@
     ./programs/ags
     # ./programs/ags/backup.nix
     ./programs/firefox
-    ./programs/foot
+    # ./programs/foot
     ./programs/hypridle
     ./programs/hyprland
     ./programs/hyprlock

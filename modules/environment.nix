@@ -18,6 +18,7 @@
     };
 
     systemPackages = with pkgs; [
+      inputs.ghostty.packages.${pkgs.system}.default
       inputs.swww.packages.${pkgs.system}.swww
 
       fastfetch
