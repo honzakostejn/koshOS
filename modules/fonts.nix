@@ -17,7 +17,7 @@
       openmoji-color
 
       # nerdfonts
-      (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+      nerd-fonts.symbols-only
     ];
 
     # user defined fonts

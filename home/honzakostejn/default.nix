@@ -43,6 +43,8 @@
     quickemu
     rofi-wayland
     teams-for-linux
+    tribler
+    vlc
 
     # hyprpanel
     kanata

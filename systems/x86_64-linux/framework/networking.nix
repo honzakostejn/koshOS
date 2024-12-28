@@ -16,5 +16,8 @@
 
   networking.firewall = {
     enable = true;
+    allowedTCPPorts = [
+      8010 # VLC streaming
+    ];
   };
 }
