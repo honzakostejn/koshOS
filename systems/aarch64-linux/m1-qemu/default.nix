@@ -38,6 +38,7 @@
     enable = true;
   };
 
+  services.xserver.libinput.enable = true;
   services.libinput.touchpad.naturalScrolling = true;
 
   # video and audio routing

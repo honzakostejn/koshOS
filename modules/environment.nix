@@ -24,6 +24,7 @@
       fastfetch
       gh
       git
+      git-credential-manager
       htop
       jq
       nixpkgs-fmt

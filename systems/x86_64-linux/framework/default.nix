@@ -59,9 +59,29 @@
   };
   # required for AX210 wireless card
   hardware.enableRedistributableFirmware = true;
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
-  hardware.xone.enable = true;
+  hardware.bluetooth = {
+    enable = true; # enables support for Bluetooth
+    powerOnBoot = true; # powers up the default Bluetooth controller on boot
+    input = {
+      General = {
+        UserspaceHID = true;
+      };
+    };
+    settings = {
+      General = {
+        Experimental = true; # show battery
+        Enable = "Source,Sink,Media,Socket";
+
+        # # https://www.reddit.com/r/NixOS/comments/1ch5d2p/comment/lkbabax/
+        # # for pairing bluetooth controller
+        # Privacy = "device";
+        # JustWorksRepairing = "always";
+        # Class = "0x000100";
+        # FastConnectable = true;
+      };
+    };
+  };
+  hardware.xpadneo.enable = true; # Enable the xpadneo driver for Xbox One wireless controllers
 
   # video and audio routing
   services.pipewire = {

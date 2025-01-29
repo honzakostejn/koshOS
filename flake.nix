@@ -68,7 +68,7 @@
       owner = "hyprwm";
       repo = "Hyprland";
       # submodules = true;
-      # ref = "refs/tags/v0.45.0";
+      # ref = "refs/tags/v0.46.0";
     };
 
     # hyprland-plugins = {

@@ -5,10 +5,14 @@
     enable = true;
     # package = pkgs.vscode.fhs;
     extensions = with pkgs.vscode-extensions; [
-      ms-dotnettools.csdevkit
       yzhang.markdown-all-in-one
       jnoortheen.nix-ide
       github.copilot
     ];
+
+    # >> don't forget to set the password-store for the keyring to work <<
+    # https://github.com/microsoft/vscode-docs/blob/vnext/docs/editor/settings-sync.md#recommended-configure-the-keyring-to-use-with-vs-code
+    # Preferences: Configure Runtime Arguments command.
+    # This will open the argv.json file where you can add the setting "password-store":"gnome-libsecret"
   };
 }

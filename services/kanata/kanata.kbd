@@ -24,55 +24,31 @@
   tab   q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps  a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft  z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl  lmet lalt           @spc           rctl
+  lctl  lmet lalt          @spc           rctl
 )
 
-(deflayer mouse
+(defalias
+  lay_mouse-quick (layer-while-held mouse-quick)
+  spc (tap-hold 200 200 spc @lay_mouse-quick)
+)
+
+(deflayer mouse-quick
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    _    _    @mau _    _    _    _    _
-  _    _    mmid mrgt mlft _    _    @mal @mad @mar _    _    _
-  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    @mau-q _    _    _    _    _
+  _    _    mmid mrgt mlft _    _    @mal-q @mad-q @mar-q _    _    _
+  _    _    _    @c   _    _    _    _    _    _    _    _
   _    _    _              _              _
 )
 
-(defalias
-  ma↑ (movemouse-accel-up 25 1000 1 100)
-  ma← (movemouse-accel-left 25 1000 1 100)
-  ma↓ (movemouse-accel-down 25 1000 1 100)
-  ma→ (movemouse-accel-right 25 1000 1 100)
-
-  msu (movemouse-up 30 1)
-  msl (movemouse-left 30 1)
-  msd (movemouse-down 30 1)
-  msr (movemouse-right 30 1)
-
-  mau (movemouse-accel-up    10 1000 1 8)
-  mal (movemouse-accel-left  10 1000 1 8)
-  mad (movemouse-accel-down  10 1000 1 8)
-  mar (movemouse-accel-right 10 1000 1 8)
-
-  mtu (tap-dance 30 (
-      (movemouse-up 1 1)
-      (movemouse-up 1 2)
-      (movemouse-up 1 3)
-      (movemouse-up 1 4)
-      (movemouse-up 1 5)
-      (movemouse-up 1 6)
-      (movemouse-up 1 7)
-      (movemouse-up 1 8)
-      (movemouse-up 1 9)
-      (movemouse-up 1 10)
-    )
-  )
+(defvirtualkeys
+  precise-mouse-speed (movemouse-speed 20)
 )
 
 (defalias
-  mlay (layer-while-held mouse)
-  spc (tap-hold 200 200 spc @mlay)
-;;  cmk (layer-switch colemak)
-;;  qwe (layer-switch qwerty)
-;;  sym (layer-toggle symbols)
-;;  esc (tap-hold-release 200 200 esc lctl)
-;;  spc (tap-hold-release 200 200 spc @sym)
-;;  cps (tap-hold-release 200 200 caps @lay)
+  c (on-press toggle-virtualkey precise-mouse-speed)
+
+  mau-q (movemouse-accel-up    10 800 1 50)
+  mal-q (movemouse-accel-left  10 800 1 50)
+  mad-q (movemouse-accel-down  10 800 1 50)
+  mar-q (movemouse-accel-right 10 800 1 50)
 )

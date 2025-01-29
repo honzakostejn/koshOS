@@ -31,6 +31,8 @@
       "docker"
       "wireshark"
     ];
+
+    shell = pkgs.nushell;
   };
 
   # authentication daemon

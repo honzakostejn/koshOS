@@ -17,7 +17,7 @@
         [[profile.output]]
         match = "eDP-1"
         enable = true
-        scale = 1.175
+        scale = 1.333
 
       [[profile]]
       name = "docked-hub-prague"
@@ -42,6 +42,19 @@
         position = "2560,0"
         transform = "270"
         enable = true
+
+      [[profile]]
+      name = "docked-home"
+        [[profile.output]]
+        match = "eDP-1"
+        enable = false
+
+        [[profile.output]]
+        search = [ "s=0x0000D2C6" ]
+        position = "0,0"
+        enable = true
+        mode = "3840x2160@60"
+        scale = 1.600
     '';
   };
 }

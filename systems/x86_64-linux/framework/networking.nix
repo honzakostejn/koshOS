@@ -18,6 +18,7 @@
     enable = true;
     allowedTCPPorts = [
       8010 # VLC streaming
+      8080 # VLC remote playback
     ];
   };
 }
