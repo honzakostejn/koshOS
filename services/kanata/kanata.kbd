@@ -22,19 +22,33 @@
 (deflayer qwerty
   esc   1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab   q    w    e    r    t    y    u    i    o    p    [    ]    \
-  caps  a    s    d    f    g    h    j    k    l    ;    '    ret
+  @caps @a   @s   @d   @f   g    h    @j   @k   @l   @;    '    ret
   lsft  z    x    c    v    b    n    m    ,    .    /    rsft
   lctl  lmet lalt          @spc           rctl
 )
 
+(defvar
+  tap-time 200
+  hold-time 200
+)
+
 (defalias
   lay_mouse-quick (layer-while-held mouse-quick)
-  spc (tap-hold 200 200 spc @lay_mouse-quick)
+  spc (tap-hold $tap-time $hold-time spc @lay_mouse-quick)
+  caps (tap-dance $tap-time (esc caps))
+  a (tap-hold $tap-time $hold-time a lalt)
+  s (tap-hold $tap-time $hold-time s lctl)
+  d (tap-hold $tap-time $hold-time d lsft)
+  f (tap-hold $tap-time $hold-time f lmet)
+  j (tap-hold $tap-time $hold-time j rmet)
+  k (tap-hold $tap-time $hold-time k rsft)
+  l (tap-hold $tap-time $hold-time l rctl)
+  ; (tap-hold $tap-time $hold-time ; ralt)
 )
 
 (deflayer mouse-quick
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    _    _    @mau-q _    _    _    _    _
+  _    _    _    @mwu @mwd _    _    _    @mau-q _    _    _    _    _
   _    _    mmid mrgt mlft _    _    @mal-q @mad-q @mar-q _    _    _
   _    _    _    @c   _    _    _    _    _    _    _    _
   _    _    _              _              _
@@ -47,8 +61,11 @@
 (defalias
   c (on-press toggle-virtualkey precise-mouse-speed)
 
-  mau-q (movemouse-accel-up    10 800 1 50)
-  mal-q (movemouse-accel-left  10 800 1 50)
-  mad-q (movemouse-accel-down  10 800 1 50)
-  mar-q (movemouse-accel-right 10 800 1 50)
+  mwu (mwheel-up   25 120)
+  mwd (mwheel-down 25 120)
+
+  mau-q (movemouse-accel-up    25 1000 1 45)
+  mal-q (movemouse-accel-left  25 1000 1 45)
+  mad-q (movemouse-accel-down  25 1000 1 45)
+  mar-q (movemouse-accel-right 25 1000 1 45)
 )
