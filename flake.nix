@@ -144,20 +144,17 @@
       url = "github:wez/wezterm/main?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    zen-browser = {
+      type = "github";
+      owner = "0xc000022070";
+      repo = "zen-browser-flake";
+    };
   };
 
   outputs = { ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = import inputs.nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = [
-          # inputs.nur.overlay
-          # inputs.hyprpanel.overlay
-        ];
-      };
-
     in
     {
       nixosConfigurations = {
@@ -179,7 +176,7 @@
 
         framework = inputs.nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs pkgs; };
+          specialArgs = { inherit inputs;};
           modules = [
             ./systems/x86_64-linux/framework
           ];

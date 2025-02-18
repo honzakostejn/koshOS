@@ -24,19 +24,21 @@ nix run nixpkgs#nixos-generators -- --format iso --flake github:honzakostejn/kos
 - [x] Enable hibernation with offset.
 - [x] Configure Hyprland.
 - [x] Display battery status.
-- [ ] Setup firefox (ZEN) with extensions.
+- [x] Setup firefox (ZEN) with extensions.
 - [x] Setup wallpaper with home-manager options.
 - [ ] Configure nix-colors.
 - [ ] Properly set hyprlock.
 - [x] Add hypridle.
 - [ ] Customize AGS bar.
-- [ ] kanata mods
-- [ ] Add binds to move the mouse to the hyprland.
+- [x] kanata mods
+- [x] Add binds to move the mouse to the hyprland.
 - [x] Enable TPM2 luks decrypt.
 - [ ] optimize battery charging thresholds
-- [ ] starship prompt
-- [ ] tmux
-- [ ] neorg
+- [x] starship prompt
+- [ ] zettlekasten
+- [ ] yazi
+- [ ] helix
+- [ ] qutebrowser
 
 # sources
 https://github.com/fufexan/dotfiles/

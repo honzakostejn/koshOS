@@ -8,11 +8,13 @@ let
   minuteInSeconds = 60;
   
   suspendScript = pkgs.writeShellScript "suspend-script" ''
-    # check if any player has status "Playing"
-    ${lib.getExe pkgs.playerctl} -a status | ${lib.getExe pkgs.ripgrep} Playing -q
-    # only suspend if nothing is playing
-    if [ $? == 1 ]; then
-      ${pkgs.systemd}/bin/systemctl suspend
+    isCharging=$(cat /sys/class/power_supply/ACAD/online)
+    if [ $isCharging == 0 ]; then
+      isSomethingPlaying=$(${lib.getExe pkgs.playerctl} -a status | ${lib.getExe pkgs.ripgrep} Playing -q)
+      # only suspend if nothing is playing
+      if [ $isSomethingPlaying == 1 ]; then
+        ${pkgs.systemd}/bin/systemctl suspend
+      fi
     fi
   '';
 
@@ -48,13 +50,7 @@ in
         }
         {
           inherit timeout;
-          on-timeout = ''
-            #!/bin/sh
-            isCharging=$(cat /sys/class/power_supply/ACAD/online)
-            if [ $isCharging == 0 ]; then
-              hyprctl dispatch dpms off
-            fi
-          '';
+          on-timeout = "hyprctl dispatch dpms on";
           on-resume = "hyprctl dispatch dpms on";
         }
         {

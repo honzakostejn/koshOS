@@ -29,7 +29,7 @@ in
     settings = {
       "$mod" = "SUPER";
 
-      "$terminal" = "kitty";
+      "$terminal" = "ghostty";
       "$menu" = "rofi -show drun";
       "$lock" = "${custom-hyprlock-script}/bin/custom-hyprlock-script";
 
@@ -49,6 +49,7 @@ in
       bind = workspaceBinds ++ [
         # basics
         "$mod, SPACE, exec, $menu"
+        "$mod, RETURN, exec, $terminal"
         "$mod, Q, killactive"
         "$mod ALT_L, L, exec, $lock"
         "$mod, F4, exit,"
@@ -70,8 +71,8 @@ in
         "$mod, L, movefocus, r"
 
         # application shortcuts
-        "$mod, W, exec, firefox -P honzakostejn"
-        "$mod SHIFT, W, exec, firefox -P NETWORG"
+        "$mod, W, exec, qutebrowser --basedir ~/.config/qutebrowser/honzakostejn"
+        "$mod SHIFT, W, exec, qutebrowser --basedir ~/.config/qutebrowser/NETWORG"
         "$mod, C, exec, code ~/repos/koshos"
         # "$mod, A, exec, ${pkgs.hyprpanel}/bin/hyprpanel"
 

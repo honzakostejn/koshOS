@@ -34,9 +34,9 @@
         };
       };
 
-      neorg = {
-        enable = true;
-      };
+      # neorg = {
+      #   enable = true;
+      # };
     };
   };
 }
