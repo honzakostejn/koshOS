@@ -50,4 +50,7 @@ def load(config, c):
     # ':' was used to enter command mode,
     # command mode is now entered with 'h'
     'h': 'cmd-set-text :',
+
+    'gK': 'tab-move +',
+    'gL': 'tab-move -',
   }
