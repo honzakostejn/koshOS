@@ -38,7 +38,7 @@ def load(config, c):
   c.bindings.commands['normal'] = {
     # vim-like bindings were moved to home-row
     'j': 'scroll left',
-    'k': 'sroll down',
+    'k': 'scroll down',
     'l': 'scroll up',
     ';': 'scroll right',
 
