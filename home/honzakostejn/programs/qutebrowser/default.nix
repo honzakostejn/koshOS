@@ -24,9 +24,11 @@ in
   };
 
   home.file = {
+    ".config/qutebrowser/honzakostejn/config/baseConfig.py".source = ./baseConfig.py;
     ".config/qutebrowser/honzakostejn/config/config.py".source = ./honzakostejn/config.py;
     ".config/qutebrowser/honzakostejn/config/theme.py".source = ./theme.py;
 
+    ".config/qutebrowser/NETWORG/config/baseConfig.py".source = ./baseConfig.py;
     ".config/qutebrowser/NETWORG/config/config.py".source = ./NETWORG/config.py;
     ".config/qutebrowser/NETWORG/config/theme.py".source = ./theme.py;
   };

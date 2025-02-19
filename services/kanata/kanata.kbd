@@ -24,7 +24,7 @@
   tab   q    w    e    r    t    y    u    i    o    p    [    ]    \
   @caps @a   @s   @d   @f   g    h    @j   @k   @l   @;    '    ret
   lsft  z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl  lmet lalt          @spc           rctl
+  lctl  lmet @lalt          @spc           rctl
 )
 
 (defvar
@@ -34,7 +34,11 @@
 
 (defalias
   lay_mouse (layer-while-held mouse)
+  lay_arrows (layer-while-held arrows)
+
+  lalt (tap-hold $tap-time $hold-time lalt @lay_arrows)
   spc (tap-hold $tap-time $hold-time spc @lay_mouse)
+
   caps (tap-dance $tap-time (esc caps))
   a (tap-hold $tap-time $hold-time a lmet)
   s (tap-hold $tap-time $hold-time s lalt)
@@ -71,4 +75,19 @@
   mal (movemouse-accel-left  25 1000 1 45)
   mad (movemouse-accel-down  25 1000 1 45)
   mar (movemouse-accel-right 25 1000 1 45)
+)
+
+(deflayer arrows
+  ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗
+  ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗
+  ✗    @a   @s   @d   @f   ✗    ✗    @lft @dwn @up  @rgt ✗    ✗
+  ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗
+  ✗    ✗    ✗              ✗              ✗
+)
+
+(defalias
+  lft ArrowLeft
+  dwn ArrowDown
+  up ArrowUp
+  rgt ArrowRight
 )

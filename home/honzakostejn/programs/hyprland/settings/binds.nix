@@ -29,6 +29,11 @@ in
     settings = {
       "$mod" = "SUPER";
 
+      "$left" = "J";
+      "$down" = "K";
+      "$up" = "L";
+      "$right" = "SEMICOLON";
+
       "$terminal" = "ghostty";
       "$menu" = "rofi -show drun";
       "$lock" = "${custom-hyprlock-script}/bin/custom-hyprlock-script";
@@ -56,19 +61,21 @@ in
 
         # window actions
         "$mod, T, togglefloating"
-        "$mod SHIFT, T, resizewindowpixel, exact 50% 50%,activewindow"
+        "$mod, T, resizeactive, exact 50% 50%"
+        "$mod, T, moveactive, exact 25% 25%"
+
         "$mod, M, fullscreen, 1"
         "$mod, F, fullscreen, 0"
 
         # window movement
-        "$mod SHIFT, H, split-changemonitor, prev"
-        "$mod SHIFT, L, split-changemonitor, next"
+        "$mod SHIFT, $left, split-changemonitor, prev"
+        "$mod SHIFT, $right, split-changemonitor, next"
 
         # focus movement
-        "$mod, J, movefocus, d"
-        "$mod, K, movefocus, u"
-        "$mod, H, movefocus, l"
-        "$mod, L, movefocus, r"
+        "$mod, $left, movefocus, l"
+        "$mod, $down, movefocus, d"
+        "$mod, $up, movefocus, u"
+        "$mod, $right, movefocus, r"
 
         # application shortcuts
         "$mod, W, exec, qutebrowser --basedir ~/.config/qutebrowser/honzakostejn"
@@ -103,19 +110,5 @@ in
         ", XF86AudioStop, exec, ${pkgs.playerctl}/bin/playerctl stop"
       ];
     };
-
-    # submaps
-    # extraConfig = ''
-    #   # ========================================
-    #   # dev submap
-    #   # ========================================
-    #   bind = $mod, D, submap, dev
-    #     submap = dev
-    #     bind = , L, exec, dev-lopata
-    #     bind = , L, submap, reset
-    #     bind = , escape, submap, reset
-    #     submap = reset
-    #   # ========================================
-    # '';
   };
 }
