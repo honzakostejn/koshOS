@@ -44,10 +44,10 @@
   s (tap-hold $tap-time $hold-time s lalt)
   d (tap-hold $tap-time $hold-time d lctl)
   f (tap-hold $tap-time $hold-time f lsft)
-  j (tap-hold $tap-time $hold-time j rsft)
-  k (tap-hold $tap-time $hold-time k rctl)
-  l (tap-hold $tap-time $hold-time l ralt)
-  ; (tap-hold $tap-time $hold-time ; rmet)
+  j (tap-hold $tap-time $hold-time j lsft) ;; left modifiers are used due to compatibility across OSs
+  k (tap-hold $tap-time $hold-time k lctl) ;; left modifiers are used due to compatibility across OSs
+  l (tap-hold $tap-time $hold-time l lalt) ;; left modifiers are used due to compatibility across OSs
+  ; (tap-hold $tap-time $hold-time ; lmet) ;; left modifiers are used due to compatibility across OSs
 )
 
 (deflayer mouse
