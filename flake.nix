@@ -103,8 +103,13 @@
     # };
 
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.1";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+
+      type = "github";
+      owner = "nix-community";
+      repo = "lanzaboote";
     };
 
     nix-colors = {
@@ -145,11 +150,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zen-browser = {
-      type = "github";
-      owner = "0xc000022070";
-      repo = "zen-browser-flake";
-    };
+    # zen-browser = {
+    #   type = "github";
+    #   owner = "0xc000022070";
+    #   repo = "zen-browser-flake";
+    # };
   };
 
   outputs = { ... }@inputs:

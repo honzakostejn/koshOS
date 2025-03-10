@@ -3,10 +3,6 @@
 , ...
 }: {
   environment = {
-    # variables = {
-    #   EDITOR = "nvim";
-    # };
-
     sessionVariables = {
       # hint Electron apps to use wayland
       NIXOS_OZONE_WL = "1";

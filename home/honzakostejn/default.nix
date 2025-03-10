@@ -7,6 +7,7 @@
     ./programs/ags
     ./programs/bash
     ./programs/firefox
+    ./programs/helix
     ./programs/hypridle
     ./programs/hyprland
     ./programs/hyprlock
@@ -16,6 +17,7 @@
     ./programs/shikane
     ./programs/starship
     ./programs/vscode
+    ./programs/yazi
 
     ./theming
   ];
@@ -52,7 +54,7 @@
     # hyprpanel
     kanata
 
-    inputs.zen-browser.packages."x86_64-linux".beta
+    # inputs.zen-browser.packages."x86_64-linux".beta
     # zen browser is still not in home-manager
     # => make sure to perform this config after the update
     # ==================================================

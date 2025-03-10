@@ -21,6 +21,8 @@ in
   programs.qutebrowser = {
     enable = true;
     package = qutebrowserPkg;
+
+    # edit settings in the baseConfig.py and config.py files due to multiple profiles
   };
 
   home.file = {

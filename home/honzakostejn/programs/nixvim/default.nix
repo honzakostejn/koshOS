@@ -8,7 +8,7 @@
   programs.nixvim = {
     enable = true;
 
-    defaultEditor = true;
+    defaultEditor = false;
 
     colorschemes.catppuccin = {
       enable = true;

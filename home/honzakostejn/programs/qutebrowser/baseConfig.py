@@ -53,4 +53,8 @@ def load(config, c):
 
     'gK': 'tab-move +',
     'gL': 'tab-move -',
+
+    '<Ctrl-p>': 'spawn --userscript qute-bitwarden',
+    '<Ctrl-Shift-p>u': 'spawn --userscript qute-bitwarden --username-only',
+    '<Ctrl-Shift-p>p': 'spawn --userscript qute-bitwarden --password-only',
   }
