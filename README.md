@@ -26,19 +26,19 @@ nix run nixpkgs#nixos-generators -- --format iso --flake github:honzakostejn/kos
 - [x] Display battery status.
 - [x] Setup firefox (ZEN) with extensions.
 - [x] Setup wallpaper with home-manager options.
-- [ ] Configure nix-colors.
-- [ ] Properly set hyprlock.
 - [x] Add hypridle.
-- [ ] Customize AGS bar.
 - [x] kanata mods
 - [x] Add binds to move the mouse to the hyprland.
 - [x] Enable TPM2 luks decrypt.
-- [ ] optimize battery charging thresholds
 - [x] starship prompt
+- [ ] optimize battery charging thresholds
+- [ ] yazi + keymap
+- [ ] Customize AGS bar.
+- [ ] helix + keymap
+- [ ] qutebrowser bitwarden script to search for everything
 - [ ] zettlekasten
-- [ ] yazi
-- [ ] helix
-- [ ] qutebrowser
+- [ ] Configure nix-colors.
+- [ ] Properly set hyprlock.
 
 # sources
 https://github.com/fufexan/dotfiles/

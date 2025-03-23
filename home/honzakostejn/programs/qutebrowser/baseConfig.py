@@ -15,6 +15,7 @@ def load(config, c):
   # don't forget to run :adblock-update on the first run
 
   c.window.hide_decoration = True
+
   c.colors.webpage.preferred_color_scheme = "dark"
 
   c.content.pdfjs = True
