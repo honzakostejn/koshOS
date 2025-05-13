@@ -9,17 +9,6 @@ with lib; let
 in {
   options = {
     services.shikane = {
-      enable = mkEnableOption "Shikane, a more powerful kanshi alternative";
-      package = mkOption {
-        type = types.package;
-        default = pkgs.shikane;
-        description = "shikane derivation to use.";
-      };
-      systemdTarget = mkOption {
-        type = types.listOf types.str;
-        default = ["sway-session.target"];
-        description = "systemd target to bind to.";
-      };
       config = mkOption {
         type = types.str;
         default = ''
@@ -38,20 +27,5 @@ in {
     home.packages = [cfg.package];
 
     xdg.configFile."shikane/config.toml".text = cfg.config;
-
-    systemd.user.services.shikane = {
-      Unit = {
-        Description = "Shikane dynamic display manager";
-        PartOf = cfg.systemdTarget;
-        Requires = cfg.systemdTarget;
-        After = cfg.systemdTarget;
-      };
-      Service = {
-        Type = "simple";
-        ExecStart = "${cfg.package}/bin/shikane";
-        Restart = "always";
-      };
-      Install = {WantedBy = cfg.systemdTarget;};
-    };
   };
 }

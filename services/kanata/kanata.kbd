@@ -52,7 +52,7 @@
 
 (deflayer mouse
   _    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗
-  _    ✗    ✗    @mwu @mwd ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗
+  _    @mwl @mwr @mwu @mwd ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗
   _    @rsz mmid mrgt mlft ✗    ✗    @mal @mad @mau @mar ✗    ✗
   _    @mov ✗    @c   ✗    ✗    ✗    ✗    ✗    ✗    ✗    ✗
   _    _    _              ✗              ✗
@@ -68,8 +68,10 @@
   rsz (multi lmet lalt)
   mov (multi lmet lctl)
 
-  mwu (mwheel-up   25 120)
-  mwd (mwheel-down 25 120)
+  mwu (mwheel-up    25 100)
+  mwd (mwheel-down  25 100)
+  mwl (mwheel-left  25 100)
+  mwr (mwheel-right 25 100)
 
   mau (movemouse-accel-up    25 1000 1 45)
   mal (movemouse-accel-left  25 1000 1 45)

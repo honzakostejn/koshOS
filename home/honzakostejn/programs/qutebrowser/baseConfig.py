@@ -23,6 +23,8 @@ def load(config, c):
 
   c.fonts.default_size = "12pt"
 
+  c.spellcheck.languages = [ 'en-US', 'cs-CZ' ]
+
   c.bindings.commands['caret'] = {
     # vim-like bindings were moved to home-row
     'j': 'move-to-prev-char',

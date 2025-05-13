@@ -22,7 +22,7 @@
     ./theming
   ];
 
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 
   # info about user and path it manages
   home.username = "honzakostejn";
@@ -45,6 +45,7 @@
     git
     # kitty
     mangohud
+    pandoc
     quickemu
     rofi-wayland
     teams-for-linux
@@ -54,7 +55,7 @@
     # hyprpanel
     kanata
 
-    # inputs.zen-browser.packages."x86_64-linux".beta
+    inputs.zen-browser.packages."x86_64-linux".beta
     # zen browser is still not in home-manager
     # => make sure to perform this config after the update
     # ==================================================

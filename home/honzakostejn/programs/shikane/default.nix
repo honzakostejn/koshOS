@@ -7,9 +7,6 @@
 
   services.shikane = {
     enable = true;
-    systemdTarget = [
-      "graphical-session.target"
-    ];
     config = ''
       [[profile]]
       name = "undocked"
