@@ -1,6 +1,6 @@
-{ pkgs,
-config,
-...
+{ pkgs
+, config
+, ...
 }:
 let
   customQuteBitwarden = ./qute-bitwarden.py;
@@ -20,7 +20,10 @@ in
 {
   programs.qutebrowser = {
     enable = true;
-    package = qutebrowserPkg;
+    package = qutebrowserPkg.override {
+      # DRM support - https://wiki.nixos.org/wiki/Qutebrowser
+      enableWideVine = true;
+    };
 
     # edit settings in the baseConfig.py and config.py files due to multiple profiles
   };

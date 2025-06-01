@@ -160,8 +160,20 @@
   outputs = { ... }@inputs:
     let
       system = "x86_64-linux";
+      pkgs = import inputs.nixpkgs { system = system; };
     in
     {
+      devShells.${system}.default = pkgs.mkShell {
+        name = "koshOS-shell";
+        packages = with pkgs; [
+          pkgs.azure-cli
+          # pkgs.bicep
+          #   pkgs.zlib # required by bicep
+          #   pkgs.icu # required by bicep
+          #   pkgs.openssl # required by bicep
+        ];
+      };
+
       nixosConfigurations = {
         x86_64-iso-image = inputs.nixpkgs.lib.nixosSystem {
           inherit system;
@@ -184,6 +196,14 @@
           specialArgs = { inherit inputs;};
           modules = [
             ./systems/x86_64-linux/framework
+          ];
+        };
+
+        jellyfin-az-nixos = inputs.nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./systems/x86_64-linux/jellyfin-az-nixos
           ];
         };
       };

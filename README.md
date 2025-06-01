@@ -46,5 +46,8 @@ https://github.com/Aylur/dotfiles/
 https://github.com/matt1432/nixos-configs/
 
 
+https://github.com/KaiWalter/nixos-cloud-deploy
+
+
 https://haseebmajid.dev/posts/2024-07-30-how-i-setup-btrfs-and-luks-on-nixos-using-disko/
 https://jnsgr.uk/2024/04/nixos-secure-boot-tpm-fde/
