@@ -1,7 +1,7 @@
-{ config
+{ lib
+, config
 , inputs
 , pkgs
-, lib
 , ...
 }:
 let
@@ -17,66 +17,74 @@ let
     blur_size = 5;
   };
   backgrounds = map generateBackground (import ./monitors.nix);
-  
+
 in
 {
-  programs.hyprlock = {
-    enable = true;
+  options = {
+    home.honzakostejn.programs.hyprlock = {
+      enable = lib.mkEnableOption "Hyprlock screen locker" // { default = true; };
+    };
+  };
 
-    package = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
+  config = lib.mkIf config.home.honzakostejn.programs.hyprlock.enable {
+    programs.hyprlock = {
+      enable = true;
 
-    settings = {
-      general = {
-        disable_loading_bar = true;
-        hide_cursor = false;
-        no_fade_in = true;
-      };
+      package = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
 
-      background = backgrounds;
+      settings = {
+        general = {
+          disable_loading_bar = true;
+          hide_cursor = false;
+          no_fade_in = true;
+        };
 
-      input-field = [
-        {
-          size = "300, 50";
+        background = backgrounds;
 
-          outline_thickness = 1;
+        input-field = [
+          {
+            size = "300, 50";
 
-          outer_color = "rgb(255, 100, 100)";
-          inner_color = "rgb(0, 0, 0)";
-          font_color = "rgb(255, 255, 255)";
+            outline_thickness = 1;
 
-          fade_on_empty = false;
-          placeholder_text = "Password...";
-          inherit font_family;
+            outer_color = "rgb(255, 100, 100)";
+            inner_color = "rgb(0, 0, 0)";
+            font_color = "rgb(255, 255, 255)";
 
-          dots_spacing = 0.2;
-          dots_center = true;
-        }
-      ];
+            fade_on_empty = false;
+            placeholder_text = "Password...";
+            inherit font_family;
 
-      label = [{
-        monitor = "";
-        text = "$TIME";
-        inherit font_family;
-        font_size = 50;
-        color = "rgb(255, 100, 100)";
+            dots_spacing = 0.2;
+            dots_center = true;
+          }
+        ];
 
-        position = "0, 150";
-
-        valign = "center";
-        halign = "center";
-      }
-        {
+        label = [{
           monitor = "";
-          text = "cmd[update:3600000] date +'%a %b %d'";
+          text = "$TIME";
           inherit font_family;
-          font_size = 20;
+          font_size = 50;
           color = "rgb(255, 100, 100)";
 
-          position = "0, 50";
+          position = "0, 150";
 
           valign = "center";
           halign = "center";
-        }];
+        }
+          {
+            monitor = "";
+            text = "cmd[update:3600000] date +'%a %b %d'";
+            inherit font_family;
+            font_size = 20;
+            color = "rgb(255, 100, 100)";
+
+            position = "0, 50";
+
+            valign = "center";
+            halign = "center";
+          }];
+      };
     };
   };
 }

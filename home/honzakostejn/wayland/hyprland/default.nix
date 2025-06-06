@@ -1,0 +1,41 @@
+{ lib
+, config
+, inputs
+, pkgs
+, ...
+}:
+let
+  # cursor = "Bibata-Modern-Classic-Hyprcursor";
+  # cursorPackage = inputs.self.packages.${pkgs.system}.bibata-hyprcursor;
+
+in
+{
+  options = {
+    home.honzakostejn.programs.hyprland = {
+      enable = lib.mkEnableOption "Hyprland window manager" // { default = true; };
+    };
+  };
+
+  imports = [
+    inputs.hyprland.homeManagerModules.default
+
+    ./settings
+    ./plugins
+
+    # ./hyprpaper.nix
+  ];
+
+  config = lib.mkIf config.home.honzakostejn.programs.hyprland.enable {
+    # xdg.dataFile."icons/${cursor}".source = "${cursorPackage}/share/icons/${cursor}";
+
+    wayland.windowManager.hyprland = {
+      enable = true;
+      xwayland.enable = true;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      systemd = {
+        enable = true;
+        variables = [ "--all" ];
+      };
+    };
+  };
+}

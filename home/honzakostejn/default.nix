@@ -1,33 +1,21 @@
-{
-  inputs,
-  pkgs,
-  ...
+{ inputs
+, pkgs
+, lib
+, ...
 }: {
   imports = [
-    ./programs/ags
-    ./programs/bash
-    ./programs/firefox
-    ./programs/helix
-    ./programs/hypridle
-    ./programs/hyprland
-    ./programs/hyprlock
-    ./programs/nixvim
-    ./programs/nushell
-    ./programs/qutebrowser
-    ./programs/shikane
-    ./programs/starship
-    ./programs/vscode
-    ./programs/yazi
-
+    ./programs
+    ./services
     ./theming
+    ./wayland
   ];
 
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 
   # info about user and path it manages
   home.username = "honzakostejn";
   home.homeDirectory = "/home/honzakostejn";
- 
+
   # let Home Manager install and manage itself
   programs.home-manager.enable = true;
 
@@ -45,7 +33,9 @@
     git
     # kitty
     mangohud
+    oversteer
     pandoc
+    pavucontrol
     quickemu
     rofi-wayland
     teams-for-linux

@@ -1,48 +1,56 @@
-{ pkgs
+{ lib
+, config
+, pkgs
 , ...
-}:
+}: {
+  options = {
+    home.honzakostejn.programs.helix = {
+      enable = lib.mkEnableOption "Helix editor" // { default = true; };
+    };
+  };
 
-{
-  programs.helix = {
-    enable = true;
+  config = lib.mkIf config.home.honzakostejn.programs.helix.enable {
+    programs.helix = {
+      enable = true;
 
-    defaultEditor = true;
+      defaultEditor = true;
 
-    extraPackages = with pkgs; [
-      nixpkgs-fmt
-      marksman
-    ];
+      extraPackages = with pkgs; [
+        nixpkgs-fmt
+        marksman
+      ];
 
-    settings = {
-      theme = "catppuccin_mocha";
-      
-      editor = {
-        line-number = "relative";
-      };
+      settings = {
+        theme = "catppuccin_mocha";
 
-      keys = {
-        normal = {
-          # replace vim keys with home row keys
-          j = "move_char_left";
-          k = "move_visual_line_down";
-          l = "move_visual_line_up";
-          ";" = "move_char_right";
+        editor = {
+          line-number = "relative";
+        };
 
-          h = "collapse_selection";
+        keys = {
+          normal = {
+            # replace vim keys with home row keys
+            j = "move_char_left";
+            k = "move_visual_line_down";
+            l = "move_visual_line_up";
+            ";" = "move_char_right";
+
+            h = "collapse_selection";
+          };
         };
       };
-    };
 
-    languages = {
-      language = [
-        {
-          name = "nix";
-          formatter = {
-            command = "nixpkgs-fmt";
-          };
-          auto-format = true;
-        }
-      ];
+      languages = {
+        language = [
+          {
+            name = "nix";
+            formatter = {
+              command = "nixpkgs-fmt";
+            };
+            auto-format = true;
+          }
+        ];
+      };
     };
   };
 }

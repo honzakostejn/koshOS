@@ -21,7 +21,7 @@ let
     )
     workspaceCount);
 
-  custom-hyprlock-script = import ../../hyprlock/custom-hyprlock-script.nix { inherit pkgs lib; };
+  custom-hyprlock-script = import ../../../programs/hyprlock/custom-hyprlock-script.nix { inherit pkgs lib; };
 
 in
 {

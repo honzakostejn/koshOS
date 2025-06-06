@@ -1,11 +1,19 @@
-{ lib,
-  ...
+{ lib
+, config
+, ...
 }: {
-  programs.starship = {
-    enable = true;
-    enableBashIntegration = true;
-    enableNushellIntegration = true;
-    settings = {
+  options = {
+    home.honzakostejn.programs.starship = {
+      enable = lib.mkEnableOption "Starship prompt" // { default = true; };
+    };
+  };
+
+  config = lib.mkIf config.home.honzakostejn.programs.starship.enable {
+    programs.starship = {
+      enable = true;
+      enableBashIntegration = true;
+      enableNushellIntegration = true;
+      settings = {
       format = ''
         [](#9A348E)$os$username[](bg:#DA627D fg:#9A348E)$directory[](fg:#DA627D bg:#FCA17D)$git_branch$git_status[](fg:#FCA17D bg:#86BBD8)$c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$rust$scala[](fg:#86BBD8 bg:#06969A)$docker_context[](fg:#06969A bg:#33658A)$time[ ](fg:#33658A)
       '';
@@ -146,5 +154,6 @@
         format = "[ ♥ $time ]($style)";
       };
     }; 
+    };
   };
 }

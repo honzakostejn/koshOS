@@ -206,6 +206,14 @@
             ./systems/x86_64-linux/jellyfin-az-nixos
           ];
         };
+
+        handkerchief = inputs.nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./systems/aarch64-linux/handkerchief
+          ];
+        };
       };
     };
 }

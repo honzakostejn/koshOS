@@ -1,116 +1,125 @@
-{ pkgs
+{ lib
 , config
+, pkgs
 , inputs
 , ...
 }: {
-  programs.firefox = {
-    enable = true;
-    # policies = {
-    #   ExtensionSettings = {
-    #     "*" = {
-    #       installation_mode = "blocked";
-    #       blocked_install_message = "Use home-manager to install extensions!";
-    #     };true
-    #   };
-    # };
-    # profiles = {
-    #   honzakostejn = {
-    #     id = 0;
+  options = {
+    home.honzakostejn.programs.firefox = {
+      enable = lib.mkEnableOption "Firefox web browser" // { default = false; };
+    };
+  };
 
-    #     search.engines = {
-    #       "Nix Packages" = {
-    #         urls = [{
-    #           template = "https://search.nixos.org/packages";
-    #           params = [
-    #             { name = "type"; value = "packages"; }
-    #             { name = "query"; value = "{searchTerms}"; }
-    #           ];
-    #         }];
-    #         icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-    #         definedAliases = [ "@np" ];
-    #       };
-    #     };
-    #     search.force = true;
+  config = lib.mkIf config.home.honzakostejn.programs.firefox.enable {
+    programs.firefox = {
+      enable = true;
+      # policies = {
+      #   ExtensionSettings = {
+      #     "*" = {
+      #       installation_mode = "blocked";
+      #       blocked_install_message = "Use home-manager to install extensions!";
+      #     };true
+      #   };
+      # };
+      profiles = {
+        honzakostejn = {
+          id = 0;
 
-    #     settings = {
-    #       # performance settings
-    #       "gfx.webrender.all" = true; # force enable GPU acceleration
-    #       "media.ffmpeg.vaapi.enabled" = true;
-    #       "widget.dmabuf.force-enabled" = true; # required in recent firefoxes
+          search.engines = {
+            "Nix Packages" = {
+              urls = [{
+                template = "https://search.nixos.org/packages";
+                params = [
+                  { name = "type"; value = "packages"; }
+                  { name = "query"; value = "{searchTerms}"; }
+                ];
+              }];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@np" ];
+            };
+          };
+          search.force = true;
 
-    #       "extensions.autoDisableScopes" = 0;
-    #       "extensions.pocket.enabled" = false;
+          settings = {
+            # performance settings
+            "gfx.webrender.all" = true; # force enable GPU acceleration
+            "media.ffmpeg.vaapi.enabled" = true;
+            "widget.dmabuf.force-enabled" = true; # required in recent firefoxes
 
-    #       "browser.download.panel.shown" = true;
-    #       "browser.toolbars.bookmarks.visibility" = "never";
-    #       "browser.translations.neverTranslateLanguages" = "en,cs";
-    #       "browser.startup.page" = 3; # Restore previous session
+            "extensions.autoDisableScopes" = 0;
+            "extensions.pocket.enabled" = false;
 
-    #       "sidebar.revamp" = true;
-    #       "sidebar.verticalTabs" = true;
-    #       "sidebar.main.tools" = "aichat";
+            "browser.download.panel.shown" = true;
+            "browser.toolbars.bookmarks.visibility" = "never";
+            "browser.translations.neverTranslateLanguages" = "en,cs";
+            "browser.startup.page" = 3; # Restore previous session
 
-    #       # misc
-    #       "dom.security.https_only_mode" = true;
-    #       "identity.fxaccounts.enabled" = false;
-    #       "signon.rememberSignons" = true;
-    #     };
+            "sidebar.revamp" = true;
+            "sidebar.verticalTabs" = true;
+            "sidebar.main.tools" = "aichat";
 
-    #     userChrome = ''
-    #       /* some css */                        
-    #     '';
+            # misc
+            "dom.security.https_only_mode" = true;
+            "identity.fxaccounts.enabled" = false;
+            "signon.rememberSignons" = true;
+          };
 
-    #     # these extensions will be installed,
-    #     # but they must be enabled manually in the browser
-    #     extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
-    #       bitwarden
-    #       ublock-origin
-    #       vimium
+          userChrome = ''
+            /* some css */                        
+          '';
 
-    #       youtube-shorts-block
-    #       multi-account-containers
+          # these extensions will be installed,
+          # but they must be enabled manually in the browser
+          extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
+            bitwarden
+            ublock-origin
+            vimium
 
-    #       # missing
-    #       # level-up-for-d365-power-apps
-    #     ];
-    #   };
+            youtube-shorts-block
+            multi-account-containers
 
-    #   # NETWORG = {
-    #   #   id = 1;
+            # missing
+            # level-up-for-d365-power-apps
+          ];
+        };
 
-    #   #   settings = {
-    #   #     "extensions.autoDisableScopes" = 0;
-    #   #     "dom.security.https_only_mode" = true;
-    #   #     "browser.download.panel.shown" = true;
-    #   #     "identity.fxaccounts.enabled" = false;
-    #   #     "signon.rememberSignons" = false;
+        # NETWORG = {
+        #   id = 1;
 
-    #   #     "browser.toolbars.bookmarks.visibility" = "never";
-    #   #     "browser.translations.neverTranslateLanguages" = "en,cs";
-    #   #     "browser.startup.page" = 3; # Restore previous session
+        #   settings = {
+        #     "extensions.autoDisableScopes" = 0;
+        #     "dom.security.https_only_mode" = true;
+        #     "browser.download.panel.shown" = true;
+        #     "identity.fxaccounts.enabled" = false;
+        #     "signon.rememberSignons" = false;
 
-    #   #     "privacy.history.custom" = true;
-    #   #     "network.cookie.cookieBehavior" = 0; # block cross-site tracking cookies
-    #   #     "privacy.donottrackheader.enabled" = true;
-    #   #     "privacy.bounceTrackingProtection.hasMigratedUserActivationData" = true;
-    #   #     "privacy.sanitize.clearOnShutdown.hasMigratedToNewPrefs2" = true;
-    #   #     "privacy.clearOnShutdown_v2.cache" = false;
-    #   #     "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
-    #   #     "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = false;
-    #   #   };
+        #     "browser.toolbars.bookmarks.visibility" = "never";
+        #     "browser.translations.neverTranslateLanguages" = "en,cs";
+        #     "browser.startup.page" = 3; # Restore previous session
 
-    #   #   userChrome = ''
-    #   #     /* some css */                        
-    #   #   '';
+        #     "privacy.history.custom" = true;
+        #     "network.cookie.cookieBehavior" = 0; # block cross-site tracking cookies
+        #     "privacy.donottrackheader.enabled" = true;
+        #     "privacy.bounceTrackingProtection.hasMigratedUserActivationData" = true;
+        #     "privacy.sanitize.clearOnShutdown.hasMigratedToNewPrefs2" = true;
+        #     "privacy.clearOnShutdown_v2.cache" = false;
+        #     "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
+        #     "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = false;
+        #   };
 
-    #   #   # these extensions will be installed,
-    #   #   # but they must be enabled manually in the browser
-    #   #   extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
-    #   #     bitwarden
-    #   #     ublock-origin
-    #   #     vimium
-    #   #   ];
-    #   # };
-    # };
+        #   userChrome = ''
+        #     /* some css */                        
+        #   '';
+
+        #   # these extensions will be installed,
+        #   # but they must be enabled manually in the browser
+        #   extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
+        #     bitwarden
+        #     ublock-origin
+        #     vimium
+        #   ];
+        # };
+      };
+    };
   };
 }
