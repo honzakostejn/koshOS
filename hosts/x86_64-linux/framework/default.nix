@@ -3,23 +3,15 @@
 , ...
 }: {
   imports = [
-    # hardware
-    ./hardware-configuration.nix
-
-    # disks configuration
     ./disks.nix
-
-    # networking configuration
-    ./networking.nix
-
-    ./power.nix
+    ./environment.nix
+    ./hardware-configuration.nix
     ./lanzaboote.nix
+    ./localization.nix
+    ./networking.nix
+    ./power.nix
 
-    ../../../modules
-
-    # ./environment.nix
-    # ./security.nix
-    # ../../look/fonts.nix
+    ../../../system
   ];
 
   boot = {

@@ -179,7 +179,7 @@
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
-            ./systems/x86_64-linux/iso-image
+            ./hosts/x86_64-linux/iso-image
           ];
         };
 
@@ -187,7 +187,7 @@
           system = "aarch64-linux";
           specialArgs = { inherit inputs; };
           modules = [
-            ./systems/aarch64-linux/m1-qemu
+            ./hosts/aarch64-linux/m1-qemu
           ];
         };
 
@@ -195,7 +195,7 @@
           inherit system;
           specialArgs = { inherit inputs;};
           modules = [
-            ./systems/x86_64-linux/framework
+            ./hosts/x86_64-linux/framework
           ];
         };
 
@@ -203,7 +203,7 @@
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
-            ./systems/x86_64-linux/jellyfin-az-nixos
+            ./hosts/x86_64-linux/jellyfin-az-nixos
           ];
         };
 
@@ -211,7 +211,7 @@
           system = "aarch64-linux";
           specialArgs = { inherit inputs; };
           modules = [
-            ./systems/aarch64-linux/handkerchief
+            ./hosts/aarch64-linux/handkerchief
           ];
         };
       };
