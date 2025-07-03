@@ -40,6 +40,9 @@ nix run nixpkgs#nixos-generators -- --format iso --flake github:honzakostejn/kos
 - [ ] Configure nix-colors.
 - [ ] Properly set hyprlock.
 
+# keyboard layout
+- inspired by https://github.com/manna-harbour/miryoku
+
 # sources
 https://github.com/fufexan/dotfiles/
 https://github.com/Aylur/dotfiles/
