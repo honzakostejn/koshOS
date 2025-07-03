@@ -17,6 +17,7 @@
 
     monitor = [
       # shikane is used for dynamic display management
+      "eDP-1, preferred, auto, 1.33"
       ", preferred, auto, 1"
     ];
 

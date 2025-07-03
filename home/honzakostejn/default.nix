@@ -29,7 +29,7 @@
     # blender
     cbonsai
     chromium
-    figma-linux
+    # figma-linux
     git
     # kitty
     mangohud
@@ -39,7 +39,7 @@
     quickemu
     rofi-wayland
     teams-for-linux
-    tribler
+    # tribler
     vlc
 
     # hyprpanel

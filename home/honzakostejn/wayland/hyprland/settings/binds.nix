@@ -3,25 +3,12 @@
 , ...
 }:
 let
-  # this one should be passed
-  workspaceCount = 10;
-
-  workspaceBinds = builtins.concatLists (builtins.genList
-    (
-      x:
-      let
-        key = builtins.toString (x);
-        # key 0 is at the end of the keyboard row
-        workspaceNumber = if x == 0 then 10 else x;
-      in
-      [
-        "$mod, ${key}, split-workspace, ${toString workspaceNumber}"
-        "$mod SHIFT, ${key}, split-movetoworkspace, ${toString workspaceNumber}"
-      ]
-    )
-    workspaceCount);
-
   custom-hyprlock-script = import ../../../programs/hyprlock/custom-hyprlock-script.nix { inherit pkgs lib; };
+  toggle-mute-teams = pkgs.writeShellApplication {
+    name = "toggle-mute-teams";
+    runtimeInputs = [ pkgs.jq ];
+    text = builtins.readFile ../scripts/toggle-mute-teams.sh;
+  };
 
 in
 {
@@ -37,6 +24,7 @@ in
       "$terminal" = "ghostty";
       "$menu" = "rofi -show drun";
       "$lock" = "${custom-hyprlock-script}/bin/custom-hyprlock-script";
+      "$toggle-mute-teams" = "${toggle-mute-teams}/bin/toggle-mute-teams";
 
       # bind[flag]
       # [flags]
@@ -51,7 +39,7 @@ in
       # d -> has description, will allow you to write a description for your bind.
       # p -> bypasses the app's requests to inhibit keybinds.
 
-      bind = workspaceBinds ++ [
+      bind = [
         # basics
         "$mod, SPACE, exec, $menu"
         "$mod, RETURN, exec, $terminal"
@@ -66,10 +54,6 @@ in
 
         "$mod, M, fullscreen, 1"
         "$mod, F, fullscreen, 0"
-
-        # window movement
-        "$mod SHIFT, $left, split-changemonitor, prev"
-        "$mod SHIFT, $right, split-changemonitor, next"
 
         # focus movement
         "$mod, $left, movefocus, l"
@@ -86,6 +70,9 @@ in
         # screenshots
         "$mod, R, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy"
         "$mod SHIFT, R, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.swappy}/bin/swappy -f - -o - | ${pkgs.wl-clipboard}/bin/wl-copy"
+
+        # toggle mute in MS Teams
+        "CONTROL SHIFT, M, exec, $toggle-mute-teams"
       ];
       bindm = [
         "$mod, CONTROL_L, movewindow"
