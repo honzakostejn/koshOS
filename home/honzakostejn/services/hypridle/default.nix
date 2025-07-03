@@ -28,12 +28,12 @@ let
 in
 {
   options = {
-    home.honzakostejn.programs.hypridle = {
+    koshos.home.honzakostejn.programs.hypridle = {
       enable = lib.mkEnableOption "Hypridle idle daemon" // { default = true; };
     };
   };
 
-  config = lib.mkIf config.home.honzakostejn.programs.hypridle.enable {
+  config = lib.mkIf config.koshos.home.honzakostejn.programs.hypridle.enable {
     # screen idle
     services.hypridle = {
       enable = true;

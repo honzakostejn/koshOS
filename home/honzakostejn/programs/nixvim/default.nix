@@ -4,7 +4,7 @@
 , ...
 }: {
   options = {
-    home.honzakostejn.programs.nixvim = {
+    koshos.home.honzakostejn.programs.nixvim = {
       enable = lib.mkEnableOption "NixVim editor" // { default = false; };
     };
   };
@@ -13,7 +13,7 @@
     inputs.nixvim.homeManagerModules.nixvim
   ];
 
-  config = lib.mkIf config.home.honzakostejn.programs.nixvim.enable {
+  config = lib.mkIf config.koshos.home.honzakostejn.programs.nixvim.enable {
     programs.nixvim = {
       enable = true;
 

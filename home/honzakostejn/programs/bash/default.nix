@@ -3,12 +3,12 @@
 , ...
 }: {
   options = {
-    home.honzakostejn.programs.bash = {
+    koshos.home.honzakostejn.programs.bash = {
       enable = lib.mkEnableOption "Bash shell" // { default = true; };
     };
   };
 
-  config = lib.mkIf config.home.honzakostejn.programs.bash.enable {
+  config = lib.mkIf config.koshos.home.honzakostejn.programs.bash.enable {
     programs.bash = {
       enable = true;
     };

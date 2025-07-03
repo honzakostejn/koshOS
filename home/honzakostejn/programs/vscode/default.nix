@@ -4,12 +4,12 @@
 , ...
 }: {
   options = {
-    home.honzakostejn.programs.vscode = {
+    koshos.home.honzakostejn.programs.vscode = {
       enable = lib.mkEnableOption "Visual Studio Code editor" // { default = true; };
     };
   };
 
-  config = lib.mkIf config.home.honzakostejn.programs.vscode.enable {
+  config = lib.mkIf config.koshos.home.honzakostejn.programs.vscode.enable {
     programs.vscode = {
       enable = true;
       profiles.default.extensions = with pkgs.vscode-extensions; [

@@ -3,12 +3,12 @@
 , ...
 }: {
   options = {
-    home.honzakostejn.programs.yazi = {
+    koshos.home.honzakostejn.programs.yazi = {
       enable = lib.mkEnableOption "Yazi file manager" // { default = true; };
     };
   };
 
-  config = lib.mkIf config.home.honzakostejn.programs.yazi.enable {
+  config = lib.mkIf config.koshos.home.honzakostejn.programs.yazi.enable {
     programs.yazi = {
       enable = true;
 

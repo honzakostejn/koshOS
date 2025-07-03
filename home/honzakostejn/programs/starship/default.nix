@@ -3,12 +3,12 @@
 , ...
 }: {
   options = {
-    home.honzakostejn.programs.starship = {
+    koshos.home.honzakostejn.programs.starship = {
       enable = lib.mkEnableOption "Starship prompt" // { default = true; };
     };
   };
 
-  config = lib.mkIf config.home.honzakostejn.programs.starship.enable {
+  config = lib.mkIf config.koshos.home.honzakostejn.programs.starship.enable {
     programs.starship = {
       enable = true;
       enableBashIntegration = true;

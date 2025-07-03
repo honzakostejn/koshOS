@@ -11,7 +11,7 @@ let
 in
 {
   options = {
-    home.honzakostejn.programs.hyprland = {
+    koshos.home.honzakostejn.programs.hyprland = {
       enable = lib.mkEnableOption "Hyprland window manager" // { default = true; };
     };
   };
@@ -25,14 +25,14 @@ in
     # ./hyprpaper.nix
   ];
 
-  config = lib.mkIf config.home.honzakostejn.programs.hyprland.enable {
+  config = lib.mkIf config.koshos.home.honzakostejn.programs.hyprland.enable {
     # xdg.dataFile."icons/${cursor}".source = "${cursorPackage}/share/icons/${cursor}";
 
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
       systemd = {
         enable = true;
         variables = [ "--all" ];

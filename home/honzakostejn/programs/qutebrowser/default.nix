@@ -20,12 +20,12 @@ let
 in
 {
   options = {
-    home.honzakostejn.programs.qutebrowser = {
+    koshos.programs.qutebrowser = {
       enable = lib.mkEnableOption "Qutebrowser web browser" // { default = true; };
     };
   };
 
-  config = lib.mkIf config.home.honzakostejn.programs.qutebrowser.enable {
+  config = lib.mkIf config.koshos.programs.qutebrowser.enable {
     programs.qutebrowser = {
       enable = true;
       package = qutebrowserPkg.override {

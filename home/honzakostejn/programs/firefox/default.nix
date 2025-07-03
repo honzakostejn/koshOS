@@ -5,12 +5,12 @@
 , ...
 }: {
   options = {
-    home.honzakostejn.programs.firefox = {
+    koshos.home.honzakostejn.programs.firefox = {
       enable = lib.mkEnableOption "Firefox web browser" // { default = false; };
     };
   };
 
-  config = lib.mkIf config.home.honzakostejn.programs.firefox.enable {
+  config = lib.mkIf config.koshos.home.honzakostejn.programs.firefox.enable {
     programs.firefox = {
       enable = true;
       # policies = {

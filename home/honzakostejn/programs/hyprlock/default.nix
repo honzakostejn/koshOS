@@ -21,12 +21,12 @@ let
 in
 {
   options = {
-    home.honzakostejn.programs.hyprlock = {
+    koshos.home.honzakostejn.programs.hyprlock = {
       enable = lib.mkEnableOption "Hyprlock screen locker" // { default = true; };
     };
   };
 
-  config = lib.mkIf config.home.honzakostejn.programs.hyprlock.enable {
+  config = lib.mkIf config.koshos.home.honzakostejn.programs.hyprlock.enable {
     programs.hyprlock = {
       enable = true;
 

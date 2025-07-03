@@ -59,48 +59,51 @@
       };
     };
 
-    hyprland = {
+    hyprutils = {
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };
 
       type = "github";
       owner = "hyprwm";
-      repo = "Hyprland";
-      # submodules = true;
-      # ref = "refs/tags/v0.46.0";
+      repo = "hyprutils";
+      ref = "refs/tags/v0.8.0";
     };
 
-    # hyprland-plugins = {
-    #   url = "github:hyprwm/hyprland-plugins";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
+    hyprland = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        hyprutils.follows = "hyprutils";
+      };
+
+      type = "github";
+      owner = "hyprwm";
+      repo = "Hyprland";
+      ref = "refs/tags/v0.49.0";
+    };
 
     hyprlock = {
-      url = "github:hyprwm/hyprlock";
       inputs = {
         hyprlang.follows = "hyprland/hyprlang";
         hyprutils.follows = "hyprland/hyprutils";
         nixpkgs.follows = "hyprland/nixpkgs";
         systems.follows = "hyprland/systems";
       };
+
+      type = "github";
+      owner = "hyprwm";
+      repo = "hyprlock";
     };
 
-    # hyprpaper = {
-    #   url = "github:hyprwm/hyprpaper";
-    #   inputs = {
-    #     hyprlang.follows = "hyprland/hyprlang";
-    #     hyprutils.follows = "hyprland/hyprutils";
-    #     nixpkgs.follows = "hyprland/nixpkgs";
-    #     systems.follows = "hyprland/systems";
-    #   };
-    # };
+    hyprsplit = {
+      inputs = {
+        hyprland.follows = "hyprland";
+      };
 
-    # hyprpanel = {
-    #   type = "github";
-    #   owner = "Jas-SinghFSU";
-    #   repo = "HyprPanel";
-    # };
+      type = "github";
+      owner = "shezdy";
+      repo = "hyprsplit";
+    };
 
     lanzaboote = {
       inputs = {
@@ -130,48 +133,72 @@
       repo = "nixvim";
     };
 
+    split-monitor-workspaces = {
+      inputs = {
+        hyprland.follows = "hyprland";
+      };
+
+      type = "github";
+      owner = "Duckonaut";
+      repo = "split-monitor-workspaces";
+    };
+
+    # hyprland-plugins = {
+    #   url = "github:hyprwm/hyprland-plugins";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
+
+    # hyprpaper = {
+    #   url = "github:hyprwm/hyprpaper";
+    #   inputs = {
+    #     hyprlang.follows = "hyprland/hyprlang";
+    #     hyprutils.follows = "hyprland/hyprutils";
+    #     nixpkgs.follows = "hyprland/nixpkgs";
+    #     systems.follows = "hyprland/systems";
+    #   };
+    # };
+
+    # hyprpanel = {
+    #   type = "github";
+    #   owner = "Jas-SinghFSU";
+    #   repo = "HyprPanel";
+    # };
+
     # nur = {
     #   type = "github";
     #   owner = "nix-community";
     #   repo = "NUR";
     # };
 
-    split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces";
-      inputs.hyprland.follows = "hyprland"; # <- make sure this line is present for the plugin to work as intended
-    };
+    # swww = {
+    #   url = "github:LGFae/swww";
+    # };
 
-    swww = {
-      url = "github:LGFae/swww";
-    };
+    # wezterm = {
+    #   url = "github:wez/wezterm/main?dir=nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-    wezterm = {
-      url = "github:wez/wezterm/main?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    zen-browser = {
-      type = "github";
-      owner = "0xc000022070";
-      repo = "zen-browser-flake";
-    };
+    # zen-browser = {
+    #   type = "github";
+    #   owner = "0xc000022070";
+    #   repo = "zen-browser-flake";
+    # };
   };
 
-  outputs = { ... }@inputs:
+  outputs = { self, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import inputs.nixpkgs { system = system; };
     in
     {
-      devShells.${system}.default = pkgs.mkShell {
-        name = "koshOS-shell";
-        packages = with pkgs; [
-          pkgs.azure-cli
-          # pkgs.bicep
-          #   pkgs.zlib # required by bicep
-          #   pkgs.icu # required by bicep
-          #   pkgs.openssl # required by bicep
-        ];
+      packages = {
+        # aarch64-linux = {
+        #   image-handkerchief = self.nixosConfigurations.handkerchief.config.system.build.sdImage;
+        # };
+        x86_64-linux = {
+          image-handkerchief = self.nixosConfigurations.handkerchief.config.system.build.sdImage;
+        };
       };
 
       nixosConfigurations = {
@@ -193,7 +220,7 @@
 
         framework = inputs.nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs;};
+          specialArgs = { inherit inputs; };
           modules = [
             ./hosts/x86_64-linux/framework
           ];

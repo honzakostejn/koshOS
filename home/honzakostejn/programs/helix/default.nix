@@ -4,12 +4,12 @@
 , ...
 }: {
   options = {
-    home.honzakostejn.programs.helix = {
+    koshos.home.honzakostejn.programs.helix = {
       enable = lib.mkEnableOption "Helix editor" // { default = true; };
     };
   };
 
-  config = lib.mkIf config.home.honzakostejn.programs.helix.enable {
+  config = lib.mkIf config.koshos.home.honzakostejn.programs.helix.enable {
     programs.helix = {
       enable = true;
 

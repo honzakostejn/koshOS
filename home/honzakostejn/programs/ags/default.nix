@@ -5,14 +5,14 @@
 , ...
 }: {
   options = {
-    home.honzakostejn.programs.ags = {
+    koshos.home.honzakostejn.programs.ags = {
       enable = lib.mkEnableOption "AGS (Aylur's GTK Shell)" // { default = true; };
     };
   };
 
   imports = [ inputs.ags.homeManagerModules.default ];
 
-  config = lib.mkIf config.home.honzakostejn.programs.ags.enable {
+  config = lib.mkIf config.koshos.home.honzakostejn.programs.ags.enable {
 
     programs.ags = {
       enable = true;

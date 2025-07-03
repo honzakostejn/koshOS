@@ -17,6 +17,8 @@
   boot = {
     bootspec.enable = true;
 
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
+
     initrd = {
       systemd = {
         enable = true;
@@ -118,10 +120,16 @@
 
   # miscellaneous
   security = {
+    polkit.enable = true;
+
     # allow wayland lockers to unlock the screen
     pam.services.hyprlock.text = "auth include login";
 
     # don't ask for password for wheel group
     sudo.wheelNeedsPassword = false;
   };
+
+  # screen sharing
+  programs.hyprland.enable = true;
+  programs.hyprland.portalPackage = pkgs.xdg-desktop-portal-hyprland;
 }
