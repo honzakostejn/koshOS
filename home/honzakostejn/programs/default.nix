@@ -8,6 +8,8 @@
     ./hyprlock
     ./nixvim
     ./nushell
+    ./opencode
+    ./quickshell
     ./qutebrowser
     ./starship
     ./vscode

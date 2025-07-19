@@ -90,6 +90,39 @@
               }
             ];
           }
+          {
+            name = "docked-hub-brno";
+            output = [
+              {
+                match = "eDP-1";
+                enable = false;
+              }
+              {
+                search = [ "s=4RFMK56P1CAS" ];
+                position = {
+                  x = 0;
+                  y = 0;
+                };
+                enable = true;
+              }
+              {
+                search = [ "s=20P5MS2" ];
+                position = {
+                  x = 1920;
+                  y = 0;
+                };
+                enable = true;
+              }
+              {
+                search = [ "s=0FFXD31F23EL" ];
+                position = {
+                  x = 2560+1920;
+                  y = 0;
+                };
+                enable = true;
+              }
+            ];
+          }
         ];
       };
     };

@@ -1,4 +1,6 @@
-{ lib
+{ inputs
+, pkgs
+, lib
 , config
 , ...
 }: {
@@ -11,13 +13,14 @@
   config = lib.mkIf config.koshos.home.honzakostejn.programs.yazi.enable {
     programs.yazi = {
       enable = true;
+      package = inputs.yazi.packages.${pkgs.system}.yazi;
 
       enableNushellIntegration = true;
       shellWrapperName = "y";
 
       keymap = {
         # https://github.com/sxyazi/yazi/blob/shipped/yazi-config/preset/keymap-default.toml
-        manager.prepend_keymap = [
+        mgr.prepend_keymap = [
           # hopping - remap vim motions to home row keys
           {
             on = [ "j" ];
@@ -26,12 +29,12 @@
           }
           {
             on = [ "k" ];
-            run = "arrow 1";
+            run = "arrow next";
             description = "Move cursor down";
           }
           {
             on = [ "l" ];
-            run = "arrow -1";
+            run = "arrow prev";
             description = "Move cursor up";
           }
           {
@@ -64,6 +67,15 @@
             description = "Seek up 5 units in the preview";
           }
         ];
+      };
+
+      settings = {
+        mgr = {
+          show_hidden = true;
+          sort_by = "mtime";
+          sort_dir_first = true;
+          sort_reverse = true;
+        };
       };
     };
   };

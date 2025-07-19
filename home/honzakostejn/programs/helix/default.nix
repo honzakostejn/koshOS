@@ -1,6 +1,7 @@
-{ lib
-, config
+{ inputs
 , pkgs
+, lib
+, config
 , ...
 }: {
   options = {
@@ -12,6 +13,7 @@
   config = lib.mkIf config.koshos.home.honzakostejn.programs.helix.enable {
     programs.helix = {
       enable = true;
+      package = inputs.helix.packages.${pkgs.system}.helix;
 
       defaultEditor = true;
 
@@ -36,6 +38,15 @@
             ";" = "move_char_right";
 
             h = "collapse_selection";
+
+            # yazi integration
+            C-y = [
+              ":sh rm -f /tmp/helix-yazi"
+              ":insert-output yazi %{buffer_name} --chooser-file=/tmp/helix-yazi"
+              ":insert-output echo \\x1b[?1049h\\x1b[?2004h > /dev/tty"
+              ":open %sh{cat /tmp/helix-yazi}"
+              ":redraw"
+            ];
           };
         };
       };

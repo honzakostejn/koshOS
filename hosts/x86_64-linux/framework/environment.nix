@@ -24,6 +24,7 @@
       htop
       jq
       nixpkgs-fmt
+      # gparted
     ];
   };
 }

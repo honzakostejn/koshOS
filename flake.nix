@@ -44,6 +44,16 @@
       repo = "ghostty";
     };
 
+    helix = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+
+      type = "github";
+      owner = "helix-editor";
+      repo = "helix";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -143,47 +153,27 @@
       repo = "split-monitor-workspaces";
     };
 
-    # hyprland-plugins = {
-    #   url = "github:hyprwm/hyprland-plugins";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
+    quickshell = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
 
-    # hyprpaper = {
-    #   url = "github:hyprwm/hyprpaper";
-    #   inputs = {
-    #     hyprlang.follows = "hyprland/hyprlang";
-    #     hyprutils.follows = "hyprland/hyprutils";
-    #     nixpkgs.follows = "hyprland/nixpkgs";
-    #     systems.follows = "hyprland/systems";
-    #   };
-    # };
+      type = "github";
+      owner = "outfoxxed";
+      repo = "quickshell";
 
-    # hyprpanel = {
-    #   type = "github";
-    #   owner = "Jas-SinghFSU";
-    #   repo = "HyprPanel";
-    # };
+      ref = "refs/tags/v0.1.0";
+    };
 
-    # nur = {
-    #   type = "github";
-    #   owner = "nix-community";
-    #   repo = "NUR";
-    # };
+    yazi = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
 
-    # swww = {
-    #   url = "github:LGFae/swww";
-    # };
-
-    # wezterm = {
-    #   url = "github:wez/wezterm/main?dir=nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
-    # zen-browser = {
-    #   type = "github";
-    #   owner = "0xc000022070";
-    #   repo = "zen-browser-flake";
-    # };
+      type = "github";
+      owner = "sxyazi";
+      repo = "yazi";
+    };
   };
 
   outputs = { self, ... }@inputs:

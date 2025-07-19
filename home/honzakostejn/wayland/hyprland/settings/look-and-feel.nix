@@ -6,15 +6,15 @@
       border_size = 4;
       "col.active_border" = "rgba(A8C5E6ff) rgba(f1a7e2ff) 45deg";
       "col.inactive_border" = "0x000B0A10";
-      gaps_in = 8;
-      gaps_out = 10;
+      gaps_in = 0;
+      gaps_out = 0;
     };
 
     decoration = {
       active_opacity = 0.95;
       inactive_opacity = 0.95;
       fullscreen_opacity = 1;
-      rounding = 16;
+      rounding = 10;
       # drop_shadow = 1;
       # shadow_range = 15;
       # shadow_render_power = 2;
