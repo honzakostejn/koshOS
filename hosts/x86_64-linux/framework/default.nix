@@ -1,4 +1,5 @@
-{ pkgs
+{ inputs
+, pkgs
 , lib
 , ...
 }: {
@@ -130,6 +131,9 @@
   };
 
   # screen sharing
-  programs.hyprland.enable = true;
-  programs.hyprland.portalPackage = pkgs.xdg-desktop-portal-hyprland;
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+  };
 }

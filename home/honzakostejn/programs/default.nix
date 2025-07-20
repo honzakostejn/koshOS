@@ -4,6 +4,7 @@
     ./ags
     ./bash
     ./firefox
+    ./ghostty
     ./helix
     ./hyprlock
     ./nixvim

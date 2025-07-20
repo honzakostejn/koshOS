@@ -11,6 +11,16 @@
   config = lib.mkIf config.koshos.home.honzakostejn.programs.opencode.enable {
     programs.opencode = {
       enable = true;
+      settings = {
+        # provider = {
+        #   azure = {
+        #     options = {
+        #       resourceName = "lopata";
+        #     };
+        #     models = { };
+        #   };
+        # };
+      };
     };
   };
 }

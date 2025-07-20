@@ -77,7 +77,6 @@
       type = "github";
       owner = "hyprwm";
       repo = "hyprutils";
-      ref = "refs/tags/v0.8.0";
     };
 
     hyprland = {
@@ -89,7 +88,7 @@
       type = "github";
       owner = "hyprwm";
       repo = "Hyprland";
-      ref = "refs/tags/v0.49.0";
+      # ref = "refs/tags/v0.50.0";
     };
 
     hyprlock = {
