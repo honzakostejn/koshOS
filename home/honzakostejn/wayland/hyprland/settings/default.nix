@@ -46,7 +46,6 @@
     };
 
     exec-once = [
-      "${config.programs.ags.finalPackage}/bin/ags run"
       # "${pkgs.hyprpanel}/bin/hyprpanel"
       # "hyprctl dispatch split-workspace 1"
     ];

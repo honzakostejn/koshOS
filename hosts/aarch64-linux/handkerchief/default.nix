@@ -73,5 +73,5 @@
   nixpkgs.hostPlatform = "aarch64-linux";
   nixpkgs.config.allowUnfree = true;
 
-  system.stateVersion = "25.11";
+  system.stateVersion = "25.05";
 }
