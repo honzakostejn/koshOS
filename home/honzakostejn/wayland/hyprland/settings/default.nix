@@ -19,6 +19,7 @@
       # shikane is used for dynamic display management
       "eDP-1, preferred, auto, 1.33"
       ", preferred, auto, 1"
+      # "DP-1, preferred, auto, 1, mirror, eDP-1"
     ];
 
     input = {

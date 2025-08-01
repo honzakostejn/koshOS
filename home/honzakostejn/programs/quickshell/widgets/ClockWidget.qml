@@ -1,8 +1,17 @@
 import "root:utils/"
+import "root:widgets/"
+import Quickshell.Widgets
 import QtQuick
 
-Text {
-  text: TimeUtil.time
-  font.pixelSize: 20
-  font.bold: true
+WrapperMouseArea {
+  property color color: "white"
+  implicitHeight: 20
+  
+  TextWidget {
+    text: TimeUtil.time
+    bold: true
+    color: parent.color
+  }
+  
+  onClicked: TimeUtil.copyUnixTime()
 }

@@ -15,11 +15,17 @@
       enable = true;
       package = inputs.quickshell.packages.${pkgs.system}.default;
       systemd = {
-        enable = false;
+        enable = true;
       };
     };
 
-    # xdg.configFile."quickshell/modules/bar/Bar.qml".source = ./modules/bar/Bar.qml;
-    # xdg.configFile."quickshell/shell.qml".source = ./shell.qml;
+    home.packages = with pkgs; [
+      # dependencies
+      wl-clipboard
+    ];
+    xdg.configFile."quickshell" = {
+      source = ./.;
+      recursive = true;
+    };
   };
 }

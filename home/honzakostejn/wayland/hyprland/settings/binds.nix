@@ -73,6 +73,8 @@ in
 
         # toggle mute in MS Teams
         "CONTROL SHIFT, M, exec, $toggle-mute-teams"
+
+        "$mod SHIFT, C, exec, ${pkgs.hyprpicker}/bin/hyprpicker -a -f hex"
       ];
       bindm = [
         "$mod, CONTROL_L, movewindow"

@@ -9,23 +9,12 @@
       ref = "refs/heads/nixos-unstable";
     };
 
-    ags = {
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        astal.follows = "astal";
-      };
-
+    # for getting the latest packages (nixpkgs-unstable) without needing to update the main nixpkgs input in the flake
+    nixpkgs-unstable = {
       type = "github";
-      owner = "Aylur";
-      repo = "ags";
-    };
-
-    astal = {
-      inputs.nixpkgs.follows = "nixpkgs";
-
-      type = "github";
-      owner = "Aylur";
-      repo = "astal";
+      owner = "nixos";
+      repo = "nixpkgs";
+      ref = "refs/heads/nixos-unstable";
     };
 
     disko = {
@@ -104,16 +93,6 @@
       repo = "hyprlock";
     };
 
-    hyprsplit = {
-      inputs = {
-        hyprland.follows = "hyprland";
-      };
-
-      type = "github";
-      owner = "shezdy";
-      repo = "hyprsplit";
-    };
-
     lanzaboote = {
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -157,11 +136,9 @@
         nixpkgs.follows = "nixpkgs";
       };
 
-      type = "github";
-      owner = "outfoxxed";
-      repo = "quickshell";
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
 
-      ref = "refs/tags/v0.1.0";
+      # ref = "refs/tags/v0.1.0";
     };
 
     yazi = {
