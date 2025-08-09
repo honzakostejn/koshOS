@@ -88,6 +88,24 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+
+    # https://wiki.nixos.org/wiki/PipeWire#AirPlay/RAOP_configuration
+    # opens UDP ports 6001-6002
+    raopOpenFirewall = true;
+    extraConfig.pipewire = {
+      "10-airplay" = {
+        "context.modules" = [
+          {
+            name = "libpipewire-module-raop-discover";
+
+            # increase the buffer size if you get dropouts/glitches
+            # args = {
+            #   "raop.latency.ms" = 500;
+            # };
+          }
+        ];
+      };
+    };
   };
   # PulseAudio uses this RealTimeKit service to acquire real-time scheduling priority
   security.rtkit.enable = true;

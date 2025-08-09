@@ -10,7 +10,8 @@
     nssmdns4 = true;
     publish = {
       enable = true;
-      addresses = true;
+      userServices = true;
+      domain = true;
     };
   };
 
@@ -19,6 +20,19 @@
     allowedTCPPorts = [
       8010 # VLC streaming
       8080 # VLC remote playback
+
+      # AirPlay
+      7100
+      7000
+      7001
+    ];
+    allowedUDPPorts = [
+      5353 # mDNS
+
+      # AirPlay
+      6000
+      6001
+      7011
     ];
   };
 }
