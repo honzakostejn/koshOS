@@ -121,6 +121,14 @@
       repo = "nixvim";
     };
 
+    opencode = {
+      type = "github";
+      owner = "sst";
+      repo = "opencode";
+
+      flake = false;
+    };
+
     split-monitor-workspaces = {
       inputs = {
         hyprland.follows = "hyprland";
