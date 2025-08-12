@@ -17,14 +17,26 @@ WrapperItem {
             text: {
                 if (!UPower.displayDevice.isLaptopBattery) return "[--]"
                 
+                var batterySegments = 4
+                // extra one is for empty state (no bar displayed)
+                var barStep = 100 / (batterySegments + 1)
                 var percentage = Math.round(UPower.displayDevice.percentage * 100)
-                var bars = Math.round(percentage / 20) // 0-4 bars
+
+                var bars = Math.round(percentage / barStep)
+                // use only the state property for charging detection
+                var isCharging = UPower.displayDevice.state === 1
+
+                var fillChar = isCharging ? "+" : "■"
                 
-                if (bars <= 0) return "[    }"       // 0-20%
-                else if (bars == 1) return "[■   }"  // 20-40%
-                else if (bars == 2) return "[■■  }"  // 40-60%
-                else if (bars == 3) return "[■■■ }"  // 60-80%
-                else return "[■■■■}"                 // 80-100%
+                // when charging, show at least 1 bar
+                var displayBars = isCharging ? Math.max(1, bars) : bars
+                // build battery array dynamically
+                var battery = new Array(batterySegments).fill(" ")
+                for (var i = 0; i < displayBars; i++) {
+                    battery[i] = fillChar
+                }
+                
+                return "[" + battery.join("") + "}"
             }
             color: {
                 if (!UPower.displayDevice.isLaptopBattery) return "white"
