@@ -82,8 +82,9 @@ in
       CPU_MAX_PERF_ON_BAT = 50;
 
       # optional helps save long term battery health
-      START_CHARGE_THRESH_BAT0 = 70;
-      STOP_CHARGE_THRESH_BAT0 = 85;
+      # `upower -d` to get the battery index
+      START_CHARGE_THRESH_BAT1 = 70; # doesn't seem to work on framework 13 
+      STOP_CHARGE_THRESH_BAT1 = 85;
     };
   };
 
