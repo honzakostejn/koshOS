@@ -1,4 +1,4 @@
-import "root:modules/"
+import qs.modules
 import Quickshell
 
 Scope {

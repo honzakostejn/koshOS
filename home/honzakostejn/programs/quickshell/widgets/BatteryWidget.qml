@@ -3,7 +3,7 @@ import Quickshell.Services.UPower
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
-import "root:widgets/"
+import qs.widgets
 
 WrapperItem {
     implicitHeight: 20

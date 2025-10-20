@@ -1,5 +1,5 @@
-import "root:utils/"
-import "root:widgets/"
+import qs.utils
+import qs.widgets
 import Quickshell.Widgets
 import QtQuick
 

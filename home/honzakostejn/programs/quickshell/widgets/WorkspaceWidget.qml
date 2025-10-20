@@ -1,5 +1,5 @@
-import "root:services/"
-import "root:utils/"
+import qs.services
+import qs.utils
 import Quickshell.Widgets
 import QtQuick
 
