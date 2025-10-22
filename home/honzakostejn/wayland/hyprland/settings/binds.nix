@@ -49,8 +49,7 @@ in
 
         # window actions
         "$mod, T, togglefloating"
-        "$mod, T, resizeactive, exact 50% 50%"
-        "$mod, T, moveactive, exact 25% 25%"
+        "$mod, T, resizeactive, exact 768 1047" # iPad portrait (3:4); 1024+23 extra pixels for qutebrowser UI
 
         "$mod, M, fullscreen, 1"
         "$mod, F, fullscreen, 0"

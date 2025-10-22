@@ -4,7 +4,6 @@
 , ...
 }:
 let
-  customQuteBitwarden = ./qute-bitwarden.py;
   qutebrowserPkg = pkgs.qutebrowser.overrideAttrs (oldAttrs: {
     name = "qutebrowser.koshos";
 
@@ -13,8 +12,12 @@ let
       rm $out/share/applications/org.qutebrowser.qutebrowser.desktop
 
       # replace the qute-bitwarden userscript with a custom one
-      cp ${customQuteBitwarden} $out/share/qutebrowser/userscripts/qute-bitwarden
+      cp ${./qute-bitwarden.py} $out/share/qutebrowser/userscripts/qute-bitwarden
       patchPythonScript $out/share/qutebrowser/userscripts/qute-bitwarden
+
+      # add a userscript to take a screenshot of the current page
+      cp ${./take-screenshot.sh} $out/share/qutebrowser/userscripts/take-screenshot
+      chmod +x $out/share/qutebrowser/userscripts/take-screenshot
     '';
   });
 in
