@@ -1,12 +1,16 @@
-{ inputs
-, lib
-, config
-, pkgs
-, ...
-}: {
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+{
   options = {
     koshos.users.honzakostejn = {
-      enable = lib.mkEnableOption "honzakostejn's user profile" // { default = true; };
+      enable = lib.mkEnableOption "honzakostejn's user profile" // {
+        default = true;
+      };
     };
   };
 
@@ -34,7 +38,6 @@
         "video" # required for brillo and setting the brightness
         "networkmanager"
         "tss" # tss group has access to TPM devices
-        "docker"
         "wireshark"
       ];
 

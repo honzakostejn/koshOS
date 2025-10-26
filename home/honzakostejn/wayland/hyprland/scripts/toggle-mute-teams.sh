@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # hyprland script to toggle mute in Microsoft Teams
 

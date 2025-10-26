@@ -15,7 +15,7 @@
         session = {
           # this logs the user in automatically,
           # because there's no greeter specified in the command
-          command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd ${lib.getExe config.programs.hyprland.package}";
+          command = "${lib.getExe pkgs.tuigreet} --time --cmd ${lib.getExe config.programs.hyprland.package}";
           user = "honzakostejn";
         };
       in

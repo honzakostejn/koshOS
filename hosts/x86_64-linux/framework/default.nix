@@ -93,18 +93,18 @@
     # opens UDP ports 6001-6002
     raopOpenFirewall = true;
     extraConfig.pipewire = {
-      "10-airplay" = {
-        "context.modules" = [
-          {
-            name = "libpipewire-module-raop-discover";
+      # "10-airplay" = {
+      #   "context.modules" = [
+      #     {
+      #       name = "libpipewire-module-raop-discover";
 
-            # increase the buffer size if you get dropouts/glitches
-            # args = {
-            #   "raop.latency.ms" = 500;
-            # };
-          }
-        ];
-      };
+      #       # increase the buffer size if you get dropouts/glitches
+      #       # args = {
+      #       #   "raop.latency.ms" = 500;
+      #       # };
+      #     }
+      #   ];
+      # };
     };
   };
   # PulseAudio uses this RealTimeKit service to acquire real-time scheduling priority
@@ -123,11 +123,6 @@
   ];
 
   services.spice-vdagentd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
-  virtualisation.docker = {
-    enable = true;
-    storageDriver = "btrfs";
-  };
   services.usbmuxd.enable = true;
 
   # automatic garbage collection

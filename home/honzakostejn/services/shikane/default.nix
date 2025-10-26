@@ -33,16 +33,16 @@
               {
                 search = [ "s=7MT0167B2AEL" ];
                 position = {
-                  x = -1200;
+                  x = 0;
                   y = 0;
                 };
                 transform = "90";
                 enable = true;
               }
               {
-                search = [ "s=CZ49310227" ];
+                search = [ "s=0FFXD31F1TPL" ];
                 position = {
-                  x = 0;
+                  x = 1200;
                   y = 0;
                 };
                 enable = true;
@@ -50,7 +50,7 @@
               {
                 search = [ "s=7MT0162411FL" ];
                 position = {
-                  x = 2560;
+                  x = 1200 + 1920;
                   y = 0;
                 };
                 transform = "270";
@@ -98,7 +98,7 @@
                 enable = false;
               }
               {
-                search = [ "s=4RFMK56P1CAS" ];
+                search = [ "s=0FFXD31J08YS" ];
                 position = {
                   x = 0;
                   y = 0;
@@ -106,17 +106,9 @@
                 enable = true;
               }
               {
-                search = [ "s=20P5MS2" ];
+                search = [ "s=Y1H5T242201L" ];
                 position = {
                   x = 1920;
-                  y = 0;
-                };
-                enable = true;
-              }
-              {
-                search = [ "s=0FFXD31F23EL" ];
-                position = {
-                  x = 2560+1920;
                   y = 0;
                 };
                 enable = true;

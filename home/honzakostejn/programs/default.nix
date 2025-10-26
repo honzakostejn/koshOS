@@ -1,5 +1,7 @@
-{ ...
-}: {
+{
+  ...
+}:
+{
   imports = [
     ./bash
     ./firefox
@@ -12,7 +14,11 @@
     ./quickshell
     ./qutebrowser
     ./starship
+    ./satty
+    ./teams-for-linux
     ./vscode
+    # ./winapps
+    ./winboat
     ./yazi
   ];
 }

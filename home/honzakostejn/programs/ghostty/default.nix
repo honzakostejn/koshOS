@@ -19,7 +19,7 @@
         window-padding-balance = true;
         window-padding-color = "extend";
 
-        theme = "tokyonight-storm";
+        theme = "TokyoNight Night";
         background-opacity = 1;
 
         font-size = 15;

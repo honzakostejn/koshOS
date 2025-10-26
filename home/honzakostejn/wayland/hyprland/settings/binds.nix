@@ -1,13 +1,25 @@
-{ pkgs
-, lib
-, ...
+{
+  pkgs,
+  lib,
+  ...
 }:
 let
-  custom-hyprlock-script = import ../../../programs/hyprlock/custom-hyprlock-script.nix { inherit pkgs lib; };
+  custom-hyprlock-script = import ../../../programs/hyprlock/custom-hyprlock-script.nix {
+    inherit pkgs lib;
+  };
   toggle-mute-teams = pkgs.writeShellApplication {
     name = "toggle-mute-teams";
     runtimeInputs = [ pkgs.jq ];
     text = builtins.readFile ../scripts/toggle-mute-teams.sh;
+  };
+  take-screenshot = pkgs.writeShellApplication {
+    name = "take-screenshot";
+    runtimeInputs = [
+      pkgs.hyprshot
+      pkgs.jq
+      pkgs.wl-clipboard
+    ];
+    text = builtins.readFile ../scripts/take-screenshot.sh;
   };
 
 in
@@ -25,6 +37,7 @@ in
       "$menu" = "rofi -show drun";
       "$lock" = "${custom-hyprlock-script}/bin/custom-hyprlock-script";
       "$toggle-mute-teams" = "${toggle-mute-teams}/bin/toggle-mute-teams";
+      "$take-screenshot" = "${take-screenshot}/bin/take-screenshot";
 
       # bind[flag]
       # [flags]
@@ -49,7 +62,7 @@ in
 
         # window actions
         "$mod, T, togglefloating"
-        "$mod, T, resizeactive, exact 768 1047" # iPad portrait (3:4); 1024+23 extra pixels for qutebrowser UI
+        "$mod, T, resizeactive, exact 768 1024" # iPad portrait (3:4)
 
         "$mod, M, fullscreen, 1"
         "$mod, F, fullscreen, 0"
@@ -64,11 +77,9 @@ in
         "$mod, W, exec, qutebrowser --basedir ~/.config/qutebrowser/honzakostejn"
         "$mod SHIFT, W, exec, qutebrowser --basedir ~/.config/qutebrowser/NETWORG"
         "$mod, C, exec, code ~/repos/koshos"
-        # "$mod, A, exec, ${pkgs.hyprpanel}/bin/hyprpanel"
 
-        # screenshots
-        "$mod, R, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy"
-        "$mod SHIFT, R, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.swappy}/bin/swappy -f - -o - | ${pkgs.wl-clipboard}/bin/wl-copy"
+        # screenshot submap trigger
+        "$mod, R, submap, screenshot"
 
         # toggle mute in MS Teams
         "CONTROL SHIFT, M, exec, $toggle-mute-teams"
@@ -97,6 +108,28 @@ in
         ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
         ", XF86AudioStop, exec, ${pkgs.playerctl}/bin/playerctl stop"
       ];
+    };
+
+    submaps = {
+      screenshot = {
+        settings = {
+          bind = [
+            "$mod, R, exec, $take-screenshot region"
+            "$mod, R, submap, reset"
+            "$mod, S, exec, $take-screenshot screen"
+            "$mod, S, submap, reset"
+            "$mod, W, exec, $take-screenshot window"
+            "$mod, W, submap, reset"
+            "$mod SHIFT, R, exec, $take-screenshot region --freeze"
+            "$mod SHIFT, R, submap, reset"
+            "$mod SHIFT, S, exec, $take-screenshot screen --freeze"
+            "$mod SHIFT, S, submap, reset"
+            "$mod SHIFT, W, exec, $take-screenshot window --freeze"
+            "$mod SHIFT, W, submap, reset"
+            ", ESCAPE, submap, reset"
+          ];
+        };
+      };
     };
   };
 }

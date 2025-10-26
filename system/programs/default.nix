@@ -1,7 +1,11 @@
-{ ...
-}: {
+{
+  ...
+}:
+{
   imports = [
+    ./docker
     ./steam
+    # ./virt-manager
   ];
 
   programs.dconf.enable = true;

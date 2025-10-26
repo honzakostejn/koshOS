@@ -16,6 +16,7 @@
         yzhang.markdown-all-in-one
         jnoortheen.nix-ide
         streetsidesoftware.code-spell-checker
+        # streetsidesoftware.code-spell-checker-czech
 
         github.copilot
         github.copilot-chat

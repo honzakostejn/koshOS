@@ -6,17 +6,12 @@
     sessionVariables = {
       # hint Electron apps to use wayland
       NIXOS_OZONE_WL = "1";
-    };
 
-    shellAliases = {
-      rebuild = "sudo nixos-rebuild switch --flake ~/repos/koshos#framework";
-      dev-lopata = "cd ~/repos/lopata && nix-shell";
+      # https://github.com/git-ecosystem/git-credential-manager/blob/main/docs/credstores.md#freedesktoporg-secret-service-api
+      GCM_CREDENTIAL_STORE = "secretservice";
     };
 
     systemPackages = with pkgs; [
-      # inputs.ghostty.packages.${pkgs.system}.default
-      # inputs.swww.packages.${pkgs.system}.swww
-
       fastfetch
       gh
       git
@@ -24,7 +19,7 @@
       htop
       jq
       nixpkgs-fmt
-      # gparted
+      usbutils
     ];
   };
 }

@@ -1,5 +1,7 @@
-{ ...
-}: {
+{
+  ...
+}:
+{
   imports = [
     ./cloudflare-warp
     ./greetd

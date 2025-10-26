@@ -10,7 +10,7 @@
   };
 
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
   ];
 
   config = lib.mkIf config.koshos.home.honzakostejn.programs.nixvim.enable {
