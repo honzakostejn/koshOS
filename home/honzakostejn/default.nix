@@ -13,8 +13,8 @@
   home.stateVersion = "25.05";
 
   # info about user and path it manages
-  home.username = "honzakostejn";
-  home.homeDirectory = "/home/honzakostejn";
+  home.username = lib.mkDefault "honzakostejn";
+  home.homeDirectory = lib.mkDefault "/home/honzakostejn";
 
   # let Home Manager install and manage itself
   programs.home-manager.enable = true;
@@ -41,7 +41,7 @@
     # teams-for-linux
     # tribler
     vlc
-    popcorntime
+    # popcorntime - this must be platform specific
     bruno
 
     # hyprpanel

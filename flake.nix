@@ -28,6 +28,8 @@
     };
 
     ghostty = {
+      inputs.nixpkgs.follows = "nixpkgs";
+
       type = "github";
       owner = "ghostty-org";
       repo = "ghostty";
@@ -149,6 +151,26 @@
       # ref = "refs/tags/v0.1.0";
     };
 
+    winapps = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+
+      type = "github";
+      owner = "winapps-org";
+      repo = "winapps";
+    };
+
+    winboat = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+
+      type = "github";
+      owner = "tibixdev";
+      repo = "winboat";
+    };
+
     yazi = {
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -158,9 +180,16 @@
       owner = "sxyazi";
       repo = "yazi";
     };
+
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
-  outputs = { self, ... }@inputs:
+  outputs =
+    { self, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import inputs.nixpkgs { system = system; };
@@ -214,6 +243,21 @@
           modules = [
             ./hosts/aarch64-linux/handkerchief
           ];
+        };
+      };
+
+      nixOnDroidConfigurations = {
+        kosh_phone = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+          pkgs = import inputs.nix-on-droid.inputs.nixpkgs {
+            system = "aarch64-linux";
+            overlays = [
+              inputs.nix-on-droid.overlays.default
+            ];
+          };
+          modules = [
+            ./hosts/aarch64-linux/kosh_phone
+          ];
+          extraSpecialArgs = { inherit inputs; };
         };
       };
     };
