@@ -1,9 +1,8 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
+{ config
+, lib
+, pkgs
+, inputs
+, ...
 }:
 {
   system.stateVersion = "24.05";
@@ -15,10 +14,6 @@
 
   # android-integration.termux-open.enable = true;
   # android-integration.termux-open-url.enable = true;
-  # android-integration.termux-reload-settings.enable = true;
-  # android-integration.termux-setup-storage.enable = true;
-  # android-integration.termux-wake-lock.enable = true;
-  # android-integration.termux-wake-unlock.enable = true;
   # android-integration.xdg-open.enable = true;
 
   time.timeZone = "Europe/Prague";
@@ -33,4 +28,9 @@
     useGlobalPkgs = true;
     extraSpecialArgs = { inherit inputs; };
   };
+
+  android-integration.termux-wake-lock.enable = true;
+  android-integration.termux-wake-unlock.enable = true;
+  android-integration.termux-reload-settings.enable = true;
+  android-integration.termux-setup-storage.enable = true;
 }
