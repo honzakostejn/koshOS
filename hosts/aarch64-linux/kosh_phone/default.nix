@@ -6,8 +6,10 @@
 }:
 {
   system.stateVersion = "24.05";
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   environment.packages = with pkgs; [
+    git
   ];
 
   environment.etcBackupExtension = ".bak";
