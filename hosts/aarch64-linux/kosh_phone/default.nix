@@ -19,7 +19,7 @@
   time.timeZone = "Europe/Prague";
 
   user = {
-    shell = "${pkgs.nushell}/bin/nushell";
+    shell = "${pkgs.nushell}/bin/nu";
   };
 
   home-manager = {
