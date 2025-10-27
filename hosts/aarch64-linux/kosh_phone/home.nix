@@ -26,6 +26,6 @@
   koshos.home.honzakostejn.programs.yazi.enable = true;
 
   home.sessionVariables = {
-    XDG_CONFIG_HOME = config.home.directory;
+    XDG_CONFIG_HOME = config.home.homeDirectory;
   };
 }
