@@ -12,6 +12,8 @@
 
   environment.packages = with pkgs; [
     git
+    gh
+    vim
   ];
 
   environment.etcBackupExtension = ".bak";
