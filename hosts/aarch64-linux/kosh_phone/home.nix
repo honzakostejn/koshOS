@@ -13,11 +13,13 @@
     git
     gh
     vim
+    lazygit
   ];
 
-  home.sessionVariables = {
-    EDITOR = "helix";
-  };
+  home.activation.termuxConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p ~/.termux/
+    cp -f ${./termux.properties} ~/.termux/termux.properties
+  '';
 
   # programs.nushell = {
   #   extraEnv = ''
@@ -33,17 +35,6 @@
   #   '';
   #   executable = true;
   # };
-
-  home.file.".termux/termux.properties" = {
-    text = ''
-      # send escape for back key
-      back-key=escape
-
-      # ctrl = volume down
-      shortcut.create-session=ctrl + t
-      shortcut.next-session=ctrl + m
-    '';
-  };
 
   programs.yazi = {
     # kosh_phone has different keyboard layout than standard qwerty
