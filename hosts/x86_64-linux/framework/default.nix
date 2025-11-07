@@ -149,4 +149,6 @@
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
   };
+
+  programs.kdeconnect.enable = true;
 }

@@ -1,0 +1,19 @@
+name: "titan2-en_US"
+numberRowMode: AlwaysDisabled
+attributes: &globalAttrs
+  moreKeyMode: OnlyExplicit
+  showPopup: false
+rowHeightMode: FillHeight
+rows:
+  - letters:
+    - {type: base, spec: ":", moreKeys: ["!noPanelAutoMoreKey!", ";"], hint: ";"}
+    - {type: base, spec: "[", moreKeys: ["!noPanelAutoMoreKey!", "{"], hint: "{"}
+    - {type: base, spec: "]", moreKeys: ["!noPanelAutoMoreKey!", "}"], hint: "}"}
+    - {type: base, spec: "<", moreKeys: ["!noPanelAutoMoreKey!", "~"], hint: "~"}
+    - {type: base, spec: ">", moreKeys: ["!noPanelAutoMoreKey!", "$"], hint: "$"}
+    - $action
+    - "!icon/action_switch_language|!code/action_switch_language"
+    - {type: base, spec: "&", moreKeys: ["!noPanelAutoMoreKey!", "|"], hint: "|"}
+    - {type: base, spec: "/", moreKeys: ["!noPanelAutoMoreKey!", "\\"], hint: "\\"}
+    - {type: base, spec: "=", moreKeys: ["!noPanelAutoMoreKey!", "^"], hint: "^"}
+  - bottom: ""
