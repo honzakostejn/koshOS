@@ -6,6 +6,7 @@
     ./docker
     ./steam
     # ./virt-manager
+    ./waydroid
   ];
 
   programs.dconf.enable = true;
