@@ -14,6 +14,7 @@
     gh
     vim
     lazygit
+    android-tools
   ];
 
   home.activation.termuxConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
