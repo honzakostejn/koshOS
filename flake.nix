@@ -9,6 +9,13 @@
       ref = "refs/heads/nixos-unstable";
     };
 
+    nixpkgs-stable = {
+      type = "github";
+      owner = "nixos";
+      repo = "nixpkgs";
+      ref = "refs/heads/master";
+    };
+
     # for getting the latest packages (nixpkgs-unstable) without needing to update the main nixpkgs input in the flake
     nixpkgs-unstable = {
       type = "github";
@@ -183,7 +190,7 @@
 
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
       inputs.home-manager.follows = "home-manager";
     };
   };

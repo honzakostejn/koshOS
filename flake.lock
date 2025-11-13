@@ -959,7 +959,7 @@
         ],
         "nix-formatter-pack": "nix-formatter-pack",
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-stable"
         ],
         "nixpkgs-docs": "nixpkgs-docs",
         "nixpkgs-for-bootstrap": "nixpkgs-for-bootstrap",
@@ -1052,6 +1052,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
+    "nixpkgs-stable": {
+      "locked": {
+        "lastModified": 1762803140,
+        "narHash": "sha256-3Z051SCuiYkEfRmxeex7qyCf9vMHbZ1lFKp1WvXgM6Q=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d66143a3c44559a7f90648cdb3efaa54eb0c9784",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "refs/heads/master",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -1272,6 +1288,7 @@
         "nix-on-droid": "nix-on-droid",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
         "opencode": "opencode",

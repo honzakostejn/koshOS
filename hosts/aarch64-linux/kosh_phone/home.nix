@@ -58,4 +58,11 @@
       };
     };
   };
+
+  programs.bash = {
+    enable = true;
+    sessionVariables = {
+      PATH = "/data/data/com.termux.nix/files/home/.nix-profile/bin:/usr/bin:/system/bin:/data/data/com.termux.nix/files/home/.nix-profile/bin:/data/data/com.termux.nix/files/usr/bin";
+    };
+  };
 }
