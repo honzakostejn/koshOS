@@ -1,0 +1,19 @@
+meta {
+  name: Add Admin Application to BAP
+  type: http
+  seq: 1
+}
+
+put {
+  url: https://api.bap.microsoft.com/providers/Microsoft.BusinessAppPlatform/adminApplications/068acd5e-9414-4181-aec1-161bb0929df4?api-version=2020-10-01
+  body: none
+  auth: inherit
+}
+
+params:query {
+  api-version: 2020-10-01
+}
+
+settings {
+  encodeUrl: true
+}

@@ -1,0 +1,21 @@
+meta {
+  name: Provision Language
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://missioncontrol.services.talxis.com/resources/tenants/{{tenantId}}/environments/{{environmentId}}/languages
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "LCID": 1029
+  }
+}
+
+settings {
+  encodeUrl: true
+}
