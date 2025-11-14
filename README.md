@@ -2,6 +2,12 @@
 honzakostejn's dotfiles
 
 # instructions
+TODO:
+clone
+remove lanzaboote
+create luks password
+build
+
 ```bash
 echo "password" > /tmp/secret.key # luks password
 sudo nix run --extra-experimental-features "nix-command flakes" github:nix-community/disko#disko-install -- --flake github:honzakostejn/koshos#framework --write-efi-boot-entries --disk main /dev/nvme0n1
@@ -13,6 +19,9 @@ sudo nix run nixpkgs#sbctl enroll-keys -- --microsoft
 sudo systemd-cryptenroll /dev/nvme0n1p2 --recovery-key
 sudo systemd-cryptenroll /dev/nvme0n1p2 --tpm2-device=auto --tpm2-pcrs=0+2+7+12 --wipe-slot=tpm2
 ```
+
+# vscode keyring
+
 
 # hibernation
 it might be required to reference disk by uuid for hibernation to work; then you can revert.

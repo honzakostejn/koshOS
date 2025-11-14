@@ -196,7 +196,7 @@
     { self, ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = import inputs.nixpkgs { system = system; };
+      pkgs = import inputs.nixpkgs-stable { system = system; };
     in
     {
       packages = {
