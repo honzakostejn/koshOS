@@ -41,7 +41,7 @@
     # teams-for-linux
     # tribler
     vlc
-    # popcorntime - this must be platform specific
+    popcorntime # platform specific
     bruno
 
     # hyprpanel
@@ -74,6 +74,10 @@
 
   services.remmina.enable = true;
   services.dunst.enable = true;
+  # services.kdeconnect = {
+  #   enable = true;
+  #   package = pkgs.gnomeExtensions.gsconnect;
+  # };
 
   xdg.mimeApps = {
     enable = true;

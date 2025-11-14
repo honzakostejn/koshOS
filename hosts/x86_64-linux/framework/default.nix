@@ -151,4 +151,9 @@
   };
 
   programs.kdeconnect.enable = true;
+  programs.bash.enable = true;
+
+  koshos = {
+    programs.waydroid.enable = true;
+  };
 }
