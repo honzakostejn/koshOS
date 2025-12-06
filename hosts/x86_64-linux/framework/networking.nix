@@ -1,4 +1,6 @@
-{ ...
+{
+  pkgs,
+  ...
 }: {
   # enable networking
   networking.networkmanager.enable = true;
@@ -8,11 +10,21 @@
   services.avahi = {
     enable = true;
     nssmdns4 = true;
+    openFirewall = true;
     publish = {
       enable = true;
       userServices = true;
       domain = true;
     };
+  };
+
+  # enable printing discovery
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
+    ];
   };
 
   networking.firewall = {
@@ -34,5 +46,9 @@
       6001
       7011
     ];
+
+    # KDE Connect ports
+    allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
+    allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
   };
 }

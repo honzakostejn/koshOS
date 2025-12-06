@@ -13,7 +13,7 @@
   config = lib.mkIf config.koshos.home.honzakostejn.programs.quickshell.enable {
     programs.quickshell = {
       enable = true;
-      package = inputs.quickshell.packages.${pkgs.system}.default;
+      package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
       systemd = {
         enable = true;
       };

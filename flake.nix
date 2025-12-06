@@ -131,8 +131,6 @@
       type = "github";
       owner = "sst";
       repo = "opencode";
-
-      flake = false;
     };
 
     split-monitor-workspaces = {
@@ -163,16 +161,6 @@
       type = "github";
       owner = "winapps-org";
       repo = "winapps";
-    };
-
-    winboat = {
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-
-      type = "github";
-      owner = "tibixdev";
-      repo = "winboat";
     };
 
     yazi = {

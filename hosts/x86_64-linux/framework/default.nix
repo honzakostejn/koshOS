@@ -138,6 +138,11 @@
 
     # allow wayland lockers to unlock the screen
     pam.services.hyprlock.text = "auth include login";
+    # https://discourse.nixos.org/t/unable-to-fix-too-many-open-files-error/27094/10
+    pam.loginLimits = [
+      { domain = "*"; type = "soft"; item = "nofile"; value = "65536"; }
+      { domain = "*"; type = "hard"; item = "nofile"; value = "1048576"; }
+    ];
 
     # don't ask for password for wheel group
     sudo.wheelNeedsPassword = false;
@@ -146,9 +151,19 @@
   # screen sharing
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
-  programs.kdeconnect.enable = true;
+  # programs.kdeconnect.enable = true;
+  programs.bash.enable = true;
+
+  koshos = {
+    programs.waydroid.enable = true;
+  };
+
+  # fingerprint reader
+  # don't forget to enroll your fingerprint
+  # sudo fprintd-enroll $USER
+  services.fprintd.enable = true;
 }

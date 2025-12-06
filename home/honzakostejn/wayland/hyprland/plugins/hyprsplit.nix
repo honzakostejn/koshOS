@@ -23,7 +23,7 @@ let
 in
 {
   wayland.windowManager.hyprland.plugins = [
-    inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
+    inputs.hyprsplit.packages.${pkgs.stdenv.hostPlatform.system}.hyprsplit
   ];
 
   wayland.windowManager.hyprland.settings = {

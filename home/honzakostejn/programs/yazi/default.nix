@@ -13,7 +13,7 @@
   config = lib.mkIf config.koshos.home.honzakostejn.programs.yazi.enable {
     programs.yazi = {
       enable = true;
-      package = inputs.yazi.packages.${pkgs.system}.yazi;
+      package = inputs.yazi.packages.${pkgs.stdenv.hostPlatform.system}.yazi;
 
       enableNushellIntegration = true;
       shellWrapperName = "y";

@@ -3,7 +3,7 @@
 , ...
 }: {
   wayland.windowManager.hyprland.plugins = [
-    inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap
+    inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprwinwrap
   ];
 
   wayland.windowManager.hyprland.settings = {

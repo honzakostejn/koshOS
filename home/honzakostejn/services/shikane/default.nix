@@ -27,10 +27,6 @@
             name = "docked-hub-prague";
             output = [
               {
-                match = "eDP-1";
-                enable = false;
-              }
-              {
                 search = [ "s=7MT0167B2AEL" ];
                 position = {
                   x = 0;
@@ -56,6 +52,14 @@
                 transform = "270";
                 enable = true;
               }
+              {
+                match = "eDP-1";
+                enable = false;
+                position = {
+                  x = 1200 + 1920 + 1200;
+                  y = 0;
+                };
+              }              
             ];
           }
           {

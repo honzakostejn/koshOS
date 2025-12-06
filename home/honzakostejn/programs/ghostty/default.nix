@@ -13,7 +13,7 @@
   config = lib.mkIf config.koshos.home.honzakostejn.programs.ghostty.enable {
     programs.ghostty = {
       enable = true;
-      package = inputs.ghostty.packages.${pkgs.system}.default;
+      package = inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default;
       settings = {
         window-decoration = "none";
         window-padding-balance = true;

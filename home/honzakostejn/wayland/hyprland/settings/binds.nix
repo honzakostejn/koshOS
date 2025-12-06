@@ -85,6 +85,9 @@ in
         "CONTROL SHIFT, M, exec, $toggle-mute-teams"
 
         "$mod SHIFT, C, exec, ${pkgs.hyprpicker}/bin/hyprpicker -a -f hex"
+
+        "$mod, equal, exec, hyprctl keyword cursor:zoom_factor 2"
+				"$mod, minus, exec, hyprctl keyword cursor:zoom_factor 1"
       ];
       bindm = [
         "$mod, CONTROL_L, movewindow"
@@ -95,8 +98,8 @@ in
         "$mod ALT_L, D, exec, hyprctl dispatch dpms off && hyprctl dispatch dpms on"
       ];
       bindlei = [
-        ", XF86MonBrightnessUp, exec, ${lib.getExe pkgs.brillo} -A 5 -u 200000"
-        ", XF86MonBrightnessDown, exec, ${lib.getExe pkgs.brillo} -U 5 -u 200000"
+        ", XF86MonBrightnessUp, exec, ${lib.getExe pkgs.brightnessctl} set 5%+"
+        ", XF86MonBrightnessDown, exec, ${lib.getExe pkgs.brightnessctl} set 5%-"
         ", XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer -i 5"
         ", XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d 5"
       ];

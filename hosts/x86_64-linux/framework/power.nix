@@ -45,60 +45,60 @@ in
   #   serviceConfig.Type = "simple";
   # };
 
-  # services = {
-  #   logind = {
-  #     powerKey = "poweroff";
-  #     lidSwitch = "suspend";
-  #     # `suspend-then-hibernate` option hibernates only at 5% of remaining battery
-  #     # thus hibernation is automated with `HIBERNATE_SECONDS`
-  #   };
+  services = {
+    # logind = {
+    #   powerKey = "poweroff";
+    #   lidSwitch = "suspend";
+    #   # `suspend-then-hibernate` option hibernates only at 5% of remaining battery
+    #   # thus hibernation is automated with `HIBERNATE_SECONDS`
+    # };
 
-  #   power-profiles-daemon.enable = true;
+    power-profiles-daemon.enable = true;
 
-  #   # battery info
-  #   upower.enable = true;
+    # battery info
+    upower.enable = true;
+  };
+
+  # powerManagement = {
+  #   enable = true;
+  #   powertop.enable = true;
   # };
 
-  powerManagement = {
-    enable = true;
-    powertop.enable = true;
-  };
+  # services.thermald.enable = true;
+  # services.upower.enable = true;
 
-  services.thermald.enable = true;
-  services.upower.enable = true;
+  # services.tlp = {
+  #   enable = true;
+  #   settings = {
+  #     CPU_SCALING_GOVERNOR_ON_AC = "performance";
+  #     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+  #     CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+  #     CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
 
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+  #     CPU_MIN_PERF_ON_AC = 0;
+  #     CPU_MAX_PERF_ON_AC = 100;
+  #     CPU_MIN_PERF_ON_BAT = 0;
+  #     CPU_MAX_PERF_ON_BAT = 50;
 
-      CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 100;
-      CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 50;
+  #     # optional helps save long term battery health
+  #     # `upower -d` to get the battery index
+  #     START_CHARGE_THRESH_BAT1 = 70; # doesn't seem to work on framework 13 
+  #     STOP_CHARGE_THRESH_BAT1 = 85;
+  #   };
+  # };
 
-      # optional helps save long term battery health
-      # `upower -d` to get the battery index
-      START_CHARGE_THRESH_BAT1 = 70; # doesn't seem to work on framework 13 
-      STOP_CHARGE_THRESH_BAT1 = 85;
-    };
-  };
-
-  services.auto-cpufreq = {
-    enable = true;
-    settings = {
-      battery = {
-        governor = "powersave";
-        turbo = "never";
-      };
-      charger = {
-        governor = "performance";
-        turbo = "auto";
-      };
-    };
-  };
+  # services.auto-cpufreq = {
+  #   enable = true;
+  #   settings = {
+  #     battery = {
+  #       governor = "powersave";
+  #       turbo = "never";
+  #     };
+  #     charger = {
+  #       governor = "performance";
+  #       turbo = "auto";
+  #     };
+  #   };
+  # };
 }

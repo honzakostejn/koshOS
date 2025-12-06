@@ -14,10 +14,6 @@ let
       # replace the qute-bitwarden userscript with a custom one
       cp ${./qute-bitwarden.py} $out/share/qutebrowser/userscripts/qute-bitwarden
       patchPythonScript $out/share/qutebrowser/userscripts/qute-bitwarden
-
-      # add a userscript to take a screenshot of the current page
-      cp ${./take-screenshot.sh} $out/share/qutebrowser/userscripts/take-screenshot
-      chmod +x $out/share/qutebrowser/userscripts/take-screenshot
     '';
   });
 in
