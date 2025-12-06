@@ -4,15 +4,6 @@
 , config
 , ...
 }:
-let
-  winboatPackage = inputs.winboat.packages."${pkgs.system}".winboat;
-  # winboatLocalPackage = pkgs.runCommand "winboat-local" {
-  #   src = ./winboat.sh;
-  # } ''
-  #   mkdir -p $out/bin
-  #   install -m755 $src $out/bin/winboat-local
-  # '';
-in
 {
   options = {
     koshos.home.honzakostejn.programs.winboat = {
@@ -24,8 +15,7 @@ in
 
   config = lib.mkIf config.koshos.home.honzakostejn.programs.winboat.enable {
     home.packages = [
-      winboatPackage
-      # winboatLocalPackage
+      pkgs.winboat
       pkgs.freerdp
     ];
 

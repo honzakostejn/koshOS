@@ -94,12 +94,15 @@ function Install-WinGetPackages {
 
   winget install --id=Microsoft.Edge -e --accept-package-agreements
   winget install --id=Microsoft.VisualStudioCode --scope machine -e --accept-package-agreements
+  winget install --id=Microsoft.VisualStudio.Community -e --accept-package-agreements
+  winget install --id=Microsoft.Azure.StorageExplorer -e --accept-package-agreements
   winget install --id=Microsoft.PowerBI -e --accept-package-agreements
   winget install --id=Microsoft.SQLServerManagementStudio -e --accept-package-agreements
   winget install --id=MscrmTools.XrmToolBox -e --accept-package-agreements
 
   winget install --id=Giorgiotani.Peazip -e --accept-package-agreements
   winget install --id=Microsoft.Office -e --accept-package-agreements
+  winget install --id=Rufus.Rufus -e --accept-package-agreements
 }
 
 function Install-VSCodeExtension {
@@ -122,6 +125,7 @@ function Install-DevDependencies {
 
   # install latest LTS Node.js via nvm
   nvm install lts
+  nvm on
 
   # install global npm packages
   npm install -g @microsoft/rush
@@ -204,7 +208,8 @@ Install-VSCodeExtension -extensionIds @(
   "networg.talxis-sdk-devkit-vscode",
   "heaths.vscode-guid",
   "streetsidesoftware.code-spell-checker",
-  "streetsidesoftware.code-spell-checker-czech"
+  "streetsidesoftware.code-spell-checker-czech",
+  "azurite.azurite"
 )
 
 Install-DevDependencies
