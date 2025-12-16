@@ -2,6 +2,7 @@
   description = "This is koshOS flake. honzakostejn's flavored NixOS configuration.";
 
   inputs = {
+    ### nixpkgs ###
     nixpkgs = {
       type = "github";
       owner = "nixos";
@@ -16,16 +17,49 @@
       ref = "refs/heads/master";
     };
 
-    disko = {
-      url = "github:nix-community/disko";
+    ### home-manager ###
+    home-manager = {
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
+    home-manager-stable = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
+    ### hypr ecosystem ###
+    hyprland = {
+      type = "github";
+      owner = "hyprwm";
+      repo = "Hyprland";
+      ref = "refs/tags/v0.52.2";
+    };
+
+    hypridle = {
+      type = "github";
+      owner = "hyprwm";
+      repo = "hypridle";
+    };
+
+    hyprlock = {
+      type = "github";
+      owner = "hyprwm";
+      repo = "hyprlock";
+    };
+
+    split-monitor-workspaces = {
+      inputs = {
+        hyprland.follows = "hyprland";
+      };
+
+      type = "github";
+      owner = "Duckonaut";
+      repo = "split-monitor-workspaces";
+      ref = "refs/tags/v0.52.2";
+    };
+
+    ### programs ###
     ghostty = {
       inputs.nixpkgs.follows = "nixpkgs";
 
@@ -44,79 +78,6 @@
       repo = "helix";
     };
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    home-manager-stable = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-
-    hypridle = {
-      url = "github:hyprwm/hypridle";
-      inputs = {
-        hyprlang.follows = "hyprland/hyprlang";
-        hyprutils.follows = "hyprland/hyprutils";
-        nixpkgs.follows = "hyprland/nixpkgs";
-        systems.follows = "hyprland/systems";
-      };
-    };
-
-    hyprutils = {
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-
-      type = "github";
-      owner = "hyprwm";
-      repo = "hyprutils";
-    };
-
-    hyprland = {
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        hyprutils.follows = "hyprutils";
-      };
-
-      type = "github";
-      owner = "hyprwm";
-      repo = "Hyprland";
-      # ref = "refs/tags/v0.50.0";
-    };
-
-    hyprlock = {
-      inputs = {
-        hyprlang.follows = "hyprland/hyprlang";
-        hyprutils.follows = "hyprland/hyprutils";
-        nixpkgs.follows = "hyprland/nixpkgs";
-        systems.follows = "hyprland/systems";
-      };
-
-      type = "github";
-      owner = "hyprwm";
-      repo = "hyprlock";
-    };
-
-    lanzaboote = {
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-
-      type = "github";
-      owner = "nix-community";
-      repo = "lanzaboote";
-    };
-
-    nix-colors = {
-      url = "github:misterio77/nix-colors";
-    };
-
-    nixos-hardware = {
-      url = "github:NixOS/nixos-hardware/master";
-    };
-
     nixvim = {
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -133,16 +94,6 @@
       repo = "opencode";
     };
 
-    split-monitor-workspaces = {
-      inputs = {
-        hyprland.follows = "hyprland";
-      };
-
-      type = "github";
-      owner = "Duckonaut";
-      repo = "split-monitor-workspaces";
-    };
-
     quickshell = {
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -153,16 +104,6 @@
       # ref = "refs/tags/v0.1.0";
     };
 
-    winapps = {
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-
-      type = "github";
-      owner = "winapps-org";
-      repo = "winapps";
-    };
-
     yazi = {
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -171,6 +112,38 @@
       type = "github";
       owner = "sxyazi";
       repo = "yazi";
+    };
+
+    ### misc ###
+    nixos-hardware = {
+      type = "github";
+      owner = "NixOS";
+      repo = "nixos-hardware";
+    };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    lanzaboote = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+
+      type = "github";
+      owner = "nix-community";
+      repo = "lanzaboote";
+    };
+
+
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-colors = {
+      url = "github:misterio77/nix-colors";
     };
 
     nix-on-droid = {

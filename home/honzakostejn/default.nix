@@ -10,7 +10,7 @@
     ./wayland
   ];
 
-  home.stateVersion = "25.05";
+  home.stateVersion = "26.05";
 
   # info about user and path it manages
   home.username = lib.mkDefault "honzakostejn";
@@ -41,11 +41,13 @@
     # teams-for-linux
     # tribler
     vlc
-    # popcorntime - this must be platform specific
+    popcorntime # platform specific
     bruno
+    obs-studio
 
     # hyprpanel
     kanata
+    android-tools
     # inputs.zen-browser.packages."x86_64-linux".beta
     # zen browser is still not in home-manager
     # => make sure to perform this config after the update
@@ -74,7 +76,7 @@
 
   services.remmina.enable = true;
   services.dunst.enable = true;
-
+  
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
@@ -86,4 +88,6 @@
       # "x-scheme-handler/unknown" = [ "userapp-Zen-97YQ12.desktop" ];
     };
   };
+
+  services.kdeconnect.enable = true;
 }
