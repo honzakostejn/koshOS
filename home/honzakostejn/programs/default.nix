@@ -8,6 +8,7 @@
     ./ghostty
     ./helix
     ./hyprlock
+    ./mcp
     ./nixvim
     ./nushell
     ./opencode
