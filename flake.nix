@@ -136,6 +136,15 @@
       repo = "lanzaboote";
     };
 
+    sysc-greet = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+
+      type = "github";
+      owner = "Nomadcxx";
+      repo = "sysc-greet";
+    };
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";

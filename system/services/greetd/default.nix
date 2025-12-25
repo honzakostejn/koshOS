@@ -5,7 +5,7 @@
 }: {
   options = {
     koshos.services.greetd = {
-      enable = lib.mkEnableOption "greetd authentication daemon" // { default = true; };
+      enable = lib.mkEnableOption "greetd authentication daemon" // { default = false; };
     };
   };
 
@@ -13,15 +13,23 @@
     services.greetd =
       let
         session = {
-          # this logs the user in automatically,
-          # because there's no greeter specified in the command
-          command = "${lib.getExe pkgs.tuigreet} --time --cmd ${lib.getExe config.programs.hyprland.package}";
-          user = "honzakostejn";
+          command = ''
+            ${lib.getExe pkgs.tuigreet}
+              --time
+              --cmd ${lib.getExe config.programs.hyprland.package}
+          '';
+          user = "greeter";
         };
       in
       {
         enable = true;
         settings = {
+          # autologin
+          # password is still required by hyprlock
+          # initial_session = {
+          #   command = "${lib.getExe config.programs.hyprland.package}";
+          #   user = "honzakostejn";
+          # };
           default_session = session;
         };
       };

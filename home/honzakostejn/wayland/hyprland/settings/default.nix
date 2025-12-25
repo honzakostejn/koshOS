@@ -46,6 +46,7 @@
     };
 
     exec-once = [
+      "hyprlock --immediate-render"
       # "${pkgs.hyprpanel}/bin/hyprpanel"
       # "hyprctl dispatch split-workspace 1"
     ];

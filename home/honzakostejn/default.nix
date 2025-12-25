@@ -39,12 +39,10 @@
     quickemu
     rofi
     # teams-for-linux
-    # tribler
     vlc
     popcorntime # platform specific
     bruno
     obs-studio
-
     # hyprpanel
     kanata
     android-tools
