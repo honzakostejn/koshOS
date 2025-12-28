@@ -26,7 +26,10 @@
                 dir-cache-time = "48h";
                 poll-interval = "60s";
                 umask = "002";
+                dir-perm = "0770";
+                file-perm = "0664";
                 user-agent = "Laptop";
+                allow-other = true;
               };
             };
           };
