@@ -15,29 +15,11 @@
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.honzakostejn = import ../../../home/honzakostejn;
+      home-manager.users.honzakostejn = import ./home.nix;
       home-manager.extraSpecialArgs = { inherit inputs; };
     }
   ];
-
-  nixpkgs.config.allowUnfree = true;
-
-  home-manager.users.honzakostejn.koshos.home.honzakostejn.programs.ghostty.enable = false;
-  home-manager.users.honzakostejn.koshos.home.honzakostejn.programs.helix.enable = false;
-  home-manager.users.honzakostejn.koshos.home.honzakostejn.programs.hyprlock.enable = false;
-  home-manager.users.honzakostejn.koshos.home.honzakostejn.programs.mcp.enable = false;
-  home-manager.users.honzakostejn.koshos.home.honzakostejn.programs.nixvim.enable = false;
-  home-manager.users.honzakostejn.koshos.home.honzakostejn.programs.nushell.enable = false;
-  home-manager.users.honzakostejn.koshos.home.honzakostejn.programs.opencode.enable = false;
-  home-manager.users.honzakostejn.koshos.home.honzakostejn.programs.quickshell.enable = false;
-  home-manager.users.honzakostejn.koshos.programs.qutebrowser.enable = false;
-  home-manager.users.honzakostejn.koshos.home.honzakostejn.programs.satty.enable = false;
-  home-manager.users.honzakostejn.koshos.home.honzakostejn.programs.teams-for-linux.enable = false;
-  home-manager.users.honzakostejn.koshos.home.honzakostejn.programs.vscode.enable = false;
-  home-manager.users.honzakostejn.koshos.home.honzakostejn.programs.winboat.enable = false;
-
-  home-manager.users.honzakostejn.koshos.home.honzakostejn.programs.hyprland.enable = false;
-
+  
   image.fileName = "jellyfin-nixos.vhd";
   virtualisation.azureImage.vmGeneration = "v2";
   virtualisation.diskSize = 16000;
