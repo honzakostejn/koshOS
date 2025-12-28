@@ -14,6 +14,7 @@
     ./opencode
     ./quickshell
     ./qutebrowser
+    ./rclone
     ./starship
     ./satty
     ./teams-for-linux
