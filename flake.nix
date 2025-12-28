@@ -175,6 +175,7 @@
         # };
         x86_64-linux = {
           image-handkerchief = self.nixosConfigurations.handkerchief.config.system.build.sdImage;
+          image-jellyfin-nixos-on-azure = self.nixosConfigurations.jellyfin-nixos-on-azure.config.system.build.azureImage;
         };
       };
 
@@ -203,11 +204,11 @@
           ];
         };
 
-        jellyfin-az-nixos = inputs.nixpkgs.lib.nixosSystem {
+        jellyfin-nixos-on-azure = inputs.nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
-            ./hosts/x86_64-linux/jellyfin-az-nixos
+            ./hosts/x86_64-linux/jellyfin-nixos-on-azure
           ];
         };
 
@@ -233,6 +234,14 @@
           ];
           extraSpecialArgs = { inherit inputs; };
         };
+      };
+
+      devShells.${system}.default = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          azure-cli
+          azure-storage-azcopy
+          jq
+        ];
       };
     };
 }
