@@ -26,7 +26,6 @@
                 dir-cache-time = "48h";
                 poll-interval = "60s";
                 user-agent = "Laptop";
-                allow-other = true;
               };
             };
           };
