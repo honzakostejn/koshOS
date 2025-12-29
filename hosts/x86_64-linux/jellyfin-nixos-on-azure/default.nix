@@ -8,16 +8,7 @@
 
     ./jellyfin.nix
     ./networking.nix
-
-    # make home-manager as a module of nixos
-    # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-    inputs.home-manager.nixosModules.home-manager
-    {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.users.honzakostejn = import ./home.nix;
-      home-manager.extraSpecialArgs = { inherit inputs; };
-    }
+    ./rclone.nix
   ];
   
   image.fileName = "jellyfin-nixos.vhd";
@@ -51,6 +42,9 @@
   };
 
   programs.zsh.enable = true;
+
+  # enable rclone mount to be used by jellyfin
+  programs.fuse.userAllowOther = true;
 
   services.logrotate.enable = true;
 
