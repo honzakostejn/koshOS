@@ -9,6 +9,11 @@
     privateNetwork = false;
     # localAddress = "192.168.100.11";
 
+    forwardPorts = [
+      { hostPort = 6789; containerPort = 6789; protocol = "tcp"; }
+      { hostPort = 6791; containerPort = 6791; protocol = "tcp"; }
+    ];
+
     config = { pkgs, ... }: {
       nixpkgs.config.allowUnfree = true; # NZBGet depends on unrar
       
