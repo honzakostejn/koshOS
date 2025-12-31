@@ -6,8 +6,13 @@
 
   services.caddy = {
     enable = true;
-    virtualHosts."jellyfin.kosh.boo".extraConfig = ''
-      reverse_proxy 127.0.0.1:8096
-    '';
+    virtualHosts = {
+      "jellyfin.kosh.boo".extraConfig = ''
+        reverse_proxy 127.0.0.1:8096
+      '';
+      "nzbget.kosh.boo".extraConfig = ''
+        reverse_proxy 127.0.0.1:6791
+      '';
+    }
   };  
 }
