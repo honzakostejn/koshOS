@@ -2,7 +2,7 @@
   pkgs
   , ...
 }: {
-  networking.firewall.allowedTCPPorts = [ 6789 ]; # NZBGet
+  networking.firewall.allowedTCPPorts = [ 6791 ]; # NZBGet
 
   containers.usenet = {
     autoStart = true;
@@ -23,6 +23,9 @@
         enable = true;
         settings = {
           MainDir = "/mnt/media";
+          SecureControl = true;
+          SecureCert = "";
+          SecureKey = "";
         };
       };
       # networking.firewall.enable = true;
