@@ -10,9 +10,10 @@
       "jellyfin.kosh.boo".extraConfig = ''
         reverse_proxy 127.0.0.1:8096
       '';
+      # todo: use secure control port (6791)
       "nzbget.kosh.boo".extraConfig = ''
-        reverse_proxy 127.0.0.1:6791
+        reverse_proxy http://192.168.100.11:6789
       '';
-    }
+    };
   };  
 }
