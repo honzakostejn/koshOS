@@ -9,6 +9,7 @@
     ./jellyfin.nix
     ./networking.nix
     ./rclone.nix
+    ./usenet.nix
   ];
   
   image.fileName = "jellyfin-nixos.vhd";
