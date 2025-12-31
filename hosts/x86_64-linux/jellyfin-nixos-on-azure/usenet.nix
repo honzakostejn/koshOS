@@ -2,13 +2,15 @@
   pkgs
   , ...
 }: {
+  networking.firewall.allowedTCPPorts = [ 6789 ]; # NZBGet
+
   containers.usenet = {
     autoStart = true;
-    enableTun = true;
-    privateNetwork = true;
+    # enableTun = true;
+    # privateNetwork = true;
 
     config = { pkgs, ... }: {
-      nixpkgs.config.allowUnfree = true; # nzbget depends on unrar
+      nixpkgs.config.allowUnfree = true; # NZBGet depends on unrar
       
       users.users.usenet = {
         isNormalUser = true;
@@ -18,8 +20,8 @@
 
       programs.zsh.enable = true;
       services.nzbget.enable = true;
-      networking.firewall.enable = true;
-      networking.firewall.allowedTCPPorts = [ 6789 ]; # NzbGet
+      # networking.firewall.enable = true;
+      # networking.firewall.allowedTCPPorts = [ 6789 ];
 
       # networking.wg-quick.interfaces = {
       #   wg0 = {
@@ -64,7 +66,7 @@
     };
 
     forwardPorts = [
-      { containerPort = 6789; hostPort = 6789; protocol = "tcp"; } # NzbGet
+      { containerPort = 6789; hostPort = 6789; protocol = "tcp"; }
     ];
 
     bindMounts = {
