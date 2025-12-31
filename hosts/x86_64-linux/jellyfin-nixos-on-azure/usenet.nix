@@ -6,8 +6,12 @@
 
   containers.usenet = {
     autoStart = true;
-    # enableTun = true;
-    # privateNetwork = true;
+    privateNetwork = true;
+    hostAddress = "192.168.100.2";
+    localAddress = "192.168.100.11";
+    forwardPorts = [
+      { containerPort = 6789; hostPort = 6789; protocol = "tcp"; }
+    ];
 
     config = { pkgs, ... }: {
       nixpkgs.config.allowUnfree = true; # NZBGet depends on unrar
@@ -64,10 +68,6 @@
       #   };
       # };
     };
-
-    forwardPorts = [
-      { containerPort = 6789; hostPort = 6789; protocol = "tcp"; }
-    ];
 
     bindMounts = {
       "/mnt/media" = {
