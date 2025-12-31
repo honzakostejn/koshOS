@@ -2,32 +2,36 @@
   pkgs
   , ...
 }: {
-  networking.firewall.allowedTCPPorts = [ 6791 ]; # NZBGet
+  networking.firewall.allowedTCPPorts = [ 6789 ]; # NZBGet
 
   containers.usenet = {
     autoStart = true;
-    privateNetwork = true;
-    localAddress = "192.168.100.11";
+    # privateNetwork = true;
+    # localAddress = "192.168.100.11";
 
     config = { pkgs, ... }: {
       nixpkgs.config.allowUnfree = true; # NZBGet depends on unrar
       
-      # users.users.usenet = {
-      #   isNormalUser = true;
-      #   # extraGroups = ["wheel"];
-      #   shell = pkgs.zsh;
-      # };
+      users.users.usenet = {
+        isNormalUser = true;
+        # extraGroups = ["wheel"];
+        shell = pkgs.zsh;
+      };
 
       programs.zsh.enable = true;
       services.nzbget = {
         enable = true;
         settings = {
           MainDir = "/mnt/media";
-          SecureControl = true;
-          SecureCert = "";
-          SecureKey = "";
+          # SecureControl = true;
+          # SecureCert = "";
+          # SecureKey = "";
         };
       };
+
+      environment.systemPackages = with pkgs; [
+        openssl
+      ];
       # networking.firewall.enable = true;
       # networking.firewall.allowedTCPPorts = [ 6789 ];
 
