@@ -3,24 +3,28 @@
   , ...
 }: {
   networking.firewall.allowedTCPPorts = [ 6789 ]; # NZBGet
+  # networking.firewall.trustedInterfaces = [ "ve-usenet" ];
+  # networking.nat.enable = true;
+  # networking.nat.internalInterfaces = [ "ve-usenet" ];
+  # networking.networkmanager.unmanaged = [ "interface-name:ve-usenet" ];
+  # networking.nat.externalInterface = "eth0";
 
   containers.usenet = {
     autoStart = true;
-    privateNetwork = false;
-    # localAddress = "192.168.100.11";
+    privateNetwork = true;
+    hostAddress = "192.168.100.1";
+    localAddress = "192.168.100.11";
 
-    forwardPorts = [
-      { hostPort = 6789; containerPort = 6789; protocol = "tcp"; }
-      { hostPort = 6791; containerPort = 6791; protocol = "tcp"; }
-    ];
+    # forwardPorts = [
+    #   { hostPort = 6789; containerPort = 6789; protocol = "tcp"; }
+    # ];
 
     config = { pkgs, ... }: {
       nixpkgs.config.allowUnfree = true; # NZBGet depends on unrar
       
-      users.users.usenet = {
-        isNormalUser = true;
-        # extraGroups = ["wheel"];
-        shell = pkgs.zsh;
+      networking.firewall = {
+        enable = true;
+        allowedTCPPorts = [ 6789 ];
       };
 
       programs.zsh.enable = true;
@@ -28,15 +32,9 @@
         enable = true;
         settings = {
           MainDir = "/mnt/media";
-          # SecureControl = true;
-          # SecureCert = "";
-          # SecureKey = "";
         };
       };
 
-      environment.systemPackages = with pkgs; [
-        openssl
-      ];
       # networking.firewall.enable = true;
       # networking.firewall.allowedTCPPorts = [ 6789 ];
 
