@@ -14,6 +14,19 @@
       settings = {
         profile = [
           {
+            name = "home";
+            output = [
+              {
+                match = "DP-2";
+                enable = true;
+              }
+              {
+                match = "eDP-1";
+                enable = false;
+              }
+            ];
+          }
+          {
             name = "undocked";
             output = [
               {
@@ -116,6 +129,31 @@
                   y = 0;
                 };
                 enable = true;
+              }
+            ];
+          }
+          {
+            name = "docked-hub-cetin";
+            output = [
+              {
+                search = [ "s=6XG5ZT2" ];
+                position = {
+                  x = 0;
+                  y = 0;
+                };
+                enable = true;
+              }
+              {
+                search = [ "s=6QD5ZT2" ];
+                position = {
+                  x = 1920;
+                  y = 0;
+                };
+                enable = true;
+              }
+              {
+                match = "eDP-1";
+                enable = false;
               }
             ];
           }
