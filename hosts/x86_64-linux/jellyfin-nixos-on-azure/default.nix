@@ -8,8 +8,10 @@
 
     ./jellyfin.nix
     ./networking.nix
+    ./rclone.nix
+    ./usenet.nix
   ];
-
+  
   image.fileName = "jellyfin-nixos.vhd";
   virtualisation.azureImage.vmGeneration = "v2";
   virtualisation.diskSize = 16000;
@@ -22,7 +24,9 @@
     isNormalUser = true;
     home = "/home/honzakostejn";
     extraGroups = ["wheel"];
-    openssh.authorizedKeys.keys = [(builtins.readFile ~/.ssh/id_ed25519.pub)];
+    openssh.authorizedKeys.keys = [
+      (builtins.readFile ~/.ssh/id_ed25519.pub)
+    ];
     shell = pkgs.zsh;
   };
 
@@ -39,9 +43,13 @@
 
   programs.zsh.enable = true;
 
+  # enable rclone mount to be used by jellyfin
+  programs.fuse.userAllowOther = true;
+
   services.logrotate.enable = true;
 
   environment.systemPackages = with pkgs; [
     git
+    vim
   ];
 }
