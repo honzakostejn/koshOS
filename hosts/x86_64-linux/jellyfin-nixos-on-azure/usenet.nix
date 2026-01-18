@@ -47,7 +47,7 @@ in
           "Server1.Username" = "donotcommitsecrets";
           "Server1.Password" = "donotcommitsecrets";
           "Server1.JoinGroup" = false;
-          "Server1.Connections" = 100;
+          "Server1.Connections" = 20;
           "Server1.Retention" = 0;
           "Server1.CertVerification" = "strict";
         };
