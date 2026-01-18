@@ -77,7 +77,7 @@ in
 
           # https://alberand.com/nixos-wireguard-vpn.html
           wg-quick.interfaces.wg0 = {
-            autostart = false;
+            autostart = true;
             address = [ 
               "0.0.0.0/32"
             ];
@@ -152,5 +152,14 @@ in
       internalInterfaces = [ "ve-usenet" ];
       externalInterface = externalInterface;
     };
+  };
+
+  # prevent systemd-networkd from auto-assigning addresses to the container veth interface
+  # if you're using NetworkManager, this is not necessary
+  # Azure uses systemd-networkd (via cloud-init), which auto-configures interfaces
+  # this causes extra IPs on ve-usenet that break routing when WireGuard is active in the container
+  systemd.network.networks."40-ve-usenet" = {
+    matchConfig.Name = "ve-usenet";
+    linkConfig.Unmanaged = true;
   };
 }
