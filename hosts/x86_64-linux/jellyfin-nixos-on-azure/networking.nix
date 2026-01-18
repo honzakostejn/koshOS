@@ -13,6 +13,9 @@
       "nzbget.kosh.boo".extraConfig = ''
         reverse_proxy 192.168.100.11:6789
       '';
+      "radarr.kosh.boo".extraConfig = ''
+        reverse_proxy 192.168.100.11:7878
+      '';
       "sonarr.kosh.boo".extraConfig = ''
         reverse_proxy 192.168.100.11:8989
       '';

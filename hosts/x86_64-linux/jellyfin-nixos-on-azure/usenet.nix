@@ -53,6 +53,13 @@ in
         };
       };
 
+      services.radarr = {
+        enable = true;
+        openFirewall = true;
+        user = "usenet";
+        dataDir = "/home/usenet/radarr";
+      };
+
       services.sonarr = {
         enable = true;
         openFirewall = true;
