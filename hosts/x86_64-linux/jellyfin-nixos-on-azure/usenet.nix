@@ -22,10 +22,6 @@ in
 
       programs.zsh.enable = true;
 
-      environment.systemPackages = with pkgs; [
-        unrar
-      ];
-
       users.users.usenet = {
         home = "/home/usenet";
         isNormalUser = true;
