@@ -1,0 +1,103 @@
+#=====================================#
+# general configuration
+#=====================================#
+[general]
+debounce_time_ms = 1500
+
+#=====================================#
+# undocked profile
+#=====================================#
+[profiles.undocked]
+config_file = "hyprconfigs/undocked.conf"
+config_file_type = "static"
+
+[[profiles.undocked.conditions.required_monitors]]
+name = "eDP-1"
+
+#=====================================#
+# hub prague profile
+#=====================================#
+[profiles.docked-hub-prague]
+config_file = "hyprconfigs/docked-hub-prague.conf"
+config_file_type = "static"
+
+[[profiles.docked-hub-prague.conditions.required_monitors]]
+description = ".*7MT0167B2AEL.*"
+match_description_using_regex = true
+monitor_tag = "external"
+
+[[profiles.docked-hub-prague.conditions.required_monitors]]
+description = ".*0FFXD31F1TPL.*"
+match_description_using_regex = true
+monitor_tag = "external"
+
+[[profiles.docked-hub-prague.conditions.required_monitors]]
+description = ".*7MT0162411FL.*"
+match_description_using_regex = true
+monitor_tag = "external"
+
+[[profiles.docked-hub-prague.conditions.required_monitors]]
+name = "eDP-1"
+monitor_tag = "internal"
+
+#=====================================#
+# hub cetin corner profile
+#=====================================#
+[profiles.docked-hub-cetin-corner]
+config_file = "hyprconfigs/docked-hub-cetin-corner.conf"
+config_file_type = "static"
+[[profiles.docked-hub-cetin-corner.conditions.required_monitors]]
+description = ".*CW6Y783F0FGB.*"
+match_description_using_regex = true
+monitor_tag = "external"
+[[profiles.docked-hub-cetin-corner.conditions.required_monitors]]
+name = "eDP-1"
+monitor_tag = "internal"
+
+
+
+# [profiles.docked-home]
+# config_file = "hyprconfigs/docked-home.conf"
+# config_file_type = "static"
+# [[profiles.docked-home.conditions.required_monitors]]
+# description = ".*0x0000D2C6.*"
+# match_description_using_regex = true
+# monitor_tag = "external"
+
+# [profiles.docked-hub-sarajevo]
+# config_file = "hyprconfigs/docked-hub-sarajevo.conf"
+# config_file_type = "static"
+# [[profiles.docked-hub-sarajevo.conditions.required_monitors]]
+# description = ".*GMXM8HA570389.*"
+# match_description_using_regex = true
+# monitor_tag = "external"
+
+# [profiles.docked-hub-brno]
+# config_file = "hyprconfigs/docked-hub-brno.conf"
+# config_file_type = "static"
+# [[profiles.docked-hub-brno.conditions.required_monitors]]
+# description = ".*0FFXD31J08YS.*"
+# match_description_using_regex = true
+# monitor_tag = "external"
+# [[profiles.docked-hub-brno.conditions.required_monitors]]
+# description = ".*Y1H5T242201L.*"
+# match_description_using_regex = true
+# monitor_tag = "external"
+# [[profiles.docked-hub-brno.conditions.required_monitors]]
+# name = "eDP-1"
+
+# [profiles.docked-hub-cetin]
+# config_file = "hyprconfigs/docked-hub-cetin.conf"
+# config_file_type = "static"
+# [[profiles.docked-hub-cetin.conditions.required_monitors]]
+# description = ".*6XG5ZT2.*"
+# match_description_using_regex = true
+# monitor_tag = "external"
+# [[profiles.docked-hub-cetin.conditions.required_monitors]]
+# description = ".*6QD5ZT2.*"
+# match_description_using_regex = true
+# monitor_tag = "external"
+
+# [fallback_profile]
+# config_file = "hyprconfigs/fallback.conf"
+# config_file_type = "static"

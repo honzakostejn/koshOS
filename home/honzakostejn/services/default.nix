@@ -2,6 +2,6 @@
 }: {
   imports = [
     ./hypridle
-    ./shikane
+    # ./shikane
   ];
 }
