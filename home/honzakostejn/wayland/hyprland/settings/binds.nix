@@ -7,10 +7,13 @@ let
   custom-hyprlock-script = import ../../../programs/hyprlock/custom-hyprlock-script.nix {
     inherit pkgs lib;
   };
-  toggle-mute-teams = pkgs.writeShellApplication {
-    name = "toggle-mute-teams";
-    runtimeInputs = [ pkgs.jq ];
-    text = builtins.readFile ../scripts/toggle-mute-teams.sh;
+  # https://github.com/hyprwm/Hyprland/discussions/10351
+  send-shortcut-to-electron = pkgs.writeShellApplication {
+    name = "send-shortcut-to-electron";
+    runtimeInputs = [
+      pkgs.jq
+    ];
+    text = builtins.readFile ../scripts/send-shortcut-to-electron.sh;
   };
   take-screenshot = pkgs.writeShellApplication {
     name = "take-screenshot";
@@ -36,7 +39,7 @@ in
       "$terminal" = "ghostty";
       "$menu" = "rofi -show drun";
       "$lock" = "${custom-hyprlock-script}/bin/custom-hyprlock-script";
-      "$toggle-mute-teams" = "${toggle-mute-teams}/bin/toggle-mute-teams";
+      "$send-shortcut-to-electron" = "${send-shortcut-to-electron}/bin/send-shortcut-to-electron";
       "$take-screenshot" = "${take-screenshot}/bin/take-screenshot";
 
       # bind[flag]
@@ -57,6 +60,7 @@ in
         "$mod, SPACE, exec, $menu"
         "$mod, RETURN, exec, $terminal"
         "$mod, Q, killactive"
+        "$mod SHIFT, Q, forcekillactive"
         "$mod ALT_L, L, exec, $lock"
         "$mod, F4, exit,"
 
@@ -77,12 +81,13 @@ in
         "$mod, W, exec, qutebrowser --basedir ~/.config/qutebrowser/honzakostejn"
         "$mod SHIFT, W, exec, qutebrowser --basedir ~/.config/qutebrowser/NETWORG"
         "$mod, C, exec, code ~/repos/koshos"
+        "$mod, Y, exec, $terminal -e yazi"
 
         # screenshot submap trigger
         "$mod, R, submap, screenshot"
 
         # toggle mute in MS Teams
-        "CONTROL SHIFT, M, exec, $toggle-mute-teams"
+        "CONTROL SHIFT, M, exec, $send-shortcut-to-electron 'CONTROL SHIFT, M' class teams-for-linux"
 
         "$mod SHIFT, C, exec, ${pkgs.hyprpicker}/bin/hyprpicker -a -f hex"
 

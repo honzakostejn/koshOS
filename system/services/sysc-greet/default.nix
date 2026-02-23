@@ -6,13 +6,13 @@
   ...
 }:
 let
-  customPackage = inputs.sysc-greet.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (finalAttrs: previousAttrs: {
-    preInstall = ''
-      # replace default files with custom ones
-      cp ${./ascii_configs/hyprland.conf} ascii_configs/hyprland.conf
-      cp ${./hyprland-greeter-config.conf} config/hyprland-greeter-config.conf
-    '';
-  });
+  # customPackage = inputs.sysc-greet.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (finalAttrs: previousAttrs: {
+  #   preInstall = ''
+  #     # replace default files with custom ones
+  #     cp ${./ascii_configs/hyprland.conf} ascii_configs/hyprland.conf
+  #     cp ${./hyprland-greeter-config.conf} config/hyprland-greeter-config.conf
+  #   '';
+  # });
 in
 {
   imports = [
@@ -31,24 +31,25 @@ in
     services.sysc-greet = {
       enable = true;
       compositor = "hyprland";
+      # auto-login
+      # settings.initial_session = {
+      #   command = "start-hyprland";
+      #   user = "honzakostejn";
+      # };
     };
 
-    environment.systemPackages = [
-      customPackage
-    ];
+    # environment.systemPackages = [
+    #   customPackage
+    # ];
 
-    # override config files in /etc to the custom package
-    environment.etc = {
-      "greetd/kitty.conf".source = lib.mkForce "${customPackage}/etc/greetd/kitty.conf";
-      "greetd/niri-greeter-config.kdl".source = lib.mkForce "${customPackage}/etc/greetd/niri-greeter-config.kdl";
-      "greetd/hyprland-greeter-config.conf".source = lib.mkForce "${customPackage}/etc/greetd/hyprland-greeter-config.conf";
-      "greetd/sway-greeter-config".source = lib.mkForce "${customPackage}/etc/greetd/sway-greeter-config";
-      "polkit-1/rules.d/85-greeter.rules".source = lib.mkForce "${customPackage}/etc/polkit-1/rules.d/85-greeter.rules";
-    };
+    # # override config files in /etc to the custom package
+    # environment.etc = {
+    #   "greetd/hyprland-greeter-config.conf".source = lib.mkForce "${customPackage}/etc/greetd/hyprland-greeter-config.conf";
+    # };
 
-    environment.pathsToLink = [
-      "/share/sysc-greet"
-    ];
+    # environment.pathsToLink = [
+    #   "/share/sysc-greet"
+    # ];
 
     security.pam.services.sysc-greet.enableGnomeKeyring = true;
   };

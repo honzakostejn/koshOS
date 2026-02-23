@@ -21,5 +21,8 @@
       nixpkgs-fmt
       usbutils
     ];
+
+    # adds ~/.local/bin to PATH
+    localBinInPath = true;
   };
 }

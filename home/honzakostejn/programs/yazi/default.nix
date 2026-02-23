@@ -66,6 +66,13 @@
             run = "seek -5";
             description = "Seek up 5 units in the preview";
           }
+
+          # custom
+          {
+            on = [ "g" "r" ];
+            run = "cd ~/repos";
+            description = "Go to ~/repos";
+          }
         ];
       };
 
