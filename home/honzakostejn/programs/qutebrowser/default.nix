@@ -43,6 +43,10 @@ in
       ".config/qutebrowser/NETWORG/config/baseConfig.py".source = ./baseConfig.py;
       ".config/qutebrowser/NETWORG/config/config.py".source = ./NETWORG/config.py;
       ".config/qutebrowser/NETWORG/config/theme.py".source = ./theme.py;
+
+      ".config/qutebrowser/CETIN/config/baseConfig.py".source = ./baseConfig.py;
+      ".config/qutebrowser/CETIN/config/config.py".source = ./CETIN/config.py;
+      ".config/qutebrowser/CETIN/config/theme.py".source = ./theme.py;
     };
 
     home.packages = with pkgs; [
@@ -62,6 +66,12 @@ in
         name = "qutebrowser [NETWORG]";
         genericName = "Work browser profile";
         exec = ''qutebrowser --basedir ${config.home.homeDirectory}/.config/qutebrowser/NETWORG'';
+        icon = "qutebrowser";
+      };
+      "qutebrowser.CETIN" = {
+        name = "qutebrowser [CETIN]";
+        genericName = "Work browser profile";
+        exec = ''qutebrowser --basedir ${config.home.homeDirectory}/.config/qutebrowser/CETIN'';
         icon = "qutebrowser";
       };
     };
