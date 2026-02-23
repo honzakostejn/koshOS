@@ -33,7 +33,7 @@
       type = "github";
       owner = "hyprwm";
       repo = "Hyprland";
-      ref = "refs/tags/v0.52.2";
+      ref = "refs/tags/v0.53.1";
     };
 
     hypridle = {
@@ -56,7 +56,7 @@
       type = "github";
       owner = "Duckonaut";
       repo = "split-monitor-workspaces";
-      ref = "refs/tags/v0.52.2";
+      ref = "refs/tags/v0.53.1";
     };
 
     ### programs ###
@@ -74,7 +74,9 @@
       };
 
       type = "github";
-      owner = "helix-editor";
+      owner = "devmanuelli"; # fork that supports github copilot
+      ref = "refs/heads/textDocument/inlineCompletion"; # fork that supports github copilot
+      # owner = "helix-editor";
       repo = "helix";
     };
 
@@ -160,6 +162,10 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
       inputs.home-manager.follows = "home-manager-stable";
     };
+
+    hyprdynamicmonitors = {
+      url = "github:fiffeek/hyprdynamicmonitors";
+    };
   };
 
   outputs =
@@ -175,7 +181,8 @@
         # };
         x86_64-linux = {
           image-handkerchief = self.nixosConfigurations.handkerchief.config.system.build.sdImage;
-          image-jellyfin-nixos-on-azure = self.nixosConfigurations.jellyfin-nixos-on-azure.config.system.build.azureImage;
+          image-jellyfin-nixos-on-azure =
+            self.nixosConfigurations.jellyfin-nixos-on-azure.config.system.build.azureImage;
         };
       };
 
