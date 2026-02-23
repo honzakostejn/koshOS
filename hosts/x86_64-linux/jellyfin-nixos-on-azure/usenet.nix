@@ -37,7 +37,7 @@ in
           ControlUsername = "usenet";
           ControlPassword = "donotcommitsecrets";
 
-          "Server1.Active" = true;
+          "Server1.Active" = false;
           "Server1.Name" = "hitnews";
           "Server1.Level" = 0;
           "Server1.Optional" = false;
@@ -50,6 +50,20 @@ in
           "Server1.Connections" = 20;
           "Server1.Retention" = 0;
           "Server1.CertVerification" = "strict";
+
+          "Server2.Active" = true;
+          "Server2.Name" = "newsdemon";
+          "Server2.Level" = 0;
+          "Server2.Optional" = false;
+          "Server2.Host" = "us.newsdemon.com";
+          "Server2.Encryption" = true;
+          "Server2.Port" = 563;
+          "Server2.Username" = "donotcommitsecrets";
+          "Server2.Password" = "donotcommitsecrets";
+          "Server2.JoinGroup" = false;
+          "Server2.Connections" = 50;
+          "Server2.Retention" = 0;
+          "Server2.CertVerification" = "strict";
         };
       };
 

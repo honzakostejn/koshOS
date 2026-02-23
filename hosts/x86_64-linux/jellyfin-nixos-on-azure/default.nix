@@ -14,6 +14,7 @@
   
   image.fileName = "jellyfin-nixos.vhd";
   virtualisation.azureImage.vmGeneration = "v2";
+  virtualisation.azure.acceleratedNetworking = true;
   virtualisation.diskSize = 16000;
 
   system.stateVersion = "26.05";
