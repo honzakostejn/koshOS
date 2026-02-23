@@ -8,6 +8,7 @@
     ./ghostty
     ./helix
     ./hyprlock
+    ./jellyfin-mpv-shim
     ./mcp
     ./nixvim
     ./nushell
@@ -21,5 +22,6 @@
     # ./winapps
     ./winboat
     ./yazi
+    ./zk
   ];
 }
