@@ -24,6 +24,8 @@
 
         font-size = 15;
         font-family = "JetBrains Mono";
+
+        bell-features = "system";
       };
     };
   };

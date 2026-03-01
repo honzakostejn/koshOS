@@ -6,6 +6,7 @@
     ./bash
     ./firefox
     ./ghostty
+    ./github-copilot-cli
     ./helix
     ./hyprlock
     ./jellyfin-mpv-shim

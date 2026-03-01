@@ -2,11 +2,25 @@
 , pkgs
 , config
 , ...
-}: {
+}:
+let
+  interprocess-communication = pkgs.writeShellApplication {
+    name = "interprocess-communication";
+    runtimeInputs = with pkgs; [
+      socat
+      pipewire
+    ];
+    text = builtins.readFile ../scripts/interprocess-communication.sh;
+  };
+in
+{
   imports = [
     ./binds.nix
     ./look-and-feel.nix
   ];
+
+  home.file.".config/hypr/notification.mp3".source =
+    ../../../../../assets/sounds/notification.mp3;
 
   wayland.windowManager.hyprland.settings = {
     env = [
@@ -44,6 +58,7 @@
 
     exec-once = [
       "hyprlock --immediate-render"
+      "${pkgs.lib.getExe interprocess-communication}"
       # "${pkgs.hyprpanel}/bin/hyprpanel"
       # "hyprctl dispatch split-workspace 1"
     ];
