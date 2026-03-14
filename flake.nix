@@ -183,6 +183,7 @@
           image-handkerchief = self.nixosConfigurations.handkerchief.config.system.build.sdImage;
           image-jellyfin-nixos-on-azure =
             self.nixosConfigurations.jellyfin-nixos-on-azure.config.system.build.azureImage;
+          image-kosh-vm = self.nixosConfigurations.kosh-vm.config.system.build.azureImage;
         };
       };
 
@@ -224,6 +225,14 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./hosts/aarch64-linux/handkerchief
+          ];
+        };
+
+        kosh-vm = inputs.nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/x86_64-linux/kosh-vm
           ];
         };
       };
