@@ -1,6 +1,6 @@
 { lib
 , config
-, inputs
+, self
 , ...
 }: {
   options = {
@@ -10,7 +10,7 @@
   };
 
   imports = [
-    inputs.nixvim.homeModules.nixvim
+    self.homeModules.nixvim
   ];
 
   config = lib.mkIf config.koshos.home.honzakostejn.programs.nixvim.enable {

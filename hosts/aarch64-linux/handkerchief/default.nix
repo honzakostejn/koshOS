@@ -11,8 +11,6 @@
     # ./repart.nix
 
     "${modulesPath}/installer/sd-card/sd-image.nix"
-
-    ../../../system
   ];
 
   boot.loader.grub.enable = false;

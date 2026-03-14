@@ -1,5 +1,6 @@
 { lib
 , config
+, self
 , inputs
 , pkgs
 , ...
@@ -17,7 +18,7 @@ in
   };
 
   imports = [
-    inputs.hyprland.homeManagerModules.default
+    self.homeModules.hyprland
 
     ./settings
     ./plugins

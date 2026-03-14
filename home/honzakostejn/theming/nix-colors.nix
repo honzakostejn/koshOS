@@ -1,11 +1,12 @@
 {
+  self,
   inputs,
   lib,
   config,
   ...
 }: {
   imports = [
-    inputs.nix-colors.homeManagerModules.default
+    self.homeModules.nixColors
   ];
 
   options = {

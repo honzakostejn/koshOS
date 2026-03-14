@@ -8,8 +8,6 @@
 
     ../framework/localization.nix
     ./networking.nix
-
-    ../../../system
   ];
 
   system.stateVersion = "25.05";

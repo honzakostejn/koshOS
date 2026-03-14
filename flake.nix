@@ -175,8 +175,20 @@
   outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        ./flake-modules/nixos-configurations.nix
+        # NixOS feature modules
+        ./flake-modules/nixos-modules/koshos.nix
+        ./flake-modules/nixos-modules/hyprland.nix
+        # Per-host configurations
+        ./flake-modules/hosts/framework.nix
+        ./flake-modules/hosts/handkerchief.nix
+        ./flake-modules/hosts/m1-qemu.nix
+        ./flake-modules/hosts/iso-image.nix
+        ./flake-modules/hosts/jellyfin-nixos-on-azure.nix
+        ./flake-modules/hosts/kosh-vm.nix
+        # Home-manager
         ./flake-modules/home-configurations.nix
+        ./flake-modules/home-modules.nix
+        # Other outputs
         ./flake-modules/nix-on-droid.nix
         ./flake-modules/packages.nix
         ./flake-modules/dev-shell.nix

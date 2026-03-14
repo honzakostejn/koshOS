@@ -5,8 +5,6 @@
 }: {
   imports = [
     "${modulesPath}/virtualisation/azure-image.nix"
-
-    ../../../system
   ];
   
   image.fileName = "kosh-vm.vhd";

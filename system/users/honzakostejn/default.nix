@@ -1,5 +1,6 @@
 {
   inputs,
+  self,
   lib,
   config,
   pkgs,
@@ -22,7 +23,7 @@
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.honzakostejn = import ../../../home/honzakostejn;
-      home-manager.extraSpecialArgs = { inherit inputs; };
+      home-manager.extraSpecialArgs = { inherit inputs self; };
     }
   ];
 

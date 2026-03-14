@@ -1,4 +1,5 @@
 {
+  self,
   inputs,
   pkgs,
   lib,
@@ -15,7 +16,7 @@
   };
 
   imports = [
-    inputs.hyprdynamicmonitors.homeManagerModules.default
+    self.homeModules.hyprdynamicmonitors
   ];
 
   config = lib.mkIf config.koshos.home.honzakostejn.programs.hyprdynamicmonitors.enable {

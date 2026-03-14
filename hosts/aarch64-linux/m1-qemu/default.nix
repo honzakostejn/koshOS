@@ -11,8 +11,6 @@
     # networking configuration
     ./networking.nix
 
-    ../../../modules
-
     # ./environment.nix
     # ./security.nix
     # ../../look/fonts.nix
