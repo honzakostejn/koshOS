@@ -54,7 +54,26 @@ monitor_tag = "external"
 name = "eDP-1"
 monitor_tag = "internal"
 
+#=====================================#
+# hub casa de Capek profile
+#=====================================#
+[profiles.docked-hub-casa-de-capek]
+config_file = "hyprconfigs/docked-hub-casa-de-capek.conf"
+config_file_type = "static"
+[[profiles.docked-hub-casa-de-capek.conditions.required_monitors]]
+description = ".*M7LMDW012533.*"
+match_description_using_regex = true
+monitor_tag = "external"
+[[profiles.docked-hub-casa-de-capek.conditions.required_monitors]]
+name = "eDP-1"
+monitor_tag = "internal"
 
+#=====================================#
+# fallback profile
+#=====================================#
+[fallback_profile]
+config_file = "hyprconfigs/fallback.conf"
+config_file_type = "static"
 
 # [profiles.docked-home]
 # config_file = "hyprconfigs/docked-home.conf"
