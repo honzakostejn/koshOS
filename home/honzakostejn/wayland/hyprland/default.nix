@@ -38,5 +38,31 @@ in
         variables = [ "--all" ];
       };
     };
+
+    # changing file chooser to yazi
+    # xdg.portal = {
+    #   enable = true;
+    #   extraPortals = with pkgs; [
+    #     xdg-desktop-portal-termfilechooser
+    #   ];
+    #   config = {
+    #     common = {
+    #       default = [ "hyprland" ];
+    #       "org.freedesktop.impl.portal.FileChooser" = "termfilechooser";
+    #     };
+    #     hyprland = {
+    #       default = [ "hyprland" ];
+    #       "org.freedesktop.impl.portal.FileChooser" = "termfilechooser";
+    #     };
+    #   };
+    # };
+    # xdg.configFile."xdg-desktop-portal-termfilechooser/config".text = ''
+    #   [filechooser]
+    #   cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
+    #   default_dir=$HOME/Downloads
+    #   env=TERMCMD=ghostty --title="terminal-filechooser" -e
+    #   open_mode=suggested
+    #   save_mode=last
+    # '';
   };
 }

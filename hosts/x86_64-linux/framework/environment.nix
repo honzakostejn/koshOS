@@ -9,6 +9,9 @@
 
       # https://github.com/git-ecosystem/git-credential-manager/blob/main/docs/credstores.md#freedesktoporg-secret-service-api
       GCM_CREDENTIAL_STORE = "secretservice";
+
+      # https://discourse.nixos.org/t/how-to-install-xdg-desktop-portal-termfilechooser/62819/45
+      # QT_QPA_PLATFORMTHEME = "xdgdesktopportal";
     };
 
     systemPackages = with pkgs; [

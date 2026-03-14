@@ -63,3 +63,8 @@ def load(config, c):
     '<Ctrl-Shift-p>u': 'spawn --userscript qute-bitwarden --username-only',
     '<Ctrl-Shift-p>p': 'spawn --userscript qute-bitwarden --password-only',
   }
+
+  c.fileselect.handler = 'external'
+  c.fileselect.single_file.command = ["ghostty", "--title=\"terminal-filechooser\"", "-e", "yazi", "--chooser-file", "{}"]
+  c.fileselect.multiple_files.command = ["ghostty", "--title=\"terminal-filechooser\"", "-e", "yazi", "--chooser-file", "{}"]
+  c.fileselect.folder.command = ["ghostty", "--title=\"terminal-filechooser\"", "-e", "yazi", "--cwd-file", "{}"]
