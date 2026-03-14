@@ -1,5 +1,7 @@
 { inputs
 , pkgs
+, lib
+, config
 , ...
 }:
 let
@@ -13,24 +15,32 @@ let
       name = "wallpaper-${sha256}.${ext}";
       inherit url sha256;
     };
-    
+
 in
 {
-  services.hyprpaper = {
-    enable = true;
-    package = inputs.hyprpaper.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    settings = {
-      ipc = "off";
-      # splash = true;
-      # splash_offset = 2.0;
+  options = {
+    koshos.home.honzakostejn.wayland.hyprland.hyprpaper = {
+      enable = lib.mkEnableOption "Hyprpaper wallpaper daemon" // { default = true; };
+    };
+  };
 
-      preload = [
-        "${wallpaper}"
-      ];
+  config = lib.mkIf config.koshos.home.honzakostejn.wayland.hyprland.hyprpaper.enable {
+    services.hyprpaper = {
+      enable = true;
+      package = inputs.hyprpaper.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      settings = {
+        ipc = "off";
+        # splash = true;
+        # splash_offset = 2.0;
 
-      wallpaper = [
-        ", ${wallpaper}"
-      ];
+        preload = [
+          "${wallpaper}"
+        ];
+
+        wallpaper = [
+          ", ${wallpaper}"
+        ];
+      };
     };
   };
 }

@@ -1,5 +1,7 @@
 { inputs
 , pkgs
+, lib
+, config
 , ...
 }:
 let
@@ -22,20 +24,28 @@ let
     workspaceCount);
 in
 {
-  wayland.windowManager.hyprland.plugins = [
-    inputs.hyprsplit.packages.${pkgs.stdenv.hostPlatform.system}.hyprsplit
-  ];
-
-  wayland.windowManager.hyprland.settings = {
-    plugin = {
-      hyprsplit = {
-        num_workspaces = workspaceCount;
-        persistent_workspaces = 1;
-      };
+  options = {
+    koshos.home.honzakostejn.wayland.hyprland.plugins.hyprsplit = {
+      enable = lib.mkEnableOption "Hyprsplit plugin" // { default = true; };
     };
+  };
 
-    bind = workspaceBinds ++ [
-      "$mod, G, split:grabroguewindows"
+  config = lib.mkIf config.koshos.home.honzakostejn.wayland.hyprland.plugins.hyprsplit.enable {
+    wayland.windowManager.hyprland.plugins = [
+      inputs.hyprsplit.packages.${pkgs.stdenv.hostPlatform.system}.hyprsplit
     ];
+
+    wayland.windowManager.hyprland.settings = {
+      plugin = {
+        hyprsplit = {
+          num_workspaces = workspaceCount;
+          persistent_workspaces = 1;
+        };
+      };
+
+      bind = workspaceBinds ++ [
+        "$mod, G, split:grabroguewindows"
+      ];
+    };
   };
 }

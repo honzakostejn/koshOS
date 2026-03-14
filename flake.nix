@@ -117,6 +117,10 @@
     };
 
     ### misc ###
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+    };
+
     nixos-hardware = {
       type = "github";
       owner = "NixOS";
@@ -168,96 +172,15 @@
     };
   };
 
-  outputs =
-    { self, ... }@inputs:
-    let
-      system = "x86_64-linux";
-      pkgs = import inputs.nixpkgs { system = system; };
-    in
-    {
-      packages = {
-        # aarch64-linux = {
-        #   image-handkerchief = self.nixosConfigurations.handkerchief.config.system.build.sdImage;
-        # };
-        x86_64-linux = {
-          image-handkerchief = self.nixosConfigurations.handkerchief.config.system.build.sdImage;
-          image-jellyfin-nixos-on-azure =
-            self.nixosConfigurations.jellyfin-nixos-on-azure.config.system.build.azureImage;
-          image-kosh-vm = self.nixosConfigurations.kosh-vm.config.system.build.azureImage;
-        };
-      };
-
-      nixosConfigurations = {
-        x86_64-iso-image = inputs.nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/x86_64-linux/iso-image
-          ];
-        };
-
-        m1-qemu = inputs.nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/aarch64-linux/m1-qemu
-          ];
-        };
-
-        framework = inputs.nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/x86_64-linux/framework
-          ];
-        };
-
-        jellyfin-nixos-on-azure = inputs.nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/x86_64-linux/jellyfin-nixos-on-azure
-          ];
-        };
-
-        handkerchief = inputs.nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/aarch64-linux/handkerchief
-          ];
-        };
-
-        kosh-vm = inputs.nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/x86_64-linux/kosh-vm
-          ];
-        };
-      };
-
-      nixOnDroidConfigurations = {
-        kosh_phone = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-          pkgs = import inputs.nix-on-droid.inputs.nixpkgs {
-            system = "aarch64-linux";
-            overlays = [
-              inputs.nix-on-droid.overlays.default
-            ];
-          };
-          modules = [
-            ./hosts/aarch64-linux/kosh_phone
-          ];
-          extraSpecialArgs = { inherit inputs; };
-        };
-      };
-
-      devShells.${system}.default = pkgs.mkShell {
-        buildInputs = with pkgs; [
-          azure-cli
-          azure-storage-azcopy
-          jq
-        ];
-      };
+  outputs = inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        ./flake-modules/nixos-configurations.nix
+        ./flake-modules/home-configurations.nix
+        ./flake-modules/nix-on-droid.nix
+        ./flake-modules/packages.nix
+        ./flake-modules/dev-shell.nix
+      ];
+      systems = [ "x86_64-linux" "aarch64-linux" ];
     };
 }

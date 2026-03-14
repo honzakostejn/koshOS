@@ -1,5 +1,7 @@
 { inputs
 , pkgs
+, lib
+, config
 , ...
 }:
 let
@@ -22,26 +24,34 @@ let
     workspaceCount);
 in
 {
-  wayland.windowManager.hyprland.plugins = [
-    inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
-  ];
-
-  wayland.windowManager.hyprland.settings = {
-    plugin = {
-      split-monitor-workspaces = {
-        count = workspaceCount;
-        keep_focused = 0;
-        enable_notifications = 0;
-        enable_persistent_workspaces = 1;
-      };
+  options = {
+    koshos.home.honzakostejn.wayland.hyprland.plugins.split-monitor-workspaces = {
+      enable = lib.mkEnableOption "Split monitor workspaces plugin" // { default = true; };
     };
+  };
 
-    bind = workspaceBinds ++ [
-      # window movement
-      "$mod SHIFT, $left, split-changemonitor, prev"
-      "$mod SHIFT, $right, split-changemonitor, next"
-
-      "$mod, G, split-grabroguewindows"
+  config = lib.mkIf config.koshos.home.honzakostejn.wayland.hyprland.plugins.split-monitor-workspaces.enable {
+    wayland.windowManager.hyprland.plugins = [
+      inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
     ];
+
+    wayland.windowManager.hyprland.settings = {
+      plugin = {
+        split-monitor-workspaces = {
+          count = workspaceCount;
+          keep_focused = 0;
+          enable_notifications = 0;
+          enable_persistent_workspaces = 1;
+        };
+      };
+
+      bind = workspaceBinds ++ [
+        # window movement
+        "$mod SHIFT, $left, split-changemonitor, prev"
+        "$mod SHIFT, $right, split-changemonitor, next"
+
+        "$mod, G, split-grabroguewindows"
+      ];
+    };
   };
 }
