@@ -41,6 +41,11 @@
           devices = [ "/dev/input/by-id/usb-LiteOn_Lenovo_Calliope_USB_Keyboard-event-kbd" ];
           config = builtins.readFile (./. + "/kanata.kbd");
         };
+
+        dell = {
+          devices = [ "/dev/input/by-id/usb-Dell_Dell_Wired_Multimedia_Keyboard-event-kbd" ];
+          config = builtins.readFile (./. + "/kanata.kbd");
+        };
       };
     };
   };
