@@ -33,7 +33,7 @@
       type = "github";
       owner = "hyprwm";
       repo = "Hyprland";
-      ref = "refs/tags/v0.53.1";
+      ref = "refs/tags/v0.54.2";
     };
 
     hypridle = {
@@ -56,7 +56,7 @@
       type = "github";
       owner = "Duckonaut";
       repo = "split-monitor-workspaces";
-      ref = "refs/tags/v0.53.1";
+      ref = "refs/tags/v0.54.2";
     };
 
     ### programs ###
