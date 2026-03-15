@@ -22,7 +22,9 @@
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.honzakostejn = import ../../../home/honzakostejn;
+      home-manager.users.honzakostejn = {
+        imports = [ self.homeModules.cli self.homeModules.gui ];
+      };
       home-manager.extraSpecialArgs = { inherit inputs self; };
     }
   ];
