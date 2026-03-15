@@ -1,7 +1,9 @@
 { inputs, self, ... }: {
   flake.nixosModules.hostKoshVm = { ... }: {
     imports = [
-      self.nixosModules.koshos
+      self.nixosModules.programs-common
+      self.nixosModules.programs-docker
+      self.nixosModules.services-cloudflare-warp
       self.nixosModules.users-honzakostejn-cli
       ../../hosts/x86_64-linux/kosh-vm
     ];

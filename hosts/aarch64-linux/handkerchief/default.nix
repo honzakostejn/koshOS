@@ -64,9 +64,6 @@
     timerConfig.OnBootSec = "1m";
   };
 
-  koshos.programs.steam.enable = false;
-  home-manager.users.honzakostejn.koshos.programs.qutebrowser.enable = false;
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.hostPlatform = "aarch64-linux";
   nixpkgs.config.allowUnfree = true;

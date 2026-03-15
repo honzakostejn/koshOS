@@ -149,10 +149,6 @@
   # programs.kdeconnect.enable = true;
   programs.bash.enable = true;
 
-  koshos = {
-    programs.waydroid.enable = true;
-  };
-
   # fingerprint reader
   # don't forget to enroll your fingerprint
   # sudo fprintd-enroll $USER

@@ -1,7 +1,7 @@
 { inputs, self, ... }: {
   flake.nixosModules.hostM1Qemu = { ... }: {
     imports = [
-      self.nixosModules.koshos
+      self.nixosModules.programs-common
       ../../hosts/aarch64-linux/m1-qemu
     ];
   };

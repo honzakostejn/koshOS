@@ -46,13 +46,4 @@
     git
     vim
   ];
-
-  koshos.programs.steam.enable = false;
-  koshos.services.cloudflare-warp.enable = false;
-  home-manager.users.honzakostejn.koshos.programs.hyprland.enable = false;
-  home-manager.users.honzakostejn.koshos.programs.hyprdynamicmonitors.enable = false;
-  home-manager.users.honzakostejn.koshos.programs.vscode.enable = false;
-  home-manager.users.honzakostejn.koshos.programs.qutebrowser.enable = false;
-  home-manager.users.honzakostejn.koshos.programs.winboat.enable = false;
-  home-manager.users.honzakostejn.koshos.programs.teams-for-linux.enable = false;
 }

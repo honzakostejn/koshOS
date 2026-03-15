@@ -1,7 +1,8 @@
 { inputs, self, ... }: {
   flake.nixosModules.hostHandkerchief = { ... }: {
     imports = [
-      self.nixosModules.koshos
+      self.nixosModules.programs-common
+      self.nixosModules.services-cloudflare-warp
       ../../hosts/aarch64-linux/handkerchief
     ];
   };

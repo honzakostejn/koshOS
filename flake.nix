@@ -176,8 +176,19 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         # NixOS feature modules
-        ./flake-modules/nixos-modules/koshos.nix
         ./flake-modules/nixos-modules/hyprland.nix
+        ./flake-modules/nixos-modules/fonts.nix
+        ./flake-modules/nixos-modules/programs/common.nix
+        ./flake-modules/nixos-modules/programs/docker.nix
+        ./flake-modules/nixos-modules/programs/steam.nix
+        ./flake-modules/nixos-modules/programs/virt-manager.nix
+        ./flake-modules/nixos-modules/programs/waydroid.nix
+        ./flake-modules/nixos-modules/services/cloudflare-warp.nix
+        ./flake-modules/nixos-modules/services/display-manager.nix
+        ./flake-modules/nixos-modules/services/getty.nix
+        ./flake-modules/nixos-modules/services/greetd.nix
+        ./flake-modules/nixos-modules/services/kanata.nix
+        ./flake-modules/nixos-modules/services/sysc-greet.nix
         ./flake-modules/nixos-modules/users/honzakostejn.nix
         ./flake-modules/nixos-modules/users/honzakostejn-cli.nix
         # Per-host configurations
