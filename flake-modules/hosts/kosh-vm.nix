@@ -2,6 +2,7 @@
   flake.nixosModules.hostKoshVm = { ... }: {
     imports = [
       self.nixosModules.koshos
+      self.nixosModules.users-honzakostejn-cli
       ../../hosts/x86_64-linux/kosh-vm
     ];
   };
