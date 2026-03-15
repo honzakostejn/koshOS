@@ -10,7 +10,7 @@
       self.nixosModules.services-cloudflare-warp
       self.nixosModules.services-kanata
       self.nixosModules.services-sysc-greet
-      ../../hosts/x86_64-linux/iso-image
+      ./x86_64-linux/iso-image
     ];
   };
 

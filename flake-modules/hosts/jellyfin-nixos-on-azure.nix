@@ -1,7 +1,7 @@
 { inputs, self, ... }: {
   flake.nixosModules.hostJellyfin = { ... }: {
     imports = [
-      ../../hosts/x86_64-linux/jellyfin-nixos-on-azure
+      ./x86_64-linux/jellyfin-nixos-on-azure
     ];
   };
 

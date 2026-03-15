@@ -5,7 +5,7 @@
       self.nixosModules.programs-docker
       self.nixosModules.services-cloudflare-warp
       self.nixosModules.users-honzakostejn-cli
-      ../../hosts/x86_64-linux/kosh-vm
+      ./x86_64-linux/kosh-vm
     ];
   };
 

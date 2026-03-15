@@ -11,7 +11,7 @@
       self.nixosModules.services-kanata
       self.nixosModules.services-sysc-greet
       self.nixosModules.users-honzakostejn
-      ../../hosts/x86_64-linux/framework
+      ./x86_64-linux/framework
     ];
   };
 
