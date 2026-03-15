@@ -192,12 +192,12 @@
         ./flake-modules/nixos-modules/users/honzakostejn.nix
         ./flake-modules/nixos-modules/users/honzakostejn-cli.nix
         # Per-host configurations
-        ./flake-modules/hosts/framework.nix
-        ./flake-modules/hosts/handkerchief.nix
-        ./flake-modules/hosts/m1-qemu.nix
-        ./flake-modules/hosts/iso-image.nix
-        ./flake-modules/hosts/jellyfin-nixos-on-azure.nix
-        ./flake-modules/hosts/kosh-vm.nix
+        ./flake-modules/hosts/x86_64-linux/framework
+        ./flake-modules/hosts/aarch64-linux/handkerchief
+        ./flake-modules/hosts/aarch64-linux/m1-qemu
+        ./flake-modules/hosts/x86_64-linux/iso-image
+        ./flake-modules/hosts/x86_64-linux/jellyfin-nixos-on-azure
+        ./flake-modules/hosts/x86_64-linux/kosh-vm
         # Home-manager
         ./flake-modules/home-configurations.nix
         ./flake-modules/home-modules.nix

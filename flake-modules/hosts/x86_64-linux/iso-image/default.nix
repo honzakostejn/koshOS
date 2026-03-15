@@ -1,29 +1,22 @@
-{
-  modulesPath,
-  lib,
-  ...
-}: {
-  imports = [
-    "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
-
-    ../framework/localization.nix
-    ./networking.nix
-  ];
-
-  system.stateVersion = "25.05";
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.hostPlatform = "x86_64-linux";
-
-  hardware.graphics = {
-    enable = true;
+{ inputs, self, ... }: {
+  flake.nixosModules.hostIsoImage = { ... }: {
+    imports = [
+      self.nixosModules.fonts
+      self.nixosModules.hyprland
+      self.nixosModules.programs-common
+      self.nixosModules.programs-docker
+      self.nixosModules.programs-steam
+      self.nixosModules.programs-waydroid
+      self.nixosModules.services-cloudflare-warp
+      self.nixosModules.services-kanata
+      self.nixosModules.services-sysc-greet
+      ./configuration.nix
+    ];
   };
 
-  # other services
-  services.qemuGuest.enable = true;
-  services.spice-vdagentd.enable = true;
-  services.openssh.enable = true;
-
-  # Needed for https://github.com/NixOS/nixpkgs/issues/58959
-  boot.supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" ];
+  flake.nixosConfigurations.x86_64-iso-image = inputs.nixpkgs.lib.nixosSystem {
+    system = "x86_64-linux";
+    specialArgs = { inherit inputs self; };
+    modules = [ self.nixosModules.hostIsoImage ];
+  };
 }
