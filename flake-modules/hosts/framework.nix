@@ -3,6 +3,7 @@
     imports = [
       self.nixosModules.koshos
       self.nixosModules.hyprland
+      self.nixosModules.users-honzakostejn
       ../../hosts/x86_64-linux/framework
     ];
   };
