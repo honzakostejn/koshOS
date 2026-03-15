@@ -178,8 +178,8 @@
         # NixOS feature modules
         ./flake-modules/nixos-modules/koshos.nix
         ./flake-modules/nixos-modules/hyprland.nix
-        ./flake-modules/nixos-modules/users-honzakostejn.nix
-        ./flake-modules/nixos-modules/users-honzakostejn-cli.nix
+        ./flake-modules/nixos-modules/users/honzakostejn.nix
+        ./flake-modules/nixos-modules/users/honzakostejn-cli.nix
         # Per-host configurations
         ./flake-modules/hosts/framework.nix
         ./flake-modules/hosts/handkerchief.nix
