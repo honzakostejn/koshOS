@@ -8,7 +8,10 @@
 
     programs.helix = {
       enable = true;
-      package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.helix;
+      package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.helix.override {
+        # tree-sitter-bovex repo was deleted; exclude it to avoid fetch failure
+        includeGrammarIf = grammar: grammar.name != "bovex";
+      };
 
       defaultEditor = true;
 
