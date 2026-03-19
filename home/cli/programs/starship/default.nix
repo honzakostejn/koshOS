@@ -5,11 +5,11 @@
       enableNushellIntegration = true;
       settings = {
       format = ''
-        [](#9A348E)$os$username[](bg:#DA627D fg:#9A348E)$directory[](fg:#DA627D bg:#FCA17D)$git_branch$git_status[](fg:#FCA17D bg:#86BBD8)$c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$rust$scala[](fg:#86BBD8 bg:#06969A)$docker_context[](fg:#06969A bg:#33658A)$time[ ](fg:#33658A)
+        [](#9A348E)$os$username$hostname[](bg:#DA627D fg:#9A348E)$directory[](fg:#DA627D bg:#FCA17D)$git_branch$git_status[](fg:#FCA17D bg:#86BBD8)$c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$rust$scala[](fg:#86BBD8 bg:#06969A)$docker_context[](fg:#06969A bg:#33658A)$time[ ](fg:#33658A)
       '';
 
       # Disable the blank line at the start of the prompt
-      # add_newline = false
+      add_newline = true;
 
       # You can also replace your username with a neat symbol like   or disable this
       # and use the os module below
@@ -17,8 +17,14 @@
         show_always = true;
         style_user = "bg:#9A348E";
         style_root = "bg:#9A348E";
-        format = "[$user ]($style)";
+        format = "[$user]($style)";
         disabled = false;
+      };
+
+      hostname = {
+        ssh_only = false;
+        style = "bg:#9A348E";
+        format = "[@$hostname ]($style)";
       };
 
       # An alternative to the username module which displays a symbol that
