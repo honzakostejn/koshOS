@@ -8,6 +8,7 @@
     ./opencode
     ./starship
     ./yazi
+    ./zellij
     ./zk
   ];
 }
