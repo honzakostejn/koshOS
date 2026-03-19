@@ -10,10 +10,10 @@
 if [ $(az account list | jq -r 'length') -eq 0 ]
 then
   echo
-  echo '********************************************************'
-  echo '* Please log  in to  Azure by  typing "az  login", and *'
-  echo '* repeat the "./upload-image.sh" command.              *'
-  echo '********************************************************'
+  echo '*************************************************************'
+  echo '* Please log in to Azure by typing "az login", and        *'
+  echo '* repeat the "./upload-vhd-image-to-azure.sh" command.    *'
+  echo '*************************************************************'
   exit 1
 fi
 
@@ -33,6 +33,10 @@ usage() {
   echo ''
   echo 'USAGE: (Every switch requires an argument)'
   echo ''
+  echo '-f --flake-attr     REQUIRED The  flake package  attribute to'
+  echo '                             build (e.g. image-jellyfin-nixos-'
+  echo '                             on-azure, image-kosh-vm).'
+  echo ''
   echo '-g --resource-group REQUIRED Created if does  not exist. Will'
   echo '                             house a new disk and the created'
   echo '                             image.'
@@ -51,6 +55,9 @@ usage() {
 # https://unix.stackexchange.com/a/204927/85131
 while [ $# -gt 0 ]; do
   case "$1" in
+    -f|--flake-attr)
+      flake_attr="$2"
+      ;;
     -l|--location)
       location="$2"
       ;;
@@ -75,7 +82,7 @@ while [ $# -gt 0 ]; do
   shift
 done
 
-if [ -z "${img_name}" ] || [ -z "${resource_group}" ]
+if [ -z "${flake_attr}" ] || [ -z "${img_name}" ] || [ -z "${resource_group}" ]
 then
   printf "************************************\n"
   printf "* Error: Missing required argument *\n"
@@ -100,8 +107,8 @@ set -x
 
 # build image and set img file
 # we set impure cause of the ssh key file
-nix build --out-link "azure" .#image-jellyfin-nixos-on-azure --impure
-img_file="$(readlink -f ./azure/jellyfin-nixos.vhd)"
+nix build --out-link "azure" ".#${flake_attr}" --impure
+img_file="$(find -L ./azure -name "*.vhd" | head -1)"
 
 # Make resource group exists
 if ! az group show --resource-group "${resource_group}" &>/dev/null
