@@ -33,7 +33,7 @@
       android-tools
     ];
 
-    home.sessionVariables = {
+    systemd.user.sessionVariables = {
       # https://github.com/git-ecosystem/git-credential-manager/blob/main/docs/credstores.md#freedesktoporg-secret-service-api
       GCM_CREDENTIAL_STORE = "secretservice";
     };
