@@ -1,6 +1,7 @@
 { inputs, self, ... }: {
   flake.nixosModules.hostFramework = { ... }: {
     imports = [
+      self.nixosModules.environment
       self.nixosModules.fonts
       self.nixosModules.hyprland
       self.nixosModules.programs-common

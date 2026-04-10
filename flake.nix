@@ -176,8 +176,9 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         # NixOS feature modules
-        ./flake-modules/nixos-modules/hyprland.nix
+        ./flake-modules/nixos-modules/environment.nix
         ./flake-modules/nixos-modules/fonts.nix
+        ./flake-modules/nixos-modules/hyprland.nix
         ./flake-modules/nixos-modules/programs/common.nix
         ./flake-modules/nixos-modules/programs/docker.nix
         ./flake-modules/nixos-modules/programs/steam.nix

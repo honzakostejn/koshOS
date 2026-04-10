@@ -1,6 +1,7 @@
 { inputs, self, ... }: {
   flake.nixosModules.hostKoshVm = { ... }: {
     imports = [
+      self.nixosModules.environment
       self.nixosModules.programs-common
       self.nixosModules.programs-docker
       self.nixosModules.services-cloudflare-warp

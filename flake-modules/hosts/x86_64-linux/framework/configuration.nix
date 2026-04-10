@@ -5,7 +5,6 @@
 }: {
   imports = [
     ./disks.nix
-    ./environment.nix
     ./hardware-configuration.nix
     ./lanzaboote.nix
     ./localization.nix
