@@ -1,28 +1,27 @@
-{
-  pkgs
-  , ...
-}: {
-  environment.systemPackages = [ pkgs.rclone ];
-  environment.etc."rclone-mnt.conf".text = ''
-    [storageaccount]
-    type = azureblob
-    sas_url = donotcommitsecrets
+{ pkgs, ... }: {
+  flake.nixosModules.rclone-blob-koshstorage = { pkgs, ... }: {
+    environment.systemPackages = [ pkgs.rclone ];
+    environment.etc."rclone-mnt.conf".text = ''
+      [storageaccount]
+      type = azureblob
+      sas_url = donotcommitsecrets
 
-    [decrypted-storageaccount]
-    type = crypt
-    remote = storageaccount:media
-    password = donotcommitsecrets
-  '';
+      [decrypted-storageaccount]
+      type = crypt
+      remote = storageaccount:media
+      password = donotcommitsecrets
+    '';
 
-  fileSystems."/mnt/media" = {
-    device = "decrypted-storageaccount:";
-    fsType = "rclone";
-    options = [
-      "nodev"
-      "nofail"
-      "allow_other"
-      "args2env"
-      "config=/etc/rclone-mnt.conf"
-    ];
+    fileSystems."/mnt/media" = {
+      device = "decrypted-storageaccount:";
+      fsType = "rclone";
+      options = [
+        "nodev"
+        "nofail"
+        "allow_other"
+        "args2env"
+        "config=/etc/rclone-mnt.conf"
+      ];
+    };
   };
 }
