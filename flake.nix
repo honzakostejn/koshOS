@@ -184,6 +184,7 @@
         ./flake-modules/nixos-modules/programs/steam.nix
         ./flake-modules/nixos-modules/programs/virt-manager.nix
         ./flake-modules/nixos-modules/programs/waydroid.nix
+        ./flake-modules/nixos-modules/rclone/blob-koshstorage.nix
         ./flake-modules/nixos-modules/services/cloudflare-warp.nix
         ./flake-modules/nixos-modules/services/display-manager.nix
         ./flake-modules/nixos-modules/services/getty.nix

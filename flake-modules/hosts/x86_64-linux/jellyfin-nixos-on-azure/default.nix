@@ -1,6 +1,7 @@
 { inputs, self, ... }: {
   flake.nixosModules.hostJellyfin = { ... }: {
     imports = [
+      self.nixosModules.rclone-blob-koshstorage
       ./configuration.nix
     ];
   };

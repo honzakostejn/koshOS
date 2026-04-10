@@ -8,6 +8,7 @@
       self.nixosModules.programs-docker
       self.nixosModules.programs-steam
       self.nixosModules.programs-waydroid
+      self.nixosModules.rclone-blob-koshstorage
       self.nixosModules.services-cloudflare-warp
       self.nixosModules.services-kanata
       self.nixosModules.services-sysc-greet
