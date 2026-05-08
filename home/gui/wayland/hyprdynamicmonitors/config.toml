@@ -69,6 +69,34 @@ name = "eDP-1"
 monitor_tag = "internal"
 
 #=====================================#
+# hub home
+#=====================================#
+[profiles.docked-hub-home]
+config_file = "hyprconfigs/docked-hub-home.conf"
+config_file_type = "static"
+[[profiles.docked-hub-home.conditions.required_monitors]]
+description = ".*0x0000D2C6.*"
+match_description_using_regex = true
+monitor_tag = "external"
+[[profiles.docked-hub-home.conditions.required_monitors]]
+name = "eDP-1"
+monitor_tag = "internal"
+
+# #=====================================#
+# # hub PCT21016 profile
+# #=====================================#
+# [profiles.docked-hub-pct21016]
+# config_file = "hyprconfigs/pct21016.conf"
+# config_file_type = "static"
+# [[profiles.docked-hub-pct21016.conditions.required_monitors]]
+# description = ".*JKK110015910.*"
+# match_description_using_regex = true
+# monitor_tag = "external"
+# [[profiles.docked-hub-pct21016.conditions.required_monitors]]
+# name = "eDP-1"
+# monitor_tag = "internal"
+
+#=====================================#
 # fallback profile
 #=====================================#
 [fallback_profile]
