@@ -91,6 +91,7 @@ function Install-WinGetPackages {
   winget install --id=Microsoft.DotNet.SDK.9 -e --accept-package-agreements
   winget install --id=Microsoft.Git -e --accept-package-agreements
   winget install --id=CoreyButler.NVMforWindows -e --accept-package-agreements
+  winget install --id=Python.Python.3.14 -e --accept-package-agreements
 
   winget install --id=Microsoft.Edge -e --accept-package-agreements
   winget install --id=Microsoft.VisualStudioCode --scope machine -e --accept-package-agreements
@@ -98,6 +99,7 @@ function Install-WinGetPackages {
   winget install --id=Microsoft.Azure.StorageExplorer -e --accept-package-agreements
   winget install --id=Microsoft.PowerBI -e --accept-package-agreements
   winget install --id=Microsoft.SQLServerManagementStudio -e --accept-package-agreements
+  winget install --id=Microsoft.AzureCLI -e --accept-package-agreements
   winget install --id=MscrmTools.XrmToolBox -e --accept-package-agreements
 
   winget install --id=Giorgiotani.Peazip -e --accept-package-agreements
