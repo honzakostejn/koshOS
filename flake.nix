@@ -106,6 +106,12 @@
       # ref = "refs/tags/v0.1.0";
     };
 
+    whisp-away = {
+      type = "github";
+      owner = "madjinn";
+      repo = "whisp-away";
+    };
+
     yazi = {
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -202,7 +208,6 @@
         ./flake-modules/hosts/x86_64-linux/kosh-vm
         # Home-manager
         ./flake-modules/home-configurations.nix
-        ./flake-modules/home-modules.nix
         # Other outputs
         ./flake-modules/nix-on-droid.nix
         ./flake-modules/packages.nix
