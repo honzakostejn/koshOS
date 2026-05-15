@@ -196,6 +196,7 @@
         ./flake-modules/nixos-modules/services/getty.nix
         ./flake-modules/nixos-modules/services/greetd.nix
         ./flake-modules/nixos-modules/services/kanata.nix
+        ./flake-modules/nixos-modules/services/sddm.nix
         ./flake-modules/nixos-modules/services/sysc-greet.nix
         ./flake-modules/nixos-modules/users/honzakostejn.nix
         ./flake-modules/nixos-modules/users/honzakostejn-cli.nix
