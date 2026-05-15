@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./programs
+    ./dotnet.nix
   ];
 
   options.koshos.username = lib.mkOption {
@@ -23,8 +24,8 @@
 
     home.packages = with pkgs; [
       git
-      gh
-      git-credential-manager
+        gh
+        git-credential-manager
       btop
       cbonsai
       pandoc
@@ -32,10 +33,5 @@
       uv
       android-tools
     ];
-
-    systemd.user.sessionVariables = {
-      # https://github.com/git-ecosystem/git-credential-manager/blob/main/docs/credstores.md#freedesktoporg-secret-service-api
-      GCM_CREDENTIAL_STORE = "secretservice";
-    };
   };
 }
