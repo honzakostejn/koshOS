@@ -82,6 +82,24 @@ monitor_tag = "external"
 name = "eDP-1"
 monitor_tag = "internal"
 
+#=====================================#
+# hub cetin pal profile
+#=====================================#
+[profiles.docked-hub-cetin-pal]
+config_file = "hyprconfigs/docked-hub-cetin-pal.conf"
+config_file_type = "static"
+[[profiles.docked-hub-cetin-pal.conditions.required_monitors]]
+description = ".*VNAA0DF4.*"
+match_description_using_regex = true
+monitor_tag = "external"
+[[profiles.docked-hub-cetin-pal.conditions.required_monitors]]
+description = ".*CW6Y77720YVI.*"
+match_description_using_regex = true
+monitor_tag = "external"
+[[profiles.docked-hub-cetin-pal.conditions.required_monitors]]
+name = "eDP-1"
+monitor_tag = "internal"
+
 # #=====================================#
 # # hub PCT21016 profile
 # #=====================================#
