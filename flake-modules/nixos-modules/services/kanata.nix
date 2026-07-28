@@ -17,6 +17,16 @@
           config = builtins.readFile ./kanata.kbd;
         };
 
+        keychron-k6-bt = {
+          # devices = [ "/dev/input/event20" ];
+          config = builtins.readFile ./kanata.kbd;
+          extraDefCfg = ''
+            ;; because of BT, use the linux-dev-names-include
+            ;; https://jtroo.github.io/config.html#linux-only-linux-dev-names-include
+            linux-dev-names-include ("Keychron K6")
+          '';
+        };
+
         logitech = {
           devices = [ "/dev/input/by-id/usb-Logitech_USB_Keyboard-event-kbd" ];
           config = builtins.readFile ./kanata.kbd;
@@ -29,6 +39,11 @@
 
         dell = {
           devices = [ "/dev/input/by-id/usb-Dell_Dell_Wired_Multimedia_Keyboard-event-kbd" ];
+          config = builtins.readFile ./kanata.kbd;
+        };
+
+        dell2 = {
+          devices = [ "/dev/input/by-id/usb-413c_Dell_KB216_Wired_Keyboard-event-kbd" ];
           config = builtins.readFile ./kanata.kbd;
         };
       };
