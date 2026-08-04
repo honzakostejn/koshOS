@@ -105,6 +105,7 @@ function Install-WinGetPackages {
   winget install --id=Giorgiotani.Peazip -e --accept-package-agreements
   winget install --id=Microsoft.Office -e --accept-package-agreements
   winget install --id=Rufus.Rufus -e --accept-package-agreements
+  winget install --id=Telerik.Fiddler.Classic -e --accept-package-agreements
 }
 
 function Install-VSCodeExtension {
