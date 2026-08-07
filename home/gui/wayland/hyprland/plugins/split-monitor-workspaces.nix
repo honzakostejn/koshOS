@@ -1,47 +1,40 @@
 { inputs
-, pkgs
+, lib
 , ...
 }:
 let
-  # this one should be passed
   workspaceCount = 10;
 
-  workspaceBinds = builtins.concatLists (builtins.genList
-    (
-      x:
-      let
-        key = builtins.toString (x);
-        # key 0 is at the end of the keyboard row
-        workspaceNumber = if x == 0 then 10 else x;
-      in
-      [
-        "$mod, ${key}, split-workspace, ${toString workspaceNumber}"
-        "$mod SHIFT, ${key}, split-movetoworkspace, ${toString workspaceNumber}"
-      ]
-    )
-    workspaceCount);
+  mod   = "SUPER";
+  left  = "J";
+  right = "SEMICOLON";
+
+  workspaceBindings = lib.concatStringsSep "\n" (builtins.genList (x:
+    let
+      key = toString x;
+      wn  = toString (if x == 0 then 10 else x);
+    in ''
+      hl.bind("${mod} + ${key}", smw.workspace("${wn}"))
+      hl.bind("${mod} + SHIFT + ${key}", smw.move_to_workspace_silent("${wn}"))
+    ''
+  ) workspaceCount);
 in
 {
-  wayland.windowManager.hyprland.plugins = [
-      inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
-    ];
+  xdg.configFile."hypr/smw".source = "${inputs.split-monitor-workspaces}/lua";
 
-    wayland.windowManager.hyprland.settings = {
-      plugin = {
-        split-monitor-workspaces = {
-          count = workspaceCount;
-          keep_focused = 0;
-          enable_notifications = 0;
-          enable_persistent_workspaces = 1;
-        };
-      };
-
-      bind = workspaceBinds ++ [
-        # window movement
-        "$mod SHIFT, $left, split-changemonitor, prev"
-        "$mod SHIFT, $right, split-changemonitor, next"
-
-        "$mod, G, split-grabroguewindows"
-      ];
-    };
+  wayland.windowManager.hyprland.extraConfig = ''
+    do
+      local cfg_home = os.getenv("XDG_CONFIG_HOME") or (os.getenv("HOME") .. "/.config")
+      package.path = package.path .. ";" .. cfg_home .. "/hypr/smw/?.lua"
+      local smw = require("split-monitor-workspaces")
+      smw.setup({
+        workspace_count = ${toString workspaceCount},
+        keep_focused = false,
+        enable_notifications = false,
+        enable_persistent_workspaces = true,
+      })
+      ${workspaceBindings}
+      hl.bind("${mod} + G", smw.grab_rogue_windows())
+    end
+  '';
 }

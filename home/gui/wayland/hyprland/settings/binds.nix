@@ -4,10 +4,12 @@
   ...
 }:
 let
+  toLua = lib.generators.toLua { };
+  mkLuaInline = lib.generators.mkLuaInline;
+
   custom-hyprlock-script = import ../../../programs/hyprlock/custom-hyprlock-script.nix {
     inherit pkgs lib;
   };
-  # https://github.com/hyprwm/Hyprland/discussions/10351
   send-shortcut-to-electron = pkgs.writeShellApplication {
     name = "send-shortcut-to-electron";
     runtimeInputs = [
@@ -25,119 +27,97 @@ let
     text = builtins.readFile ../scripts/take-screenshot.sh;
   };
 
+  mod   = "SUPER";
+  left  = "J";
+  down  = "K";
+  up    = "L";
+  right = "SEMICOLON";
+
+  lock       = "${custom-hyprlock-script}/bin/custom-hyprlock-script";
+  screenshot = "${take-screenshot}/bin/take-screenshot";
+  electron   = "${send-shortcut-to-electron}/bin/send-shortcut-to-electron";
+
+  exec = cmd: mkLuaInline "hl.dsp.exec_cmd(${toLua cmd})";
+  bind = keys: dsp: { _args = [ keys dsp ]; };
 in
 {
   wayland.windowManager.hyprland = {
     settings = {
-      "$mod" = "SUPER";
-
-      "$left" = "J";
-      "$down" = "K";
-      "$up" = "L";
-      "$right" = "SEMICOLON";
-
-      "$terminal" = "ghostty";
-      "$menu" = "rofi -show drun";
-      "$lock" = "${custom-hyprlock-script}/bin/custom-hyprlock-script";
-      "$send-shortcut-to-electron" = "${send-shortcut-to-electron}/bin/send-shortcut-to-electron";
-      "$take-screenshot" = "${take-screenshot}/bin/take-screenshot";
-
-      # bind[flag]
-      # [flags]
-      # l -> locked, will also work when an input inhibitor (e.g. a lockscreen) is active.
-      # r -> release, will trigger on release of a key.
-      # e -> repeat, will repeat when held.
-      # n -> non-consuming, key/mouse events will be passed to the active window in addition to triggering the dispatcher.
-      # m -> mouse, see below.
-      # t -> transparent, cannot be shadowed by other binds.
-      # i -> ignore mods, will ignore modifiers.
-      # s -> separate, will arbitrarily combine keys between each mod/key, see [Keysym combos](#keysym-combos) above.
-      # d -> has description, will allow you to write a description for your bind.
-      # p -> bypasses the app's requests to inhibit keybinds.
-
       bind = [
-        # basics
-        "$mod, SPACE, exec, $menu"
-        "$mod, RETURN, exec, $terminal"
-        "$mod, Q, killactive"
-        "$mod SHIFT, Q, forcekillactive"
-        "$mod ALT_L, L, exec, $lock"
-        "$mod, F4, exit,"
+        (bind "${mod} + SPACE"       (exec "rofi -show drun"))
+        (bind "${mod} + RETURN"      (exec "ghostty"))
+        (bind "${mod} + Q"           (mkLuaInline "hl.dsp.window.close()"))
+        (bind "${mod} + SHIFT + Q"   (mkLuaInline "hl.dsp.window.kill()"))
+        (bind "${mod} + ALT_L + L"   (exec lock))
+        # (bind "${mod} + F4"          (mkLuaInline "hl.dsp.hyprland.quit()")) TODO: hyprland is nil
 
-        # window actions
-        "$mod, T, togglefloating"
-        "$mod, T, resizeactive, exact 768 1024" # iPad portrait (3:4)
+        (bind "${mod} + T"           (mkLuaInline "hl.dsp.window.float({ toggle = true })"))
+        (bind "${mod} + T"           (mkLuaInline "hl.dsp.window.resize({ x = 768, y = 1024, exact = true })"))
 
-        "$mod, M, fullscreen, 1"
-        "$mod, F, fullscreen, 0"
+        (bind "${mod} + M"           (mkLuaInline "hl.dsp.window.fullscreen({ mode = 1 })"))
+        (bind "${mod} + F"           (mkLuaInline "hl.dsp.window.fullscreen({ mode = 0 })"))
 
-        # focus movement
-        "$mod, $left, movefocus, l"
-        "$mod, $down, movefocus, d"
-        "$mod, $up, movefocus, u"
-        "$mod, $right, movefocus, r"
+        (bind "${mod} + ${left}"     (mkLuaInline "hl.dsp.focus({ direction = \"l\" })"))
+        (bind "${mod} + ${down}"     (mkLuaInline "hl.dsp.focus({ direction = \"d\" })"))
+        (bind "${mod} + ${up}"       (mkLuaInline "hl.dsp.focus({ direction = \"u\" })"))
+        (bind "${mod} + ${right}"    (mkLuaInline "hl.dsp.focus({ direction = \"r\" })"))
 
-        # application shortcuts
-        "$mod, W, exec, qutebrowser --basedir ~/.config/qutebrowser/honzakostejn"
-        "$mod SHIFT, W, exec, qutebrowser --basedir ~/.config/qutebrowser/NETWORG"
-        "$mod, C, exec, code ~/repos/koshos"
-        "$mod, Y, exec, $terminal -e yazi"
+        (bind "${mod} + W"           (exec "qutebrowser --basedir ~/.config/qutebrowser/honzakostejn"))
+        (bind "${mod} + SHIFT + W"   (exec "qutebrowser --basedir ~/.config/qutebrowser/NETWORG"))
+        (bind "${mod} + C"           (exec "code ~/repos/koshos"))
+        (bind "${mod} + Y"           (exec "ghostty -e yazi"))
 
-        # screenshot submap trigger
-        "$mod, R, submap, screenshot"
+        (bind "${mod} + R"           (mkLuaInline "hl.dsp.submap(\"screenshot\")"))
 
-        # toggle mute in MS Teams
-        "CONTROL SHIFT, M, exec, $send-shortcut-to-electron 'CONTROL SHIFT, M' class teams-for-linux"
+        (bind "CONTROL + SHIFT + M"  (exec "${electron} 'CONTROL SHIFT, M' class teams-for-linux"))
 
-        "$mod SHIFT, C, exec, ${pkgs.hyprpicker}/bin/hyprpicker -a -f hex"
+        (bind "${mod} + SHIFT + C"   (exec "${pkgs.hyprpicker}/bin/hyprpicker -a -f hex"))
 
-        "$mod, equal, exec, hyprctl keyword cursor:zoom_factor 2"
-				"$mod, minus, exec, hyprctl keyword cursor:zoom_factor 1"
+        (bind "${mod} + equal"       (exec "hyprctl keyword cursor:zoom_factor 2"))
+        (bind "${mod} + minus"       (exec "hyprctl keyword cursor:zoom_factor 1"))
       ];
-      bindm = [
-        "$mod, CONTROL_L, movewindow"
-        "$mod, ALT_L, resizewindow"
-      ];
-      bindl = [
-        ", switch:Lid Switch, exec, $lock"
-        "$mod ALT_L, D, exec, hyprctl dispatch dpms off && hyprctl dispatch dpms on"
-      ];
-      bindlei = [
-        ", XF86MonBrightnessUp, exec, ${lib.getExe pkgs.brightnessctl} set 5%+"
-        ", XF86MonBrightnessDown, exec, ${lib.getExe pkgs.brightnessctl} set 5%-"
-        ", XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer -i 5"
-        ", XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d 5"
-      ];
-      bindli = [
-        ", XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer --toggle-mute"
-        ", XF86AudioMicMute, exec, ${pkgs.pamixer}/bin/pamixer --default-source --toggle-mute"
-        ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
-        ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
-        ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
-        ", XF86AudioStop, exec, ${pkgs.playerctl}/bin/playerctl stop"
-      ];
+
+      # bindm = [
+      #   (bind "${mod} + CONTROL_L"   (mkLuaInline "hl.dsp.window.drag()"))
+      #   (bind "${mod} + ALT_L"       (mkLuaInline "hl.dsp.window.resize()"))
+      # ]; TODO: not sure how this is supported in lua
+
+      # bindl = [
+      #   (bind ", switch:Lid Switch"  (exec lock))
+      #   (bind "${mod} + ALT_L + D"   (exec "hyprctl dispatch dpms off && hyprctl dispatch dpms on"))
+      # ]; TODO: not sure how this is supported in lua
+
+      # bindlei = [
+      #   (bind ", XF86MonBrightnessUp"   (exec "${lib.getExe pkgs.brightnessctl} set 5%+"))
+      #   (bind ", XF86MonBrightnessDown" (exec "${lib.getExe pkgs.brightnessctl} set 5%-"))
+      #   (bind ", XF86AudioRaiseVolume"  (exec "${pkgs.pamixer}/bin/pamixer -i 5"))
+      #   (bind ", XF86AudioLowerVolume"  (exec "${pkgs.pamixer}/bin/pamixer -d 5"))
+      # ]; TODO: not sure how this is supported in lua
+
+      # bindli = [
+      #   (bind ", XF86AudioMute"     (exec "${pkgs.pamixer}/bin/pamixer --toggle-mute"))
+      #   (bind ", XF86AudioMicMute"  (exec "${pkgs.pamixer}/bin/pamixer --default-source --toggle-mute"))
+      #   (bind ", XF86AudioNext"     (exec "${pkgs.playerctl}/bin/playerctl next"))
+      #   (bind ", XF86AudioPrev"     (exec "${pkgs.playerctl}/bin/playerctl previous"))
+      #   (bind ", XF86AudioPlay"     (exec "${pkgs.playerctl}/bin/playerctl play-pause"))
+      #   (bind ", XF86AudioStop"     (exec "${pkgs.playerctl}/bin/playerctl stop"))
+      # ]; TODO: not sure how this is supported in lua
     };
 
-    submaps = {
-      screenshot = {
-        settings = {
-          bind = [
-            "$mod, R, exec, $take-screenshot region"
-            "$mod, R, submap, reset"
-            "$mod, S, exec, $take-screenshot screen"
-            "$mod, S, submap, reset"
-            "$mod, W, exec, $take-screenshot window"
-            "$mod, W, submap, reset"
-            "$mod SHIFT, R, exec, $take-screenshot region --freeze"
-            "$mod SHIFT, R, submap, reset"
-            "$mod SHIFT, S, exec, $take-screenshot screen --freeze"
-            "$mod SHIFT, S, submap, reset"
-            "$mod SHIFT, W, exec, $take-screenshot window --freeze"
-            "$mod SHIFT, W, submap, reset"
-            ", ESCAPE, submap, reset"
-          ];
-        };
-      };
-    };
+    submaps.screenshot.settings.bind = [
+      (bind "${mod} + R"         (exec "${screenshot} region"))
+      (bind "${mod} + R"         (mkLuaInline "hl.dsp.submap(\"reset\")"))
+      (bind "${mod} + S"         (exec "${screenshot} screen"))
+      (bind "${mod} + S"         (mkLuaInline "hl.dsp.submap(\"reset\")"))
+      (bind "${mod} + W"         (exec "${screenshot} window"))
+      (bind "${mod} + W"         (mkLuaInline "hl.dsp.submap(\"reset\")"))
+      (bind "${mod} + SHIFT + R" (exec "${screenshot} region --freeze"))
+      (bind "${mod} + SHIFT + R" (mkLuaInline "hl.dsp.submap(\"reset\")"))
+      (bind "${mod} + SHIFT + S" (exec "${screenshot} screen --freeze"))
+      (bind "${mod} + SHIFT + S" (mkLuaInline "hl.dsp.submap(\"reset\")"))
+      (bind "${mod} + SHIFT + W" (exec "${screenshot} window --freeze"))
+      (bind "${mod} + SHIFT + W" (mkLuaInline "hl.dsp.submap(\"reset\")"))
+      (bind "ESCAPE"             (mkLuaInline "hl.dsp.submap(\"reset\")"))
+    ];
   };
 }

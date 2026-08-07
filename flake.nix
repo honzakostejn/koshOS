@@ -7,7 +7,8 @@
       type = "github";
       owner = "nixos";
       repo = "nixpkgs";
-      ref = "refs/heads/nixos-unstable";
+      # ref = "refs/heads/nixos-unstable";
+      rev = "2c5e08bb71ce415816deb5f44980d6a58be7700f";
     };
 
     nixpkgs-stable = {
@@ -33,7 +34,7 @@
       type = "github";
       owner = "hyprwm";
       repo = "Hyprland";
-      ref = "refs/tags/v0.54.2";
+      ref = "refs/tags/v0.56.1";
     };
 
     hypridle = {
@@ -54,9 +55,9 @@
       };
 
       type = "github";
-      owner = "Duckonaut";
+      owner = "zjeffer";
       repo = "split-monitor-workspaces";
-      ref = "refs/tags/v0.54.2";
+      ref = "refs/tags/v0.56.1";
     };
 
     ### programs ###

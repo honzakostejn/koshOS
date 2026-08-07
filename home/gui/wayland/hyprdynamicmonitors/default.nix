@@ -75,7 +75,10 @@
     };
 
     wayland.windowManager.hyprland.extraConfig = ''
-      # source the auto-generated monitors configuration
-      source = ~/.config/hypr/monitors.conf
+      -- Monitors are managed dynamically by hyprdynamicmonitors, which writes a Lua
+      -- file and runs `hyprctl reload`. dofile (not require) re-reads it on every
+      -- reload; pcall keeps a first-boot absence from killing the config.
+      local cfg_home = os.getenv("XDG_CONFIG_HOME") or (os.getenv("HOME") .. "/.config")
+      pcall(dofile, cfg_home .. "/hypr/monitors.lua")
     '';
 }

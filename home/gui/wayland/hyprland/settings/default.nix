@@ -1,6 +1,6 @@
 { inputs
 , pkgs
-, config
+, lib
 , ...
 }:
 let
@@ -12,6 +12,8 @@ let
     ];
     text = builtins.readFile ../scripts/interprocess-communication.sh;
   };
+  toLua = lib.generators.toLua { };
+  mkLuaInline = lib.generators.mkLuaInline;
 in
 {
   imports = [
@@ -23,52 +25,43 @@ in
     ../../../../../assets/sounds/notification.mp3;
 
   wayland.windowManager.hyprland.settings = {
-    env = [
-      # "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
-      # "HYPRCURSOR_THEME,${cursorName}"
-      # "HYPRCURSOR_SIZE,${toString pointer.size}"
-    ];
+    config = {
+      input = {
+        kb_layout = "us,cz";
+        kb_variant = ",qwerty";
+        kb_options = "grp:alt_shift_toggle";
 
-    # monitor = [
-    #   hyprdynamicmonitors are used for dynamic display management
-    # ];
+        follow_mouse = 2;
+        accel_profile = "adaptive";
+        sensitivity = 0.5;
 
-    input = {
-      kb_layout = "us,cz";
-      kb_variant = ",qwerty";
-      kb_options = "grp:alt_shift_toggle";
+        touchpad = {
+          natural_scroll = true;
+          scroll_factor = 0.5;
+          clickfinger_behavior = true;
+          tap_to_click = false;
+        };
+      };
 
-      follow_mouse = 2;
-      accel_profile = "adaptive";
-      sensitivity = 0.5;
-
-      touchpad = {
-        # scrolling settings
-        natural_scroll = true;
-        scroll_factor = 0.5;
-
-        # button presses with 1, 2, or 3 fingers will be
-        # mapped to LMB, RMB, and MMB respectively
-        clickfinger_behavior = true;
-
-        # require physical click
-        tap-to-click = false;
+      misc = {
+        disable_splash_rendering = true;
+        force_default_wallpaper = 0;
+        disable_hyprland_logo = true;
+        background_color = "0x00000000";
+        animate_manual_resizes = true;
       };
     };
 
-    exec-once = [
-      "hyprlock --immediate-render"
-      "${pkgs.lib.getExe interprocess-communication}"
-      # "${pkgs.hyprpanel}/bin/hyprpanel"
-      # "hyprctl dispatch split-workspace 1"
-    ];
-
-    misc = {
-      disable_splash_rendering = true;
-      force_default_wallpaper = 0;
-      disable_hyprland_logo = true;
-      background_color = "0x00000000";
-      animate_manual_resizes = true;
+    on = {
+      _args = [
+        "hyprland.start"
+        (mkLuaInline ''
+          function()
+            hl.exec_cmd(${toLua "hyprlock --immediate-render"})
+            hl.exec_cmd(${toLua "${pkgs.lib.getExe interprocess-communication}"})
+          end
+        '')
+      ];
     };
   };
 }

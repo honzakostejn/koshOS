@@ -3,12 +3,13 @@
 #=====================================#
 [general]
 debounce_time_ms = 1500
+destination = "$HOME/.config/hypr/monitors.lua"
 
 #=====================================#
 # undocked profile
 #=====================================#
 [profiles.undocked]
-config_file = "hyprconfigs/undocked.conf"
+config_file = "hyprconfigs/undocked.lua"
 config_file_type = "static"
 
 [[profiles.undocked.conditions.required_monitors]]
@@ -18,7 +19,7 @@ name = "eDP-1"
 # hub prague profile
 #=====================================#
 [profiles.docked-hub-prague]
-config_file = "hyprconfigs/docked-hub-prague.conf"
+config_file = "hyprconfigs/docked-hub-prague.lua"
 config_file_type = "static"
 
 [[profiles.docked-hub-prague.conditions.required_monitors]]
@@ -44,7 +45,7 @@ monitor_tag = "internal"
 # hub cetin corner profile
 #=====================================#
 [profiles.docked-hub-cetin-corner]
-config_file = "hyprconfigs/docked-hub-cetin-corner.conf"
+config_file = "hyprconfigs/docked-hub-cetin-corner.lua"
 config_file_type = "static"
 [[profiles.docked-hub-cetin-corner.conditions.required_monitors]]
 description = ".*CW6Y783F0FGB.*"
@@ -58,7 +59,7 @@ monitor_tag = "internal"
 # hub casa de Capek profile
 #=====================================#
 [profiles.docked-hub-casa-de-capek]
-config_file = "hyprconfigs/docked-hub-casa-de-capek.conf"
+config_file = "hyprconfigs/docked-hub-casa-de-capek.lua"
 config_file_type = "static"
 [[profiles.docked-hub-casa-de-capek.conditions.required_monitors]]
 description = ".*M7LMDW012533.*"
@@ -72,7 +73,7 @@ monitor_tag = "internal"
 # hub home
 #=====================================#
 [profiles.docked-hub-home]
-config_file = "hyprconfigs/docked-hub-home.conf"
+config_file = "hyprconfigs/docked-hub-home.lua"
 config_file_type = "static"
 [[profiles.docked-hub-home.conditions.required_monitors]]
 description = ".*0x0000D2C6.*"
@@ -86,7 +87,7 @@ monitor_tag = "internal"
 # hub cetin pal profile
 #=====================================#
 [profiles.docked-hub-cetin-pal]
-config_file = "hyprconfigs/docked-hub-cetin-pal.conf"
+config_file = "hyprconfigs/docked-hub-cetin-pal.lua"
 config_file_type = "static"
 [[profiles.docked-hub-cetin-pal.conditions.required_monitors]]
 description = ".*VNAA0DF4.*"
@@ -118,7 +119,7 @@ monitor_tag = "internal"
 # fallback profile
 #=====================================#
 [fallback_profile]
-config_file = "hyprconfigs/fallback.conf"
+config_file = "hyprconfigs/fallback.lua"
 config_file_type = "static"
 
 # [profiles.docked-home]
