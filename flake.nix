@@ -183,10 +183,6 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
       inputs.home-manager.follows = "home-manager-stable";
     };
-
-    hyprdynamicmonitors = {
-      url = "github:fiffeek/hyprdynamicmonitors";
-    };
   };
 
   outputs = inputs@{ flake-parts, ... }:

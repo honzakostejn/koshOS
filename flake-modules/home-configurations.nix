@@ -8,7 +8,6 @@
     nixColors           = inputs.nix-colors.homeManagerModules.default;
     nixvim              = inputs.nixvim.homeModules.nixvim;
     hyprland            = inputs.hyprland.homeManagerModules.default;
-    hyprdynamicmonitors = inputs.hyprdynamicmonitors.homeManagerModules.default;
 
     cli = ../home/cli;
     gui = ../home/gui;

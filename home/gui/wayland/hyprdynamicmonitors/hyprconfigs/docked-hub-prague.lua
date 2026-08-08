@@ -1,4 +1,0 @@
-hl.monitor({ output = "desc:Dell Inc. DELL U2415 7MT0167B2AEL", mode = "1920x1200@59.95", position = "0x0", scale = 1, transform = 1 })
-hl.monitor({ output = "desc:Dell Inc. DELL U2412M 0FFXD31F1TPL", mode = "1920x1200@59.95", position = "1200x0", scale = 1 })
-hl.monitor({ output = "desc:Dell Inc. DELL U2415 7MT0162411FL", mode = "1920x1200@59.95", position = "3120x0", scale = 1, transform = 3 })
-hl.monitor({ output = "eDP-1", disabled = true })

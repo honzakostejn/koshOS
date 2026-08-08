@@ -1,2 +1,0 @@
-hl.monitor({ output = "desc:ASUSTek COMPUTER INC VP32UQ M7LMDW012533", mode = "3840x2160@60.00", scale = 1.5 })
-hl.monitor({ output = "eDP-1", disabled = true })

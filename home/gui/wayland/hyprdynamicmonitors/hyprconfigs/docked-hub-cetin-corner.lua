@@ -1,2 +1,0 @@
-hl.monitor({ output = "desc:Dell Inc. DELL P2417H CW6Y783F0FGB", mode = "1920x1080@60.00000", position = "-114x-1080", scale = 1 })
-hl.monitor({ output = "eDP-1", mode = "2256x1504@59.999", position = "0x0", scale = 1.33 })

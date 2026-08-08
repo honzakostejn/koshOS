@@ -1,0 +1,63 @@
+{
+  "name": "docked-hub-prague",
+  "created_at": "2026-08-08T00:00:00Z",
+  "updated_at": "2026-08-08T00:00:00Z",
+  "outputs": [
+    {
+      "key": "dell inc.|dell u2415|7mt0167b2ael",
+      "make": "Dell Inc.",
+      "model": "DELL U2415",
+      "serial": "7MT0167B2AEL",
+      "enabled": true,
+      "width": 1920,
+      "height": 1200,
+      "refresh": 59.95,
+      "x": 0,
+      "y": 0,
+      "scale": 1.0,
+      "transform": 1
+    },
+    {
+      "key": "dell inc.|dell u2412m|0ffxd31f1tpl",
+      "make": "Dell Inc.",
+      "model": "DELL U2412M",
+      "serial": "0FFXD31F1TPL",
+      "enabled": true,
+      "width": 1920,
+      "height": 1200,
+      "refresh": 59.95,
+      "x": 1200,
+      "y": 0,
+      "scale": 1.0,
+      "transform": 0
+    },
+    {
+      "key": "dell inc.|dell u2415|7mt0162411fl",
+      "make": "Dell Inc.",
+      "model": "DELL U2415",
+      "serial": "7MT0162411FL",
+      "enabled": true,
+      "width": 1920,
+      "height": 1200,
+      "refresh": 59.95,
+      "x": 3120,
+      "y": 0,
+      "scale": 1.0,
+      "transform": 3
+    },
+    {
+      "key": "boe|0x095f",
+      "name": "eDP-1",
+      "make": "BOE",
+      "model": "0x095F",
+      "enabled": false,
+      "width": 2256,
+      "height": 1504,
+      "refresh": 59.999,
+      "x": 0,
+      "y": 0,
+      "scale": 1.33333,
+      "transform": 0
+    }
+  ]
+}

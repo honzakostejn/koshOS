@@ -1,0 +1,35 @@
+{
+  "name": "docked-hub-home",
+  "created_at": "2026-08-08T00:00:00Z",
+  "updated_at": "2026-08-08T00:00:00Z",
+  "outputs": [
+    {
+      "key": "ancor communications inc|asus mg28u|0x0000d2c6",
+      "make": "Ancor Communications Inc",
+      "model": "ASUS MG28U",
+      "serial": "0x0000D2C6",
+      "enabled": true,
+      "width": 3840,
+      "height": 2160,
+      "refresh": 60.0,
+      "x": 0,
+      "y": 0,
+      "scale": 1.5,
+      "transform": 0
+    },
+    {
+      "key": "boe|0x095f",
+      "name": "eDP-1",
+      "make": "BOE",
+      "model": "0x095F",
+      "enabled": false,
+      "width": 2256,
+      "height": 1504,
+      "refresh": 59.999,
+      "x": 0,
+      "y": 0,
+      "scale": 1.33333,
+      "transform": 0
+    }
+  ]
+}

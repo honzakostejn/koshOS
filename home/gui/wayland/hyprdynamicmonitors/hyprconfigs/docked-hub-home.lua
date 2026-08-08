@@ -1,2 +1,0 @@
-hl.monitor({ output = "desc:Ancor Communications Inc ASUS MG28U 0x0000D2C6", mode = "3840x2160@60.00", scale = 1.5 })
-hl.monitor({ output = "eDP-1", disabled = true })

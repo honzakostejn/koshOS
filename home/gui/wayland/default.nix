@@ -3,6 +3,6 @@
 {
   imports = [
     ./hyprland
-    ./hyprdynamicmonitors
+    ./hyprmoncfg
   ];
 }
