@@ -107,6 +107,16 @@
       # ref = "refs/tags/v0.1.0";
     };
 
+    noctalia = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+
+      type = "github";
+      owner = "noctalia-dev";
+      repo = "noctalia";
+    };
+
     whisp-away = {
       type = "github";
       owner = "madjinn";

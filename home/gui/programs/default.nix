@@ -3,7 +3,8 @@
     ./ghostty
     ./hyprlock
     ./jellyfin-mpv-shim
-    ./quickshell
+    # ./quickshell
+    ./noctalia
     ./qutebrowser
     ./satty
     ./teams-for-linux
