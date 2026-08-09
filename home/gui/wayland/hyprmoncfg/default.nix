@@ -28,15 +28,6 @@ in
     require("monitors")
   '';
 
-  # require() hard-errors on a missing module, which would take the whole
-  # Hyprland config down before hyprmoncfg ever gets to write monitors.lua.
-  # Seed a marker-only file so the first apply can claim it.
-  # home.activation.hyprmoncfgSeedMonitors = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-  #   if [ ! -e "${monitorsLua}" ]; then
-  #     run install -Dm644 ${monitorsLuaSeed} "${monitorsLua}"
-  #   fi
-  # ''; TODO: check if this is needed, I don't think it is.
-
   systemd.user.services.hyprmoncfgd = {
     Unit = {
       Description = "Hyprland monitor profile daemon (hyprmoncfgd)";
