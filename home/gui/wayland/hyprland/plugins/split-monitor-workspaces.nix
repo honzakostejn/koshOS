@@ -31,12 +31,12 @@ in
     ];
 
     settings = {
-      # config.plugin."split-monitor-workspaces" = {
-      #   count = workspaceCount;
-      #   keep_focused = false;
-      #   enable_notifications = false;
-      #   enable_persistent_workspaces = true;
-      # }; TODO: this was probably moved, not sure
+      config.plugin.split_monitor_workspaces = {
+        count = workspaceCount;
+        keep_focused = false;
+        enable_notifications = false;
+        enable_persistent_workspaces = true;
+      };
 
       bind = workspaceBinds ++ [
         (bind "${mod} + SHIFT + ${left}"  (smw "change_monitor(\"prev\")"))

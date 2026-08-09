@@ -39,6 +39,8 @@ let
 
   exec = cmd: mkLuaInline "hl.dsp.exec_cmd(${toLua cmd})";
   bind = keys: dsp: { _args = [ keys dsp ]; };
+  # hyprlang's bind<l|e|i|...> suffixes are now a flags table passed
+  flagged = flags: map (b: b // { _args = b._args ++ [ flags ]; });
 in
 {
   wayland.windowManager.hyprland = {
@@ -49,7 +51,7 @@ in
         (bind "${mod} + Q"           (mkLuaInline "hl.dsp.window.close()"))
         (bind "${mod} + SHIFT + Q"   (mkLuaInline "hl.dsp.window.kill()"))
         (bind "${mod} + ALT_L + L"   (exec lock))
-        # (bind "${mod} + F4"          (mkLuaInline "hl.dsp.hyprland.quit()")) TODO: hyprland is nil
+        (bind "${mod} + F4"          (mkLuaInline "hl.dsp.exit()"))
 
         (bind "${mod} + T"           (mkLuaInline "hl.dsp.window.float({ toggle = true })"))
         (bind "${mod} + T"           (mkLuaInline "hl.dsp.window.resize({ x = 768, y = 1024, exact = true })"))
@@ -75,33 +77,34 @@ in
 
         (bind "${mod} + equal"       (exec "hyprctl keyword cursor:zoom_factor 2"))
         (bind "${mod} + minus"       (exec "hyprctl keyword cursor:zoom_factor 1"))
+
+        (bind "${mod} + CONTROL_L"   (mkLuaInline "hl.dsp.window.drag()"))
+        (bind "${mod} + ALT_L"       (mkLuaInline "hl.dsp.window.resize()"))
+      ]
+
+      # bindl
+      ++ flagged { locked = true; } [
+        (bind "switch:Lid Switch"    (exec lock))
+        (bind "${mod} + ALT_L + D"   (mkLuaInline "hl.dsp.dpms({ action = \"toggle\" })"))
+      ]
+
+      # bindlei
+      ++ flagged { locked = true; repeating = true; ignore_mods = true; } [
+        (bind "XF86MonBrightnessUp"   (exec "${lib.getExe pkgs.brightnessctl} set 5%+"))
+        (bind "XF86MonBrightnessDown" (exec "${lib.getExe pkgs.brightnessctl} set 5%-"))
+        (bind "XF86AudioRaiseVolume"  (exec "${pkgs.pamixer}/bin/pamixer -i 5"))
+        (bind "XF86AudioLowerVolume"  (exec "${pkgs.pamixer}/bin/pamixer -d 5"))
+      ]
+      
+      # bindli
+      ++ flagged { locked = true; ignore_mods = true; } [
+        (bind "XF86AudioMute"        (exec "${pkgs.pamixer}/bin/pamixer --toggle-mute"))
+        (bind "XF86AudioMicMute"     (exec "${pkgs.pamixer}/bin/pamixer --default-source --toggle-mute"))
+        (bind "XF86AudioNext"        (exec "${pkgs.playerctl}/bin/playerctl next"))
+        (bind "XF86AudioPrev"        (exec "${pkgs.playerctl}/bin/playerctl previous"))
+        (bind "XF86AudioPlay"        (exec "${pkgs.playerctl}/bin/playerctl play-pause"))
+        (bind "XF86AudioStop"        (exec "${pkgs.playerctl}/bin/playerctl stop"))
       ];
-
-      # bindm = [
-      #   (bind "${mod} + CONTROL_L"   (mkLuaInline "hl.dsp.window.drag()"))
-      #   (bind "${mod} + ALT_L"       (mkLuaInline "hl.dsp.window.resize()"))
-      # ]; TODO: not sure how this is supported in lua
-
-      # bindl = [
-      #   (bind ", switch:Lid Switch"  (exec lock))
-      #   (bind "${mod} + ALT_L + D"   (exec "hyprctl dispatch dpms off && hyprctl dispatch dpms on"))
-      # ]; TODO: not sure how this is supported in lua
-
-      # bindlei = [
-      #   (bind ", XF86MonBrightnessUp"   (exec "${lib.getExe pkgs.brightnessctl} set 5%+"))
-      #   (bind ", XF86MonBrightnessDown" (exec "${lib.getExe pkgs.brightnessctl} set 5%-"))
-      #   (bind ", XF86AudioRaiseVolume"  (exec "${pkgs.pamixer}/bin/pamixer -i 5"))
-      #   (bind ", XF86AudioLowerVolume"  (exec "${pkgs.pamixer}/bin/pamixer -d 5"))
-      # ]; TODO: not sure how this is supported in lua
-
-      # bindli = [
-      #   (bind ", XF86AudioMute"     (exec "${pkgs.pamixer}/bin/pamixer --toggle-mute"))
-      #   (bind ", XF86AudioMicMute"  (exec "${pkgs.pamixer}/bin/pamixer --default-source --toggle-mute"))
-      #   (bind ", XF86AudioNext"     (exec "${pkgs.playerctl}/bin/playerctl next"))
-      #   (bind ", XF86AudioPrev"     (exec "${pkgs.playerctl}/bin/playerctl previous"))
-      #   (bind ", XF86AudioPlay"     (exec "${pkgs.playerctl}/bin/playerctl play-pause"))
-      #   (bind ", XF86AudioStop"     (exec "${pkgs.playerctl}/bin/playerctl stop"))
-      # ]; TODO: not sure how this is supported in lua
     };
 
     submaps.screenshot.settings.bind = [
