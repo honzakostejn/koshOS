@@ -23,6 +23,23 @@ let
       (bind "${mod} + SHIFT + ${key}" (smw "move_to_workspace(${wn})"))
     ]
   ) workspaceCount);
+
+  # workspaces are indexed globally from 0..N
+  # the workspace rules are assigning a custom name to each workspace,
+  # which is then used by the shell's bar to display the workspace number
+  # this helps the user with navigating workspaces across multiple monitors
+  # by keyboard binds
+  maxMonitors = 5;
+  workspaceNameRules = builtins.genList (x:
+    let
+      id = x + 1;
+      label = lib.mod id workspaceCount;
+      monitorId = x / workspaceCount;
+    in { _args = [{
+      workspace = toString id;
+      default_name = "${toString label}_m${toString monitorId}";
+    }]; }
+  ) (maxMonitors * workspaceCount);
 in
 {
   wayland.windowManager.hyprland = {
@@ -37,6 +54,8 @@ in
         enable_notifications = false;
         enable_persistent_workspaces = true;
       };
+
+      workspace_rule = workspaceNameRules;
 
       bind = workspaceBinds ++ [
         (bind "${mod} + SHIFT + ${left}"  (smw "change_monitor(\"prev\")"))
