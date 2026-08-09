@@ -57,7 +57,6 @@ in
         "hyprland.start"
         (mkLuaInline ''
           function()
-            hl.exec_cmd(${toLua "hyprlock --immediate-render"})
             hl.exec_cmd(${toLua "${pkgs.lib.getExe interprocess-communication}"})
           end
         '')
