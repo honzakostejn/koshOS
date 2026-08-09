@@ -68,3 +68,7 @@ def load(config, c):
   c.fileselect.single_file.command = ["ghostty", "--title=\"terminal-filechooser\"", "-e", "yazi", "--chooser-file", "{}"]
   c.fileselect.multiple_files.command = ["ghostty", "--title=\"terminal-filechooser\"", "-e", "yazi", "--chooser-file", "{}"]
   c.fileselect.folder.command = ["ghostty", "--title=\"terminal-filechooser\"", "-e", "yazi", "--cwd-file", "{}"]
+
+  # TODO: until this issue isn't closed
+  # https://github.com/qutebrowser/qutebrowser/issues/8926
+  c.qt.args = ["disable-features=AcceleratedVideoDecodeLinuxGL"]
