@@ -1,7 +1,6 @@
 { ... }: {
   imports = [
     ./ghostty
-    ./hyprlock
     ./jellyfin-mpv-shim
     # ./quickshell
     ./noctalia

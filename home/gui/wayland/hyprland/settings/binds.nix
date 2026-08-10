@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   ...
@@ -7,9 +8,6 @@ let
   toLua = lib.generators.toLua { };
   mkLuaInline = lib.generators.mkLuaInline;
 
-  custom-hyprlock-script = import ../../../programs/hyprlock/custom-hyprlock-script.nix {
-    inherit pkgs lib;
-  };
   send-shortcut-to-electron = pkgs.writeShellApplication {
     name = "send-shortcut-to-electron";
     runtimeInputs = [
@@ -33,7 +31,9 @@ let
   up    = "L";
   right = "SEMICOLON";
 
-  lock       = "${custom-hyprlock-script}/bin/custom-hyprlock-script";
+  # noctalia's own session action, which raises its lockscreen directly instead
+  # of relying on it picking up logind's Lock signal
+  lock       = "${config.programs.noctalia.package}/bin/noctalia msg session lock";
   screenshot = "${take-screenshot}/bin/take-screenshot";
   electron   = "${send-shortcut-to-electron}/bin/send-shortcut-to-electron";
 
@@ -50,7 +50,7 @@ in
         (bind "${mod} + RETURN"      (exec "ghostty"))
         (bind "${mod} + Q"           (mkLuaInline "hl.dsp.window.close()"))
         (bind "${mod} + SHIFT + Q"   (mkLuaInline "hl.dsp.window.kill()"))
-        (bind "${mod} + ALT_L + L"   (exec lock))
+        (bind "${mod} + ALT + L"     (exec lock))
         (bind "${mod} + F4"          (mkLuaInline "hl.dsp.exit()"))
 
         (bind "${mod} + T"           (mkLuaInline "hl.dsp.window.float({ toggle = true })"))
@@ -77,7 +77,10 @@ in
 
         (bind "${mod} + equal"       (exec "hyprctl keyword cursor:zoom_factor 2"))
         (bind "${mod} + minus"       (exec "hyprctl keyword cursor:zoom_factor 1"))
+      ]
 
+      # bindm
+      ++ flagged { mouse = true; } [
         (bind "${mod} + CONTROL_L"   (mkLuaInline "hl.dsp.window.drag()"))
         (bind "${mod} + ALT_L"       (mkLuaInline "hl.dsp.window.resize()"))
       ]

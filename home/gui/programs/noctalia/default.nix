@@ -1,7 +1,16 @@
-{ config, inputs, ... }:
+{ config, inputs, pkgs, ... }:
 let
   cfg = config.programs.noctalia;
   defaultWallpaper = "${cfg.package}/share/noctalia/assets/noctalia-wallpaper.png";
+
+  minuteInSeconds = 60;
+  screenOffTimeout = 3 * minuteInSeconds;
+
+  suspendOnBattery = pkgs.writeShellScript "suspend-on-battery" ''
+    if [ "$(cat /sys/class/power_supply/ACAD/online)" -eq 0 ]; then
+      ${pkgs.systemd}/bin/systemctl suspend
+    fi
+  '';
 in
 {
   imports = [ inputs.noctalia.homeModules.default ];
@@ -10,7 +19,7 @@ in
     enable = true;
     systemd.enable = true;
 
-    # Declarative layer, written to ~/.config/noctalia/config.toml. Noctalia
+    # declarative layer, written to ~/.config/noctalia/config.toml. Noctalia
     # never rewrites this file; anything changed through the GUI lands in
     # ~/.local/state/noctalia/settings.toml and wins over these values until
     # that override file is cleared.
@@ -31,10 +40,62 @@ in
         lang = "en";
       };
 
+      lockscreen = {
+        enabled = true;
+        lock_before_suspend = true;
+        fingerprint = true;
+        blurred_desktop = true;
+        blur_intensity = 0.5;
+        tint_intensity = 0.3;
+      };
+
+      idle = {
+        behavior_order = [ "screen-off" "suspend" ];
+
+        behavior = {
+          "screen-off" = {
+            enabled = true;
+            timeout = screenOffTimeout;
+            action = "screen_off";
+          };
+
+          suspend = {
+            enabled = true;
+            timeout = screenOffTimeout + 10;
+            action = "command";
+            command = "${suspendOnBattery}";
+          };
+        };
+      };
+
       theme = {
         builtin = "Catppuccin";
         mode = "dark";
         source = "builtin";
+        templates = {
+          builtin_ids = [
+            "alacritty"
+            "btop"
+            "cava"
+            "emacs"
+            "foot"
+            "gtk3"
+            "gtk4"
+            "ghostty"
+            "helix"
+            "hyprland"
+            "kcolorscheme"
+            "kitty"
+            "labwc"
+            "mango"
+            "niri"
+            "qt"
+            "scroll"
+            "starship"
+            "sway"
+            "wezterm"
+          ];
+        };
       };
 
       wallpaper = {

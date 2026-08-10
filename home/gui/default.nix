@@ -3,7 +3,6 @@
 }: {
   imports = [
     ./programs
-    ./services
     ./theming
     ./wayland
   ];
