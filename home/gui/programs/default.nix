@@ -2,7 +2,6 @@
   imports = [
     ./ghostty
     ./jellyfin-mpv-shim
-    # ./quickshell
     ./noctalia
     ./qutebrowser
     ./satty
