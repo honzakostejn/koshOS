@@ -37,18 +37,6 @@
       ref = "refs/tags/v0.56.1";
     };
 
-    hypridle = {
-      type = "github";
-      owner = "hyprwm";
-      repo = "hypridle";
-    };
-
-    hyprlock = {
-      type = "github";
-      owner = "hyprwm";
-      repo = "hyprlock";
-    };
-
     split-monitor-workspaces = {
       inputs = {
         hyprland.follows = "hyprland";
@@ -93,7 +81,7 @@
 
     opencode = {
       type = "github";
-      owner = "sst";
+      owner = "anomalyco";
       repo = "opencode";
     };
 
@@ -115,6 +103,16 @@
       type = "github";
       owner = "noctalia-dev";
       repo = "noctalia";
+    };
+
+    noctalia-greeter = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+
+      type = "github";
+      owner = "noctalia-dev";
+      repo = "noctalia-greeter";
     };
 
     whisp-away = {
@@ -199,12 +197,8 @@
         ./flake-modules/nixos-modules/programs/waydroid.nix
         ./flake-modules/nixos-modules/rclone/blob-koshstorage.nix
         ./flake-modules/nixos-modules/services/cloudflare-warp.nix
-        ./flake-modules/nixos-modules/services/display-manager.nix
-        ./flake-modules/nixos-modules/services/getty.nix
-        ./flake-modules/nixos-modules/services/greetd.nix
         ./flake-modules/nixos-modules/services/kanata.nix
-        ./flake-modules/nixos-modules/services/sddm.nix
-        ./flake-modules/nixos-modules/services/sysc-greet.nix
+        ./flake-modules/nixos-modules/services/noctalia-greeter.nix
         ./flake-modules/nixos-modules/users/honzakostejn.nix
         ./flake-modules/nixos-modules/users/honzakostejn-cli.nix
         # Per-host configurations
