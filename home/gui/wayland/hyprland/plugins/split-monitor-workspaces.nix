@@ -1,47 +1,75 @@
 { inputs
+, lib
 , pkgs
 , ...
 }:
 let
-  # this one should be passed
   workspaceCount = 10;
 
-  workspaceBinds = builtins.concatLists (builtins.genList
-    (
-      x:
-      let
-        key = builtins.toString (x);
-        # key 0 is at the end of the keyboard row
-        workspaceNumber = if x == 0 then 10 else x;
-      in
-      [
-        "$mod, ${key}, split-workspace, ${toString workspaceNumber}"
-        "$mod SHIFT, ${key}, split-movetoworkspace, ${toString workspaceNumber}"
-      ]
-    )
-    workspaceCount);
+  mod   = "SUPER";
+  left  = "J";
+  right = "SEMICOLON";
+
+  mkLuaInline = lib.generators.mkLuaInline;
+  bind = keys: dsp: { _args = [ keys dsp ]; };
+  smw = expr: mkLuaInline "function() return hl.plugin.split_monitor_workspaces.${expr} end";
+
+  workspaceBinds = builtins.concatLists (builtins.genList (x:
+    let
+      key = toString x;
+      wn  = toString (if x == 0 then 10 else x);
+    in [
+      (bind "${mod} + ${key}"         (smw "workspace(${wn})"))
+      (bind "${mod} + SHIFT + ${key}" (smw "move_to_workspace(${wn})"))
+    ]
+  ) workspaceCount);
+
+  patchedPlugin = inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}
+    .split-monitor-workspaces
+    .overrideAttrs (old: {
+      # the plugin finds workspaces by name, searching for the ID as a string ("11"),
+      # so the default_name rules below ("1_m1") make it miss and create a second
+      # workspace at an existing ID. This patch looks them up by ID instead.
+      patches = (old.patches or [ ]) ++ [ ./patches/split-monitor-workspaces-id-based-lookup.patch ];
+    });
+
+  # workspaces are indexed globally from 0..N
+  # the workspace rules are assigning a custom name to each workspace,
+  # which is then used by the shell's bar to display the workspace number
+  # this helps the user with navigating workspaces across multiple monitors
+  # by keyboard binds
+  maxMonitors = 5;
+  workspaceNameRules = builtins.genList (x:
+    let
+      id = x + 1;
+      label = lib.mod id workspaceCount;
+      monitorId = x / workspaceCount + 1;  # monitor IDs are 1-based, not 0-based
+    in { _args = [{
+      workspace = toString id;
+      default_name = "${toString label}_m${toString monitorId}";
+    }]; }
+  ) (maxMonitors * workspaceCount);
 in
 {
-  wayland.windowManager.hyprland.plugins = [
-      inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
-    ];
+  wayland.windowManager.hyprland = {
+    plugins = [ patchedPlugin ];
 
-    wayland.windowManager.hyprland.settings = {
-      plugin = {
-        split-monitor-workspaces = {
-          count = workspaceCount;
-          keep_focused = 0;
-          enable_notifications = 0;
-          enable_persistent_workspaces = 1;
-        };
+    settings = {
+      config.plugin.split_monitor_workspaces = {
+        count = workspaceCount;
+        keep_focused = false;
+        enable_notifications = false;
+        enable_persistent_workspaces = true;
       };
 
-      bind = workspaceBinds ++ [
-        # window movement
-        "$mod SHIFT, $left, split-changemonitor, prev"
-        "$mod SHIFT, $right, split-changemonitor, next"
+      workspace_rule = workspaceNameRules;
 
-        "$mod, G, split-grabroguewindows"
+      bind = workspaceBinds ++ [
+        (bind "${mod} + SHIFT + ${left}"  (smw "change_monitor(\"prev\")"))
+        (bind "${mod} + SHIFT + ${right}" (smw "change_monitor(\"next\")"))
+
+        (bind "${mod} + G"                (smw "grab_rogue_windows()"))
       ];
     };
+  };
 }

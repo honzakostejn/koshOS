@@ -60,10 +60,4 @@
     dates = "weekly";
     options = "--delete-older-than 30d";
   };
-
-  # miscellaneous
-  security = {
-    # allow wayland lockers to unlock the screen
-    pam.services.hyprlock.text = "auth include login";
-  };
 }

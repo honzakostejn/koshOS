@@ -1,0 +1,35 @@
+{
+  "name": "docked-hub-cetin-corner",
+  "created_at": "2026-08-08T00:00:00Z",
+  "updated_at": "2026-08-08T00:00:00Z",
+  "outputs": [
+    {
+      "key": "dell inc.|dell p2417h|cw6y783f0fgb",
+      "make": "Dell Inc.",
+      "model": "DELL P2417H",
+      "serial": "CW6Y783F0FGB",
+      "enabled": true,
+      "width": 1920,
+      "height": 1080,
+      "refresh": 60.0,
+      "x": -114,
+      "y": -1080,
+      "scale": 1.0,
+      "transform": 0
+    },
+    {
+      "key": "boe|0x095f",
+      "name": "eDP-1",
+      "make": "BOE",
+      "model": "0x095F",
+      "enabled": true,
+      "width": 2256,
+      "height": 1504,
+      "refresh": 59.999,
+      "x": 0,
+      "y": 0,
+      "scale": 1.33333,
+      "transform": 0
+    }
+  ]
+}
