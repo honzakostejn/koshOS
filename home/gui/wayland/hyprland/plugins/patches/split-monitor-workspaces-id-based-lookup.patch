@@ -1,0 +1,140 @@
+diff --git a/src/helpers.cpp b/src/helpers.cpp
+index b3ff576..3f7a89a 100644
+--- a/src/helpers.cpp
++++ b/src/helpers.cpp
+@@ -133,6 +133,36 @@ PHLMONITOR getPrimaryMonitor()
+     return nullptr; // we don't throw here because this can sometimes happen when waking from suspend
+ }
+ 
++std::optional<WORKSPACEID> mappedWorkspaceID(const std::string& workspace)
++{
++    try {
++        size_t     pos = 0;
++        auto const id = std::stoll(workspace, &pos);
++        if (pos != workspace.size())
++            return std::nullopt; // trailing characters => not a plain ID
++        return static_cast<WORKSPACEID>(id);
++    }
++    catch (const std::exception&) {
++        return std::nullopt;
++    }
++}
++
++PHLWORKSPACE findMappedWorkspace(const std::string& workspace)
++{
++    if (auto const id = mappedWorkspaceID(workspace))
++        return State::workspaceState()->query().id(*id).run();
++    return State::workspaceState()->query().name(workspace).run();
++}
++
++bool isMappedWorkspace(const std::string& mapped, const PHLWORKSPACE& workspace)
++{
++    if (workspace == nullptr)
++        return false;
++    if (auto const id = mappedWorkspaceID(mapped))
++        return workspace->m_id == *id;
++    return workspace->m_name == mapped;
++}
++
+ const std::string& getWorkspaceFromMonitor(const PHLMONITOR& monitor, const std::string& workspace)
+ {
+     // based on the string, we parse multiple formats:
+@@ -156,7 +186,7 @@ const std::string& getWorkspaceFromMonitor(const PHLMONITOR& monitor, const std:
+     if (workspace == "empty") {
+         // get the next workspace ID that is empty on this monitor
+         for (const auto& workspaceName : curWorkspaces) {
+-            PHLWORKSPACE workspacePtr = State::workspaceState()->query().name(workspaceName).run();
++            PHLWORKSPACE workspacePtr = findMappedWorkspace(workspaceName);
+             // the workspace we want is either not yet created (=nullptr) or already created but empty (!= nullptr but no windows)
+             if (workspacePtr == nullptr || workspacePtr->getWindowCount() == 0) {
+                 return workspaceName;
+@@ -175,7 +205,7 @@ const std::string& getWorkspaceFromMonitor(const PHLMONITOR& monitor, const std:
+             return workspace;
+         }
+         // find the current workspace index in the monitor's workspace list
+-        auto it = std::ranges::find(curWorkspaces, monitor->m_activeWorkspace->m_name);
++        auto it = std::ranges::find_if(curWorkspaces, [&monitor](const auto& mapped) { return isMappedWorkspace(mapped, monitor->m_activeWorkspace); });
+         if (it == curWorkspaces.end()) {
+             Log::logger->log(Log::ERR, "[split-monitor-workspaces] Current workspace {} not found in monitor workspaces", monitor->m_activeWorkspace->m_name.c_str());
+             return workspace;
+diff --git a/src/helpers.hpp b/src/helpers.hpp
+index ccfcaff..99df100 100644
+--- a/src/helpers.hpp
++++ b/src/helpers.hpp
+@@ -39,6 +39,18 @@ PHLMONITOR getPrimaryMonitor();
+ // The given workspace string can be in multiple formats: "empty", relative ("+1", "-2"), absolute ("1", "2") or a workspace name.
+ const std::string& getWorkspaceFromMonitor(const PHLMONITOR& monitor, const std::string& workspace);
+ 
++// The monitor workspace map stores stringified workspace IDs, but a workspace's *name* is not a
++// stable identifier: it can be changed by the user, e.g. through a `default_name` workspace rule.
++// Resolving through the ID keeps the mapping correct regardless of how a workspace is named.
++// Returns nullopt for entries that are not numeric (a genuinely named workspace).
++std::optional<WORKSPACEID> mappedWorkspaceID(const std::string& workspace);
++
++// Look up a workspace from a mapped entry, by ID when it is numeric and by name otherwise.
++PHLWORKSPACE findMappedWorkspace(const std::string& workspace);
++
++// Whether the given workspace is the one the mapped entry refers to.
++bool isMappedWorkspace(const std::string& mapped, const PHLWORKSPACE& workspace);
++
+ // Get the currently focused monitor, with a fallback to the monitor under the cursor if the focused monitor can't be determined
+ PHLMONITOR getCurrentMonitor();
+ 
+diff --git a/src/main.cpp b/src/main.cpp
+index 769b001..035f59a 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -26,7 +26,7 @@ SDispatchResult splitWorkspace(const std::string& workspace)
+     std::vector<SDispatchResult> results;
+     for (const PHLMONITOR& monitor : State::monitorState()->monitors()) {
+         bool noFocus = monitor != getCurrentMonitor(); // only focus the current monitor
+-        auto workspaceRef = State::workspaceState()->query().name(getWorkspaceFromMonitor(monitor, workspace)).run();
++        auto workspaceRef = findMappedWorkspace(getWorkspaceFromMonitor(monitor, workspace));
+         if (workspaceRef.get() == nullptr) {
+             // create it if it doesn't exist yet
+             auto const workspaceID = getWorkspaceIDNameFromString(getWorkspaceFromMonitor(monitor, workspace)).id;
+@@ -56,7 +56,7 @@ SDispatchResult cycleWorkspaces(const std::string& value, bool nowrap = false)
+         auto const workspaces = g_vMonitorWorkspaceMap[monitor->m_id];
+         int index = -1;
+         for (int i = 0; i < getMonitorMaxWorkspaces(monitor->m_name); i++) {
+-            if (workspaces[i] == monitor->m_activeWorkspace->m_name) {
++            if (isMappedWorkspace(workspaces[i], monitor->m_activeWorkspace)) {
+                 index = i;
+                 break;
+             }
+@@ -79,7 +79,7 @@ SDispatchResult cycleWorkspaces(const std::string& value, bool nowrap = false)
+             }
+             index = 0; // wrap around to the first workspace
+         }
+-        auto workspaceRef = State::workspaceState()->query().name(workspaces[index]).run();
++        auto workspaceRef = findMappedWorkspace(workspaces[index]);
+         if (workspaceRef.get() == nullptr) {
+             // create it if it doesn't exist yet
+             auto const workspaceID = getWorkspaceIDNameFromString(workspaces[index]).id;
+@@ -193,7 +193,7 @@ SDispatchResult grabRogueWindows(const std::string& /*unused*/)
+         auto const monitorID = window->m_monitor->m_id;
+ 
+         bool isInRogueWorkspace = !g_vMonitorWorkspaceMap.contains(monitorID) || // if the monitor is not mapped, the window is rogue
+-                                  !std::ranges::any_of(g_vMonitorWorkspaceMap[monitorID], [&workspaceName](const auto& mappedWorkspaceName) { return workspaceName == mappedWorkspaceName; });
++                                  !std::ranges::any_of(g_vMonitorWorkspaceMap[monitorID], [&window](const auto& mapped) { return isMappedWorkspace(mapped, window->m_workspace); });
+         if (isInRogueWorkspace) {
+             Log::logger->log(Log::INFO, "[split-monitor-workspaces] Moving rogue window {} from workspace {} to workspace {}", window->m_title.c_str(), workspaceName.c_str(),
+                              currentWorkspace->m_name.c_str());
+@@ -230,7 +230,7 @@ void mapMonitor(const PHLMONITOR& monitor) // NOLINT(readability-convert-member-
+     for (int i = workspaceIndex; i < workspaceIndex + maxWorkspaces; i++) {
+         std::string workspaceName = std::to_string(i);
+         g_vMonitorWorkspaceMap[monitor->m_id].push_back(workspaceName);
+-        PHLWORKSPACE workspace = State::workspaceState()->query().name(workspaceName).run();
++        PHLWORKSPACE workspace = State::workspaceState()->query().id(i).run();
+ 
+         // when not using persistent workspaces, we still want to create the first workspace on each monitor
+         // to avoid issues where only the last mapped monitor has the correct workspace (#121)
+@@ -275,7 +275,7 @@ void unmapMonitor(const PHLMONITOR& monitor)
+ 
+     if (g_vMonitorWorkspaceMap.contains(monitor->m_id)) {
+         for (const auto& workspaceName : g_vMonitorWorkspaceMap[monitor->m_id]) {
+-            PHLWORKSPACE workspace = State::workspaceState()->query().name(workspaceName).run();
++            PHLWORKSPACE workspace = findMappedWorkspace(workspaceName);
+ 
+             if (workspace.get() != nullptr) {
+                 workspace->setPersistent(false);

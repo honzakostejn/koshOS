@@ -24,6 +24,15 @@ let
     ]
   ) workspaceCount);
 
+  patchedPlugin = inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}
+    .split-monitor-workspaces
+    .overrideAttrs (old: {
+      # the plugin finds workspaces by name, searching for the ID as a string ("11"),
+      # so the default_name rules below ("1_m1") make it miss and create a second
+      # workspace at an existing ID. This patch looks them up by ID instead.
+      patches = (old.patches or [ ]) ++ [ ./patches/split-monitor-workspaces-id-based-lookup.patch ];
+    });
+
   # workspaces are indexed globally from 0..N
   # the workspace rules are assigning a custom name to each workspace,
   # which is then used by the shell's bar to display the workspace number
@@ -34,7 +43,7 @@ let
     let
       id = x + 1;
       label = lib.mod id workspaceCount;
-      monitorId = x / workspaceCount;
+      monitorId = x / workspaceCount + 1;  # monitor IDs are 1-based, not 0-based
     in { _args = [{
       workspace = toString id;
       default_name = "${toString label}_m${toString monitorId}";
@@ -43,9 +52,7 @@ let
 in
 {
   wayland.windowManager.hyprland = {
-    plugins = [
-      inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
-    ];
+    plugins = [ patchedPlugin ];
 
     settings = {
       config.plugin.split_monitor_workspaces = {
