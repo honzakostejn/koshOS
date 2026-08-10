@@ -3,7 +3,6 @@
 }: {
   imports = [
     ./programs
-    ./theming
     ./wayland
   ];
 
@@ -11,6 +10,7 @@
     rawtherapee
     bitwarden-desktop
     # blender
+    claude-code
     chromium
     # figma-linux
     # kitty
@@ -49,6 +49,7 @@
   ];
 
   home.pointerCursor = {
+    enable = true;
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Classic";
     size = 16;

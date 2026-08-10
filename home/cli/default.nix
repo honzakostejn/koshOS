@@ -15,7 +15,7 @@
   };
 
   config = {
-    home.stateVersion = "26.05";
+    home.stateVersion = "26.11";
 
     home.username = lib.mkDefault config.koshos.username;
     home.homeDirectory = lib.mkDefault "/home/${config.koshos.username}";

@@ -13,8 +13,6 @@
   ];
 
   boot = {
-    bootspec.enable = true;
-
     binfmt.emulatedSystems = [ "aarch64-linux" ];
 
     initrd = {
@@ -44,9 +42,13 @@
     tctiEnvironment.enable = true; # TPM2TOOLS_TCTI and TPM2_PKCS11_TCTI env variables
   };
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "26.11";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    # https://github.com/NixOS/nixpkgs/issues/526914
+    "electron-40.10.5"
+  ];
 
   hardware.graphics = {
     enable = true;
@@ -78,6 +80,8 @@
   hardware.xpadneo.enable = true; # Enable the xpadneo driver for Xbox One wireless controllers
 
   services.udev.packages = with pkgs; [ oversteer ];
+
+  services.envfs.enable = true; # https://github.com/github/copilot-cli/issues/3392#issuecomment-4487327291
 
   # video and audio routing
   services.pipewire = {
@@ -133,8 +137,8 @@
   security = {
     polkit.enable = true;
 
-    # allow wayland lockers to unlock the screen
-    pam.services.hyprlock.text = "auth include login";
+    # noctalia's lockscreen authenticates against the "login" stack directly,
+    # so it needs no PAM service of its own.
     # https://discourse.nixos.org/t/unable-to-fix-too-many-open-files-error/27094/10
     pam.loginLimits = [
       { domain = "*"; type = "soft"; item = "nofile"; value = "65536"; }

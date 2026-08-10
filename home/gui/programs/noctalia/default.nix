@@ -123,4 +123,14 @@ in
       };
     };
   };
+
+  # noctalia manages the GTK theme, but it must be enabled here
+  # otherwise it fails to apply the theme to GTK apps
+  gtk = {
+    enable = true;
+    theme = {
+      name = "adw-gtk3-dark";
+      package = pkgs.adw-gtk3;
+    };
+  };
 }

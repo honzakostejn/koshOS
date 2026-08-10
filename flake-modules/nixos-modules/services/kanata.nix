@@ -18,13 +18,13 @@
         };
 
         keychron-k6-bt = {
-          # devices = [ "/dev/input/event20" ];
+          devices = [ "/dev/input/event20" ];
           config = builtins.readFile ./kanata.kbd;
-          extraDefCfg = ''
-            ;; because of BT, use the linux-dev-names-include
-            ;; https://jtroo.github.io/config.html#linux-only-linux-dev-names-include
-            linux-dev-names-include ("Keychron K6")
-          '';
+          # extraDefCfg = ''
+          #   ;; because of BT, use the linux-dev-names-include
+          #   ;; https://jtroo.github.io/config.html#linux-only-linux-dev-names-include
+          #   linux-dev-names-include ("Keychron K6")
+          # '';
         };
 
         logitech = {
