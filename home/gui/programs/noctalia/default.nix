@@ -33,6 +33,16 @@ in
         scale = 1.2;
         shadow = false;
         thickness = 40;
+
+        monitor = {
+          # overrides for the portrait monitors
+          "7MT0167B2AEL" = {
+            position = "top";
+          };
+          "7MT0162411FL" = {
+            position = "top";
+          };
+        };
       };
 
       shell = {
