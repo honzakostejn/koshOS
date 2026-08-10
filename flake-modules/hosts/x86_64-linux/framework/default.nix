@@ -11,7 +11,7 @@
       self.nixosModules.rclone-blob-koshstorage
       self.nixosModules.services-cloudflare-warp
       self.nixosModules.services-kanata
-      self.nixosModules.services-sddm
+      self.nixosModules.services-noctalia-greeter
       self.nixosModules.users-honzakostejn
       ./configuration.nix
     ];

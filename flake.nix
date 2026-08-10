@@ -7,8 +7,8 @@
       type = "github";
       owner = "nixos";
       repo = "nixpkgs";
-      # ref = "refs/heads/nixos-unstable";
-      rev = "2c5e08bb71ce415816deb5f44980d6a58be7700f";
+      ref = "refs/heads/nixos-unstable";
+      # rev = "2c5e08bb71ce415816deb5f44980d6a58be7700f";
     };
 
     nixpkgs-stable = {
@@ -85,16 +85,6 @@
       repo = "opencode";
     };
 
-    quickshell = {
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-
-      # ref = "refs/tags/v0.1.0";
-    };
-
     noctalia = {
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -155,16 +145,6 @@
       type = "github";
       owner = "nix-community";
       repo = "lanzaboote";
-    };
-
-    sysc-greet = {
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-
-      type = "github";
-      owner = "Nomadcxx";
-      repo = "sysc-greet";
     };
 
     firefox-addons = {

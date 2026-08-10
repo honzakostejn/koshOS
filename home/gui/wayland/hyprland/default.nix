@@ -14,8 +14,6 @@ in
 
     ./settings
     ./plugins
-
-    # ./hyprpaper.nix
   ];
 
   # xdg.dataFile."icons/${cursor}".source = "${cursorPackage}/share/icons/${cursor}";
