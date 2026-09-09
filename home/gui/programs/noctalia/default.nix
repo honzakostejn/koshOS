@@ -108,9 +108,12 @@ in
         };
       };
 
+      # shader-desk draws the background instead. Both paint onto a
+      # wlr-layer-shell surface, so leaving noctalia's wallpaper on would just
+      # cover the shader up. Note that a wallpaper toggled in the GUI lands in
+      # settings.toml and keeps winning over this until that file is cleared.
       wallpaper = {
-        default.path = defaultWallpaper;
-        last.path = defaultWallpaper;
+        enabled = false;
       };
 
       widget.workspaces = {

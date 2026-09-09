@@ -105,6 +105,16 @@
       repo = "noctalia-greeter";
     };
 
+    shader-desk = {
+      # upstream's own flake builds against a nixpkgs we cannot reach into, and
+      # its license needs allowUnfree, so only the sources are taken from here
+      flake = false;
+
+      type = "github";
+      owner = "KMartianov";
+      repo = "shader-desk";
+    };
+
     whisp-away = {
       type = "github";
       owner = "madjinn";

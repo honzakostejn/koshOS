@@ -1119,6 +1119,7 @@
         "noctalia": "noctalia",
         "noctalia-greeter": "noctalia-greeter",
         "opencode": "opencode",
+        "shader-desk": "shader-desk",
         "split-monitor-workspaces": "split-monitor-workspaces",
         "whisp-away": "whisp-away",
         "yazi": "yazi"
@@ -1200,6 +1201,22 @@
       "original": {
         "owner": "andreymatin",
         "repo": "scss-reset",
+        "type": "github"
+      }
+    },
+    "shader-desk": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786294935,
+        "narHash": "sha256-55TjaIE4/FeV2mjKe4ov0qXFYlwNP8ApXm3l/Yj2PcQ=",
+        "owner": "KMartianov",
+        "repo": "shader-desk",
+        "rev": "58b93adb3ae743a889209e1c549c13d9e1ec05fa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "KMartianov",
+        "repo": "shader-desk",
         "type": "github"
       }
     },
