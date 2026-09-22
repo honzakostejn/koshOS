@@ -34,6 +34,8 @@ let
   # noctalia's own session action, which raises its lockscreen directly instead
   # of relying on it picking up logind's Lock signal
   lock       = "${config.programs.noctalia.package}/bin/noctalia msg session lock";
+  launcher   = "${config.programs.noctalia.package}/bin/noctalia msg panel-toggle launcher";
+  bitwarden  = "${config.programs.noctalia.package}/bin/noctalia msg panel-toggle launcher /bw ";
   screenshot = "${take-screenshot}/bin/take-screenshot";
   electron   = "${send-shortcut-to-electron}/bin/send-shortcut-to-electron";
 
@@ -46,7 +48,8 @@ in
   wayland.windowManager.hyprland = {
     settings = {
       bind = [
-        (bind "${mod} + SPACE"       (exec "rofi -show drun"))
+        (bind "${mod} + SPACE"       (exec launcher))
+        (bind "${mod} + B"           (exec bitwarden))
         (bind "${mod} + RETURN"      (exec "ghostty"))
         (bind "${mod} + Q"           (mkLuaInline "hl.dsp.window.close()"))
         (bind "${mod} + SHIFT + Q"   (mkLuaInline "hl.dsp.window.kill()"))

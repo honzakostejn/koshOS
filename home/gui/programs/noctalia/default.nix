@@ -50,6 +50,13 @@ in
         lang = "en";
       };
 
+      # Only on/off and settings live here; plugin code is cloned by noctalia
+      # itself into ~/.local/state/noctalia/plugins. A [plugins] override in
+      # settings.toml wins over this list until removed.
+      plugins = {
+        enabled = [ "noctalia/bitwarden" ];
+      };
+
       lockscreen = {
         enabled = true;
         lock_before_suspend = true;
@@ -132,4 +139,7 @@ in
       package = pkgs.adw-gtk3;
     };
   };
+
+  # noctalia/bitwarden needs the bw CLI on PATH (bw serve local REST API)
+  home.packages = [ pkgs.bitwarden-cli ];
 }

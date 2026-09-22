@@ -21,7 +21,6 @@
     rofi
     # teams-for-linux
     vlc
-    popcorntime # platform specific
     bruno
     obs-studio
     # hyprpanel
@@ -58,7 +57,6 @@
   };
 
   services.remmina.enable = true;
-  services.dunst.enable = true;
 
   xdg.mimeApps = {
     enable = true;
