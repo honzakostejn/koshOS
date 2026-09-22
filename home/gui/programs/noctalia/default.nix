@@ -109,8 +109,7 @@ in
       };
 
       wallpaper = {
-        default.path = defaultWallpaper;
-        last.path = defaultWallpaper;
+        enabled = false;
       };
 
       widget.workspaces = {

@@ -1,0 +1,51 @@
+{
+  "name": "docked-hub-prague-cap",
+  "created_at": "2026-09-16T10:50:51.810698315Z",
+  "updated_at": "2026-09-16T10:50:51.811101988Z",
+  "outputs": [
+    {
+      "key": "dell inc.|dell u2715h|gh85d5ct04jl",
+      "make": "Dell Inc.",
+      "model": "DELL U2715H",
+      "serial": "GH85D5CT04JL",
+      "enabled": true,
+      "mode": "2560x1440@59.95Hz",
+      "width": 2560,
+      "height": 1440,
+      "refresh": 59.95,
+      "x": 0,
+      "y": 0,
+      "scale": 1.0,
+      "transform": 0
+    },
+    {
+      "key": "dell inc.|dell u2715h|gh85d5ct0f8l",
+      "make": "Dell Inc.",
+      "model": "DELL U2715H",
+      "serial": "GH85D5CT0F8L",
+      "enabled": true,
+      "mode": "2560x1440@59.95Hz",
+      "width": 2560,
+      "height": 1440,
+      "refresh": 59.95,
+      "x": 2560,
+      "y": 0,
+      "scale": 1.0,
+      "transform": 0
+    },
+    {
+      "key": "boe|0x095f",
+      "name": "eDP-1",
+      "make": "BOE",
+      "model": "0x095F",
+      "enabled": true,
+      "width": 2256,
+      "height": 1504,
+      "refresh": 59.999,
+      "x": 1732,
+      "y": 1440,
+      "scale": 1.33333,
+      "transform": 0
+    }
+  ]
+}
