@@ -38,6 +38,7 @@ let
   bitwarden  = "${config.programs.noctalia.package}/bin/noctalia msg panel-toggle launcher /bw ";
   screenshot = "${take-screenshot}/bin/take-screenshot";
   electron   = "${send-shortcut-to-electron}/bin/send-shortcut-to-electron";
+  voxtype    = "${config.services.voxtype.package}/bin/voxtype";
 
   exec = cmd: mkLuaInline "hl.dsp.exec_cmd(${toLua cmd})";
   bind = keys: dsp: { _args = [ keys dsp ]; };
@@ -71,6 +72,13 @@ in
         (bind "${mod} + SHIFT + W"   (exec "qutebrowser --basedir ~/.config/qutebrowser/NETWORG"))
         (bind "${mod} + C"           (exec "code ~/repos/koshos"))
         (bind "${mod} + Y"           (exec "ghostty -e yazi"))
+
+        # voxtype push-to-talk: hold to record, release to transcribe and type
+        # the text at the cursor. `record start` is only the trigger — the
+        # daemon switches to the voxtype_recording submap once the mic opens
+        # (pre_recording_command, see services/voxtype), and that submap is
+        # where the release is handled
+        (bind "${mod} + S"           (exec "${voxtype} record start"))
 
         (bind "${mod} + R"           (mkLuaInline "hl.dsp.submap(\"screenshot\")"))
 
@@ -127,6 +135,37 @@ in
       (bind "${mod} + SHIFT + W" (exec "${screenshot} window --freeze"))
       (bind "${mod} + SHIFT + W" (mkLuaInline "hl.dsp.submap(\"reset\")"))
       (bind "ESCAPE"             (mkLuaInline "hl.dsp.submap(\"reset\")"))
+    ];
+
+    # nix-owned equivalent of `voxtype setup compositor hyprland`: the daemon
+    # enters these from the pre_recording/pre_output/post_output hooks
+    # https://github.com/peteonrails/voxtype/blob/main/docs/TROUBLESHOOTING.md#modifier-key-interference-hyprlandswayriver
+    #
+    # hyprland resolves binds against the active submap, so the release of the
+    # push-to-talk bind has to live here — the daemon enters this submap while
+    # recording, which is where the key is let go
+    submaps.voxtype_recording.settings.bind = [
+      (bind "F12"               (exec "${voxtype} record cancel"))
+      (bind "F12"               (mkLuaInline "hl.dsp.submap(\"reset\")"))
+    ] ++ flagged { release = true; } [
+      (bind "${mod} + S"         (exec "${voxtype} record stop"))
+    ];
+
+    # swallows the modifiers while voxtype types, otherwise a still-held SUPER
+    # turns the transcribed text into SUPER+<letter> binds. F12 is the escape
+    # hatch if the daemon dies mid-typing. Escape is deliberately unbound: it
+    # makes wtype drop the first character
+    # https://github.com/hyprwm/Hyprland/issues/3165
+    submaps.voxtype_suppress.settings.bind = [
+      (bind "SUPER_L"     (exec "true"))
+      (bind "SUPER_R"     (exec "true"))
+      (bind "Control_L"   (exec "true"))
+      (bind "Control_R"   (exec "true"))
+      (bind "Alt_L"       (exec "true"))
+      (bind "Alt_R"       (exec "true"))
+      (bind "Shift_L"     (exec "true"))
+      (bind "Shift_R"     (exec "true"))
+      (bind "F12"         (mkLuaInline "hl.dsp.submap(\"reset\")"))
     ];
   };
 }
