@@ -46,6 +46,11 @@
           devices = [ "/dev/input/by-id/usb-413c_Dell_KB216_Wired_Keyboard-event-kbd" ];
           config = builtins.readFile ./kanata.kbd;
         };
+
+        natec = {
+          devices = [ "/dev/input/by-id/usb-USB_USB_Keyboard-event-kbd" ];
+          config = builtins.readFile ./kanata.kbd;
+        };
       };
     };
   };

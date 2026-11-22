@@ -42,6 +42,9 @@ in
           "7MT0162411FL" = {
             position = "top";
           };
+          "7MT016AK0WPS" = {
+            position = "top";
+          };
         };
       };
 

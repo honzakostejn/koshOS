@@ -4,10 +4,10 @@
   "updated_at": "2026-08-08T00:00:00Z",
   "outputs": [
     {
-      "key": "dell inc.|dell u2415|7mt0167b2ael",
+      "key": "dell inc.|dell u2415|7mt016ak0wps",
       "make": "Dell Inc.",
       "model": "DELL U2415",
-      "serial": "7MT0167B2AEL",
+      "serial": "7MT016AK0WPS",
       "enabled": true,
       "width": 1920,
       "height": 1200,
@@ -18,17 +18,17 @@
       "transform": 1
     },
     {
-      "key": "dell inc.|dell u2412m|0ffxd31f1tpl",
-      "make": "Dell Inc.",
-      "model": "DELL U2412M",
-      "serial": "0FFXD31F1TPL",
+      "key": "hewlett packard|hp lp3065|cz49310227",
+      "make": "Hewlett Packard",
+      "model": "HP LP3065",
+      "serial": "CZ49310227",
       "enabled": true,
-      "width": 1920,
-      "height": 1200,
-      "refresh": 59.95,
+      "width": 2560,
+      "height": 1600,
+      "refresh": 59.86,
       "x": 1200,
       "y": 0,
-      "scale": 1.0,
+      "scale": 1,
       "transform": 0
     },
     {
@@ -40,7 +40,7 @@
       "width": 1920,
       "height": 1200,
       "refresh": 59.95,
-      "x": 3120,
+      "x": 3760,
       "y": 0,
       "scale": 1.0,
       "transform": 3
