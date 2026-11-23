@@ -6,9 +6,9 @@ attributes: &globalAttrs
 rowHeightMode: FillHeight
 rows:
   - letters:
-    - {type: base, spec: "\u030c"}
-    - $action
-    - "!icon/action_switch_language|!code/action_switch_language"
-    - {type: base, spec: "\u030a"}
-    - {type: base, spec: "\u0301"}
+      - { type: base, spec: "\u030c" }
+      - $action
+      - "!icon/action_switch_language|!code/action_switch_language"
+      - { type: base, spec: "\u030a" }
+      - { type: base, spec: "\u0301" }
   - bottom: ""
