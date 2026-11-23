@@ -3,10 +3,7 @@
   "migrated_user_scripts_toggle": true,
   "secure": "true",
   "spellcheck": {
-    "dictionaries": [
-      "cs-CZ",
-      "en-US"
-    ],
+    "dictionaries": ["cs-CZ", "en-US"],
     "dictionary": ""
   }
 }

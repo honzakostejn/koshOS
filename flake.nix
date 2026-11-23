@@ -34,7 +34,7 @@
       type = "github";
       owner = "hyprwm";
       repo = "Hyprland";
-      ref = "refs/tags/v0.56.1";
+      ref = "refs/tags/v0.57.2";
     };
 
     split-monitor-workspaces = {
@@ -45,7 +45,7 @@
       type = "github";
       owner = "zjeffer";
       repo = "split-monitor-workspaces";
-      ref = "refs/tags/v0.56.1";
+      ref = "refs/tags/v0.57.2";
     };
 
     ### programs ###

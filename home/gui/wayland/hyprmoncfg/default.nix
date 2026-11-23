@@ -5,7 +5,6 @@
 }:
 let
   hyprConfigDir = "${config.xdg.configHome}/hypr";
-  monitorsLua = "${hyprConfigDir}/monitors.lua";
 
   # hyprmoncfg only rewrites a target it owns
   monitorsLuaSeed = pkgs.writeText "monitors.lua" ''
@@ -24,8 +23,12 @@ in
   };
 
   wayland.windowManager.hyprland.extraConfig = ''
-    -- Monitor layout is generated into monitors.lua by hyprmoncfg/hyprmoncfgd.
-    require("monitors")
+    -- Monitor layout is generated into hyprmoncfg-monitors.lua by hyprmoncfg.
+    do
+      local path = "${hyprConfigDir}/hyprmoncfg-monitors.lua"
+      local file = io.open(path, "r")
+      if file then file:close(); dofile(path) end
+    end
   '';
 
   systemd.user.services.hyprmoncfgd = {

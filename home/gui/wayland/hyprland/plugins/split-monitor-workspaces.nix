@@ -1,6 +1,6 @@
 { inputs
 , lib
-, pkgs
+
 , ...
 }:
 let
@@ -12,7 +12,11 @@ let
 
   mkLuaInline = lib.generators.mkLuaInline;
   bind = keys: dsp: { _args = [ keys dsp ]; };
-  smw = expr: mkLuaInline "function() return hl.plugin.split_monitor_workspaces.${expr} end";
+  
+  smwModule = "split-monitor-workspaces.lua.split-monitor-workspaces";
+  smw = expr: mkLuaInline ''require("${smwModule}").${expr}'';
+
+  smwSource = inputs.split-monitor-workspaces;
 
   workspaceBinds = builtins.concatLists (builtins.genList (x:
     let
@@ -23,15 +27,6 @@ let
       (bind "${mod} + SHIFT + ${key}" (smw "move_to_workspace(${wn})"))
     ]
   ) workspaceCount);
-
-  patchedPlugin = inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}
-    .split-monitor-workspaces
-    .overrideAttrs (old: {
-      # the plugin finds workspaces by name, searching for the ID as a string ("11"),
-      # so the default_name rules below ("1_m1") make it miss and create a second
-      # workspace at an existing ID. This patch looks them up by ID instead.
-      patches = (old.patches or [ ]) ++ [ ./patches/split-monitor-workspaces-id-based-lookup.patch ];
-    });
 
   # workspaces are indexed globally from 0..N
   # the workspace rules are assigning a custom name to each workspace,
@@ -52,21 +47,47 @@ let
 in
 {
   wayland.windowManager.hyprland = {
-    plugins = [ patchedPlugin ];
-
-    settings = {
-      config.plugin.split_monitor_workspaces = {
-        count = workspaceCount;
-        keep_focused = false;
-        enable_notifications = false;
-        enable_persistent_workspaces = true;
+    extraLuaFiles = {
+      "split-monitor-workspaces.lua.globals" = {
+        content = "${smwSource}/lua/globals.lua";
+        autoLoad = false;
+      };
+      "split-monitor-workspaces.lua.helpers" = {
+        content = "${smwSource}/lua/helpers.lua";
+        autoLoad = false;
+      };
+      "split-monitor-workspaces.lua.monitors" = {
+        content = "${smwSource}/lua/monitors.lua";
+        autoLoad = false;
+      };
+      "split-monitor-workspaces.lua.dispatchers" = {
+        content = "${smwSource}/lua/dispatchers.lua";
+        autoLoad = false;
+      };
+      "${smwModule}" = {
+        content = "${smwSource}/lua/split-monitor-workspaces.lua";
+        autoLoad = false;
       };
 
+      # autoLoad defaults to true: this one actually calls setup() on reload/init.
+      "split-monitor-workspaces-setup".content = ''
+        require("${smwModule}").setup({
+          workspace_count = ${toString workspaceCount},
+          keep_focused = false,
+          enable_notifications = false,
+          enable_persistent_workspaces = true,
+        })
+      '';
+    };
+
+    settings = {
       workspace_rule = workspaceNameRules;
 
       bind = workspaceBinds ++ [
-        (bind "${mod} + SHIFT + ${left}"  (smw "change_monitor(\"prev\")"))
-        (bind "${mod} + SHIFT + ${right}" (smw "change_monitor(\"next\")"))
+        # change_monitor("prev"/"next") no longer exists in the Lua rewrite;
+        # this is Hyprland's own native relative-monitor-focus dispatcher.
+        (bind "${mod} + SHIFT + ${left}"  (mkLuaInline ''hl.dsp.window.move({ monitor = "-1" })''))
+        (bind "${mod} + SHIFT + ${right}" (mkLuaInline ''hl.dsp.window.move({ monitor = "+1" })''))
 
         (bind "${mod} + G"                (smw "grab_rogue_windows()"))
       ];

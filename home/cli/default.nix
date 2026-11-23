@@ -29,7 +29,6 @@
       btop
       cbonsai
       pandoc
-      jellyfin-tui
       uv
       android-tools
     ];
